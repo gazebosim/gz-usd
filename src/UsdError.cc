@@ -142,7 +142,8 @@ bool UsdError::operator==(const bool _value) const
 }
 
 /////////////////////////////////////////////////
-std::ostream &operator<<(std::ostream &_out, const ignition::usd::UsdError &_err)
+std::ostream &operator<<(std::ostream &_out,
+                         const ignition::usd::UsdError &_err)
 {
   if (_err.Code() == UsdErrorCode::IGNITION_USD_ERROR)
   {
@@ -154,8 +155,8 @@ std::ostream &operator<<(std::ostream &_out, const ignition::usd::UsdError &_err
     }
     else
     {
-      _out << "Error code is of type IGNITION_USD_ERROR, but no sdf::Error object "
-           << "has been wrapped into this UsdError object.";
+      _out << "Error code is of type IGNITION_USD_ERROR, but no sdf::Error "
+           << "object has been wrapped into this UsdError object.";
     }
 
     return _out;

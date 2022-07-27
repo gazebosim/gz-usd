@@ -36,9 +36,10 @@ namespace ignition
     /// \param[in] _outputFilenameSdf Path where the SDF file will be located
     /// \param[in] _useGazeboPlugins Whether _outputFilenameSdf should have
     /// gazebo plugins in it (true) or not (false)
-    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects. Each UsdError
-    /// includes an error code and message. An empty vector indicates no error
-    /// occurred when parsing the USD file to its SDF representation.
+    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+    /// Each UsdError includes an error code and message. An empty vector
+    /// indicates no error occurred when parsing the USD file to its SDF
+    /// representation.
     UsdErrors IGNITION_USD_VISIBLE parseUSDFile(
       const std::string &_inputFilenameUsd,
       const std::string &_outputFilenameSdf,

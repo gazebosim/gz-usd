@@ -58,8 +58,9 @@ namespace usd
 
     if (_triangles.size() != count * 3)
     {
-      errors.push_back(UsdError(UsdErrorCode::USD_TO_IGNITION_USD_POLYGON_PARSING_ERROR,
-            "Unable to parse the polygon mesh"));
+      errors.push_back(UsdError(
+        UsdErrorCode::USD_TO_IGNITION_USD_POLYGON_PARSING_ERROR,
+        "Unable to parse the polygon mesh"));
     }
 
     return errors;

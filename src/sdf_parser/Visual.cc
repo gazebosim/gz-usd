@@ -54,7 +54,8 @@ namespace usd
     auto usdVisualXform = pxr::UsdGeomXform::Define(_stage, sdfVisualPath);
     if (!usdVisualXform)
     {
-      errors.push_back(UsdError(ignition::usd::UsdErrorCode::FAILED_USD_DEFINITION,
+      errors.push_back(UsdError(
+        ignition::usd::UsdErrorCode::FAILED_USD_DEFINITION,
         "Not able to define a Geom Xform at path [" + _path + "]"));
       return errors;
     }

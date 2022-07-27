@@ -39,8 +39,8 @@ namespace ignition
   /// \param[inout] _dest The destination for the copy of _ori. If _dest
   /// represents a file that already exists, a unique numeric suffix in the
   /// form of _<number> will be appended to the end of the file name.
-  /// \return A list of ignition::usd::UsdErrors. An empty list means no errors occurred when
-  /// copying _ori to _dest
+  /// \return A list of ignition::usd::UsdErrors. An empty list means no errors
+  ///  occurred when copying _ori to _dest
   ignition::usd::UsdErrors copyFile(const std::string &_ori, std::string &_dest)
   {
     ignition::usd::UsdErrors errors;
@@ -58,7 +58,8 @@ namespace ignition
         if (fileExtensionIndex == std::string::npos)
         {
           errors.emplace_back(
-              sdf::Error(sdf::ErrorCode::FILE_READ, "Unable to find the extension "
+              sdf::Error(sdf::ErrorCode::FILE_READ,
+                "Unable to find the extension "
                 "of the file [" + _dest + "] which should be copied"));
           return errors;
         }
@@ -117,7 +118,8 @@ namespace ignition
   }
 
   /////////////////////////////////////////////////
-  ignition::usd::UsdErrors ParseMaterial(const pxr::UsdPrim &_prim, sdf::Material &_material)
+  ignition::usd::UsdErrors ParseMaterial(
+    const pxr::UsdPrim &_prim, sdf::Material &_material)
   {
     ignition::usd::UsdErrors errors;
     // if the prim is a Geom then get the color values

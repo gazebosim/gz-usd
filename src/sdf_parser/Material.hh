@@ -45,9 +45,9 @@ namespace ignition
     /// \param[in] _stage The stage that should contain the USD representation
     /// of _material.
     /// \param[out] _materialPath USD Material path
-    /// \return ignition::usd::UsdErrors, which is a list of UsdError objects. This list is
-    /// empty if no errors occurred when parsing _materialSdf its USD
-    /// representation
+    /// \return ignition::usd::UsdErrors, which is a list of UsdError objects.
+    /// This list is empty if no errors occurred when parsing _materialSdf its
+    /// USD representation
     ignition::usd::UsdErrors ParseSdfMaterial(
         const sdf::Material *_materialSdf,
         pxr::UsdStageRefPtr &_stage,

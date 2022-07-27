@@ -83,8 +83,9 @@ class UsdJointStageFixture : public::testing::Test
 
     this->modelPath =
       std::string(this->worldPath.GetString() + "/" + this->model->Name());
-    const auto errors = ignition::usd::ParseSdfModel(*(this->model), this->stage,
-        this->modelPath, this->worldPath);
+    const auto errors = ignition::usd::ParseSdfModel(
+      *(this->model), this->stage,
+      this->modelPath, this->worldPath);
     EXPECT_TRUE(errors.empty());
 
     // save the model's USD joint paths so that they can be verified

@@ -62,9 +62,10 @@ namespace usd
   /// \param[in] _jointPrim The USD joint prim
   /// \param[in] _joint The SDF representation of _jointPrim
   /// \param[in] _parentModel The SDF model that is the parent of _joint
-  /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects. Each UsdError
-  /// includes an error code and message. An empty vector indicates no error
-  /// occurred when setting _joint's pose relative to _joint's parent and child
+  /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+  /// Each UsdError includes an error code and message. An empty vector
+  /// indicates no error occurred when setting _joint's pose relative to
+  /// _joint's parent and child
   ignition::usd::UsdErrors SetUSDJointPose(pxr::UsdPhysicsJoint &_jointPrim,
       const sdf::Joint &_joint, const sdf::Model &_parentModel)
   {
@@ -187,9 +188,10 @@ namespace usd
   /// valid, initialized stage.
   /// \param[in] _path The path in _stage where the USD representation of _joint
   /// will be defined.
-  /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects. Each UsdError
-  /// includes an error code and message. An empty vector indicates no error
-  /// occurred when converting _joint to its USD representation.
+  /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+  /// Each UsdError includes an error code and message. An empty vector
+  /// indicates no error occurred when converting _joint to its USD
+  /// representation.
   ignition::usd::UsdErrors ParseSdfRevoluteJoint(const sdf::Joint &_joint,
       pxr::UsdStageRefPtr &_stage, const std::string &_path)
   {
@@ -239,9 +241,10 @@ namespace usd
       pxr::UsdPhysicsDriveAPI::Apply(usdJointPrim, pxr::TfToken("angular"));
     if (!drive)
     {
-      errors.push_back(UsdError(ignition::usd::UsdErrorCode::FAILED_PRIM_API_APPLY,
-            "Internal error: unable to mark link at path [" + _path +
-            "] as a UsdPhysicsDriveAPI."));
+      errors.push_back(UsdError(
+        ignition::usd::UsdErrorCode::FAILED_PRIM_API_APPLY,
+        "Internal error: unable to mark link at path [" + _path +
+        "] as a UsdPhysicsDriveAPI."));
       return errors;
     }
 
@@ -260,9 +263,10 @@ namespace usd
   /// valid, initialized stage.
   /// \param[in] _path The path in _stage where the USD representation of _joint
   /// will be defined.
-  /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects. Each UsdError
-  /// includes an error code and message. An empty vector indicates no error
-  /// occurred when converting _joint to its USD representation.
+  /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+  /// Each UsdError includes an error code and message. An empty vector
+  /// indicates no error occurred when converting _joint to its USD
+  /// representation.
   ignition::usd::UsdErrors ParseSdfPrismaticJoint(const sdf::Joint &_joint,
       pxr::UsdStageRefPtr &_stage, const std::string &_path)
   {
@@ -323,9 +327,10 @@ namespace usd
       const auto it = _linkToUsdPath.find(_joint.ParentLinkName());
       if (it == _linkToUsdPath.end())
       {
-        errors.push_back(UsdError(ignition::usd::UsdErrorCode::INVALID_PRIM_PATH,
-              "Unable to find a USD path for link [" + _joint.ParentLinkName() +
-              "], which is the parent link of joint [" + _joint.Name() + "]."));
+        errors.push_back(UsdError(
+          ignition::usd::UsdErrorCode::INVALID_PRIM_PATH,
+          "Unable to find a USD path for link [" + _joint.ParentLinkName() +
+          "], which is the parent link of joint [" + _joint.Name() + "]."));
         return errors;
       }
       parentLinkPath = it->second;

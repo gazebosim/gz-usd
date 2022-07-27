@@ -44,8 +44,9 @@ namespace ignition
     /// \param[in] _prim USD prim where the material is extracted
     /// \param[out] _material The sdf::Material representation of _prim's
     /// material
-    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects. Each UsdError
-    /// includes an error code and message. An empty vector indicates no error.
+    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+    /// Each UsdErrorincludes an error code and message. An empty vector
+    /// indicates no error.
     ignition::usd::UsdErrors ParseMaterial(const pxr::UsdPrim &_prim,
         sdf::Material &_material);
 }

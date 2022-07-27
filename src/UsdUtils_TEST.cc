@@ -122,7 +122,8 @@ TEST(UsdUtils, validPath)
 
   EXPECT_EQ("", ignition::usd::validPath(""));
 
-  EXPECT_EQ("_0/start/with/digit", ignition::usd::validPath("0/start/with/digit"));
+  EXPECT_EQ("_0/start/with/digit",
+            ignition::usd::validPath("0/start/with/digit"));
 
   EXPECT_EQ("/hasSpaces", ignition::usd::validPath("/has Spaces"));
 

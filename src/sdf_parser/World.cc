@@ -94,7 +94,8 @@ namespace usd
       const auto light = *(_world.LightByIndex(i));
       auto lightPath = std::string(_path + "/" + light.Name());
       lightPath = ignition::usd::validPath(lightPath);
-      ignition::usd::UsdErrors lightErrors = ParseSdfLight(light, _stage, lightPath);
+      ignition::usd::UsdErrors lightErrors = ParseSdfLight(
+        light, _stage, lightPath);
       if (!lightErrors.empty())
       {
         errors.push_back(UsdError(

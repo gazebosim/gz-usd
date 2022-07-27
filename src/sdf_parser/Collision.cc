@@ -56,7 +56,8 @@ namespace usd
       _stage, sdfCollisionPath);
     if (!usdCollisionXform)
     {
-      errors.push_back(UsdError(ignition::usd::UsdErrorCode::FAILED_USD_DEFINITION,
+      errors.push_back(UsdError(
+        ignition::usd::UsdErrorCode::FAILED_USD_DEFINITION,
         "Not able to define a Geom Xform at path [" + _path + "]"));
       return errors;
     }
@@ -120,7 +121,8 @@ namespace usd
 
     if (!pxr::UsdPhysicsCollisionAPI::Apply(geomPrim))
     {
-      errors.push_back(UsdError(ignition::usd::UsdErrorCode::FAILED_PRIM_API_APPLY,
+      errors.push_back(UsdError(
+        ignition::usd::UsdErrorCode::FAILED_PRIM_API_APPLY,
         "Internal error: unable to apply a collision to the prim at path ["
         + geometryPath + "]"));
       return errors;

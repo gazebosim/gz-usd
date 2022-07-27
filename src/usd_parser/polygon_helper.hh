@@ -48,9 +48,9 @@ namespace ignition
   /// face of the mesh.
   /// \param[out] _triangles A flat list of vertex indices, with each face
   /// converted to one or more triangles.
-  /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects. Each UsdError
-  /// includes an error code and message. An empty vector indicates no error
-  /// occurred when parsing the polygons.
+  /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+  /// Each UsdError includes an error code and message. An empty vector
+  /// indicates no error occurred when parsing the polygons.
   ignition::usd::UsdErrors PolygonToTriangles(
     const pxr::VtIntArray &_faceVertexIndices,
     const pxr::VtIntArray &_faceVertexCounts,

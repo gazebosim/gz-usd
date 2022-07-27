@@ -81,7 +81,8 @@ namespace ignition
       /// \brief Find a path and get the data
       /// \param[in] _name Name of the path to find
       /// \return A pair with the name of the stage and the data
-      public: const std::pair<std::string, std::shared_ptr<ignition::usd::USDStage>>
+      public: const std::pair<std::string,
+                              std::shared_ptr<ignition::usd::USDStage>>
           FindStage(const std::string &_name) const;
 
       public: friend std::ostream& operator<<(

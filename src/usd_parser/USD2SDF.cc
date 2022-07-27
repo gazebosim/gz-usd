@@ -31,7 +31,8 @@ namespace ignition {
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
 namespace usd {
 ////////////////////////////////////////////////
-ignition::usd::UsdErrors USD2SDF::Read(const std::string &_fileName, bool _useGazeboPlugins,
+ignition::usd::UsdErrors USD2SDF::Read(
+  const std::string &_fileName, bool _useGazeboPlugins,
   sdf::Root &_root)
 {
   ignition::usd::UsdErrors errors;

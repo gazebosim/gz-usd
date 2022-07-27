@@ -95,15 +95,17 @@ namespace ignition
     public: UsdError();
 
     /// \brief Constructor.
-    /// \param[in] _code The error code. If the error code is IGNITION_USD_ERROR, the
-    /// constructor that takes an sdf::Error object should be used instead.
+    /// \param[in] _code The error code. If the error code is
+    /// IGNITION_USD_ERROR, the constructor that takes an sdf::Error object
+    /// should be used instead.
     /// \param[in] _message A description of the error.
     /// \sa ErrorCode.
     public: UsdError(const UsdErrorCode _code, const std::string &_message);
 
     /// \brief Constructor.
-    /// \param[in] _code The error code. If the error code is IGNITION_USD_ERROR, the
-    /// constructor that takes an sdf::Error object should be used instead.
+    /// \param[in] _code The error code. If the error code is
+    /// IGNITION_USD_ERROR, the constructor that takes an sdf::Error object
+    /// should be used instead.
     /// \param[in] _message A description of the error.
     /// \param[in] _filePath The file path that is related to this error.
     /// \sa ErrorCode.
@@ -111,8 +113,9 @@ namespace ignition
                      const std::string &_filePath);
 
     /// \brief Constructor.
-    /// \param[in] _code The error code. If the error code is IGNITION_USD_ERROR, the
-    /// constructor that takes an sdf::Error object should be used instead.
+    /// \param[in] _code The error code. If the error code is
+    /// IGNITION_USD_ERROR, the constructor that takes an sdf::Error object
+    /// should be used instead.
     /// \param[in] _message A description of the error.
     /// \param[in] _filePath The file path that is related to this error.
     /// \param[in] _lineNumber The line number in the provided file path where

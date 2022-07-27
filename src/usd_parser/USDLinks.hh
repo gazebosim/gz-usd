@@ -47,8 +47,8 @@ namespace ignition
     /// \param[in] _usdData USDData object that holds data about the USD stage
     /// \param[in] _scale scale of current Link, sdf::Link does not have a scale
     /// attribute we need to keeep the scale in a extenal variable
-    /// \return ignition::usd::UsdErrors, which is a list of UsdError objects. An empty list
-    /// means there were no errors parsing the USD link
+    /// \return ignition::usd::UsdErrors, which is a list of UsdError objects.
+    /// An empty list means there were no errors parsing the USD link
     ignition::usd::UsdErrors ParseUSDLinks(
       const pxr::UsdPrim &_prim,
       const std::string &_nameLink,

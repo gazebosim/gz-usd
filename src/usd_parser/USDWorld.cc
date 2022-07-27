@@ -181,10 +181,11 @@ namespace usd
         modelPtr = _world.ModelByName(currentModelName);
         if (!modelPtr)
         {
-          errors.push_back(UsdError(UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
-                "Unable to find a sdf::Model named [" + currentModelName +
-                "] in world named [" + _world.Name() +
-                "], but a sdf::Model with this name should exist."));
+          errors.push_back(UsdError(
+            UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
+            "Unable to find a sdf::Model named [" + currentModelName +
+            "] in world named [" + _world.Name() +
+            "], but a sdf::Model with this name should exist."));
           return errors;
         }
       }
@@ -193,7 +194,8 @@ namespace usd
       {
         if (!modelPtr)
         {
-          errors.push_back(UsdError(UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
+          errors.push_back(UsdError(
+            UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
             "Unable to store RosDifferentialBase in a DiffDrive plugin "
             "because the corresponding sdf::Model object wasn't found."));
           return errors;
@@ -287,7 +289,8 @@ namespace usd
       {
         if (!modelPtr)
         {
-          errors.push_back(UsdError(UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
+          errors.push_back(UsdError(
+            UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
             "Unable to parse joint corresponding to USD prim [" +
             std::string(prim.GetName()) +
             "] because the corresponding sdf::Model object wasn't found."));
@@ -297,7 +300,8 @@ namespace usd
         auto errorsJoint = ParseJoints(prim, usdData, joint);
         if (!errorsJoint.empty())
         {
-          errors.push_back(UsdError(UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
+          errors.push_back(UsdError(
+            UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
             "Unable to find parse UsdPhysicsJoint [" +
             std::string(prim.GetName()) + "]"));
           return errors;
@@ -344,9 +348,10 @@ namespace usd
 
       if (!modelPtr)
       {
-        errors.push_back(UsdError(UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
-              "Unable to parse link named [" + linkName +
-              "] because the corresponding sdf::Model object wasn't found."));
+        errors.push_back(UsdError(
+          UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
+          "Unable to parse link named [" + linkName +
+          "] because the corresponding sdf::Model object wasn't found."));
         return errors;
       }
 
@@ -370,7 +375,8 @@ namespace usd
       {
         ignition::math::Vector3d scale{1, 1, 1};
 
-        ignition::usd::ParseUSDLinks(prim, linkName, optionalLink, usdData, scale);
+        ignition::usd::ParseUSDLinks(
+          prim, linkName, optionalLink, usdData, scale);
         linkScaleMap[linkName] = scale;
 
         if (optionalLink && !optionalLink->Name().empty() &&

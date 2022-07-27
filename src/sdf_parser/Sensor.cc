@@ -54,9 +54,9 @@ namespace usd
   /// camera
   /// \param[in] _path The path where the USD representation of _sensor should
   /// be defined in _stage
-  /// \return ignition::usd::UsdErrors, which is a list of UsdError objects. An empty list
-  /// means there were no issues defining the USD representation of _sensor in
-  /// _stage
+  /// \return ignition::usd::UsdErrors, which is a list of UsdError objects.
+  /// An empty list means there were no issues defining the USD representation
+  /// of _sensor in_stage
   ignition::usd::UsdErrors ParseSdfCameraSensor(const sdf::Sensor &_sensor,
     pxr::UsdStageRefPtr &_stage, const pxr::SdfPath &_path)
   {
@@ -101,9 +101,9 @@ namespace usd
   /// lidar sensor
   /// \param[in] _path The path where the USD representation of _sensor should
   /// be defined in _stage
-  /// \return ignition::usd::UsdErrors, which is a list of UsdError objects. An empty list
-  /// means there were no issues defining the USD representation of _sensor in
-  /// _stage
+  /// \return ignition::usd::UsdErrors, which is a list of UsdError objects.
+  /// An empty list means there were no issues defining the USD representation
+  /// of _sensor in _stage
   ignition::usd::UsdErrors ParseSdfLidarSensor(const sdf::Sensor &_sensor,
     pxr::UsdStageRefPtr &_stage, const pxr::SdfPath &_path)
   {
@@ -156,9 +156,11 @@ namespace usd
   /// \param[in] _stage The stage that contains the definition of the USD
   /// IMU sensor
   /// \param[in] _path The path where the USD IMU should be defined in _stage
-  /// \return ignition::usd::UsdErrors, which is a list of UsdError objects. An empty list
-  /// means there were no issues defining the USD IMU sensor in _stage
-  ignition::usd::UsdErrors ParseSdfImuSensor(pxr::UsdStageRefPtr &_stage, pxr::SdfPath &_path)
+  /// \return ignition::usd::UsdErrors, which is a list of UsdError objects.
+  /// An empty list means there were no issues defining the USD IMU sensor in
+  /// _stage
+  ignition::usd::UsdErrors ParseSdfImuSensor(
+    pxr::UsdStageRefPtr &_stage, pxr::SdfPath &_path)
   {
     ignition::usd::UsdErrors errors;
 
@@ -207,7 +209,7 @@ namespace usd
       case sdf::SensorType::CONTACT:
         // TODO(adlarkin) figure out how to convert contact sensor. I found the
         // following docs, but they seem to require isaac sim specific packages:
-        //  https://docs.omniverse.nvidia.com/py/isaacsim/source/extensions/omni.isaac.contact_sensor/docs/index.html
+        // https://docs.omniverse.nvidia.com/py/isaacsim/source/extensions/omni.isaac.contact_sensor/docs/index.html
       default:
         errors.push_back(
           UsdError(ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,

@@ -91,8 +91,8 @@ namespace usd
   /// \param[in] _doc Documentation of the field
   /// \param[in] _colorSpace if the material is a texture, we can specify the
   /// color space of the image
-  /// \return ignition::usd::UsdErrors, which is a list of UsdError objects. This list is empty
-  /// if no errors occurred when creating the material input.
+  /// \return ignition::usd::UsdErrors, which is a list of UsdError objects.
+  /// This list is empty if no errors occurred when creating the material input.
   template<typename T>
   ignition::usd::UsdErrors CreateMaterialInput(
     const pxr::UsdPrim &_prim,
@@ -214,8 +214,6 @@ namespace usd
       {pxr::TfToken("range:min"), pxr::VtValue(pxr::GfVec3f(0, 0, 0))}
     };
     const ignition::math::Color diffuse = _materialSdf->Diffuse();
-
-    std::cerr << _materialPath << " diffuse " << diffuse.R() << " " <<  diffuse.G() << " " << diffuse.B()  << '\n';
 
     auto errorsMaterialDiffuseColorConstant = CreateMaterialInput<pxr::GfVec3f>(
       shaderPrim,

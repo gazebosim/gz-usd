@@ -37,9 +37,10 @@ namespace ignition
     /// \param[in] _useGazeboPlugins Whether _world should have gazebo plugins
     /// in it (true) or not (false)
     /// \param[out] _world World interface where all USD world data is placed
-    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects. Each UsdError
-    /// includes an error code and message. An empty vector indicates no error
-    /// occurred when parsing the world information of _inputFileNameUsd
+    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+    /// Each UsdErrorincludes an error code and message. An empty vector
+    /// indicates no error occurred when parsing the world information of
+    /// _inputFileNameUsd
     ignition::usd::UsdErrors parseUSDWorld(
       const std::string &_inputFileNameUsd,
       bool _useGazeboPlugins,

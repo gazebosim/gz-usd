@@ -49,8 +49,10 @@ inline namespace IGNITION_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
-  ignition::usd::UsdErrors ParseSdfLink(const sdf::Link &_link, pxr::UsdStageRefPtr &_stage,
-      const std::string &_path, bool _rigidBody)
+  ignition::usd::UsdErrors ParseSdfLink(const sdf::Link &_link,
+    pxr::UsdStageRefPtr &_stage,
+    const std::string &_path,
+    bool _rigidBody)
   {
     const pxr::SdfPath sdfLinkPath(_path);
     ignition::usd::UsdErrors errors;
@@ -80,18 +82,20 @@ namespace usd
       auto linkPrim = _stage->GetPrimAtPath(sdfLinkPath);
       if (!linkPrim)
       {
-        errors.push_back(UsdError(ignition::usd::UsdErrorCode::INVALID_PRIM_PATH,
-              "Internal error: unable to get prim at path ["
-              + _path + "], but a link prim should exist at this path"));
+        errors.push_back(UsdError(
+          ignition::usd::UsdErrorCode::INVALID_PRIM_PATH,
+          "Internal error: unable to get prim at path ["
+          + _path + "], but a link prim should exist at this path"));
         return errors;
       }
 
       if (!pxr::UsdPhysicsRigidBodyAPI::Apply(linkPrim))
       {
-        errors.push_back(UsdError(ignition::usd::UsdErrorCode::FAILED_PRIM_API_APPLY,
-              "Internal error: unable to mark model at path [" +
-              linkPrim.GetPath().GetString() + "] as a rigid body, "
-              "so mass properties won't be attached"));
+        errors.push_back(UsdError(
+          ignition::usd::UsdErrorCode::FAILED_PRIM_API_APPLY,
+          "Internal error: unable to mark model at path [" +
+          linkPrim.GetPath().GetString() + "] as a rigid body, "
+          "so mass properties won't be attached"));
         return errors;
       }
 
@@ -99,9 +103,10 @@ namespace usd
         pxr::UsdPhysicsMassAPI::Apply(linkPrim);
       if (!massAPI)
       {
-        errors.push_back(UsdError(ignition::usd::UsdErrorCode::FAILED_PRIM_API_APPLY,
-              "Unable to attach mass properties to link ["
-              + _link.Name() + "]"));
+        errors.push_back(UsdError(
+          ignition::usd::UsdErrorCode::FAILED_PRIM_API_APPLY,
+          "Unable to attach mass properties to link ["
+          + _link.Name() + "]"));
         return errors;
       }
       massAPI.CreateMassAttr().Set(
@@ -170,11 +175,13 @@ namespace usd
       const auto sensor = *(_link.SensorByIndex(i));
       auto sensorPath = std::string(_path + "/" + sensor.Name());
       sensorPath = ignition::usd::validPath(sensorPath);
-      ignition::usd::UsdErrors errorsSensor = ParseSdfSensor(sensor, _stage, sensorPath);
+      ignition::usd::UsdErrors errorsSensor = ParseSdfSensor(
+        sensor, _stage, sensorPath);
       if (!errorsSensor.empty())
       {
         errors.push_back(
-            UsdError(ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+            UsdError(
+              ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
               "Error parsing sensor [" + sensor.Name() + "]"));
         errors.insert(errors.end(), errorsSensor.begin(), errorsSensor.end());
         return errors;
@@ -187,11 +194,13 @@ namespace usd
       const auto light = *(_link.LightByIndex(i));
       auto lightPath = std::string(_path + "/" + light.Name());
       lightPath = ignition::usd::validPath(lightPath);
-      ignition::usd::UsdErrors lightErrors = ParseSdfLight(light, _stage, lightPath);
+      ignition::usd::UsdErrors lightErrors = ParseSdfLight(
+        light, _stage, lightPath);
       if (!lightErrors.empty())
       {
         errors.push_back(
-            UsdError(ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+            UsdError(
+              ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
               "Error parsing light [" + light.Name() + "]"));
         errors.insert(errors.end(), lightErrors.begin(), lightErrors.end());
       }

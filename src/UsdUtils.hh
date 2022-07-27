@@ -86,8 +86,9 @@ namespace ignition
     /// \param[out] _pose The pose of _obj w.r.t. its parent.
     /// \tparam T An object that has the following method signatures:
     ///   sdf::SemanticPose SemanticPose();
-    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects. Each UsdError
-    /// includes an error code and message. An empty vector indicates no error.
+    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+    /// Each UsdError includes an error code and message. An empty vector
+    /// indicates no error.
     template <typename T>
     inline UsdErrors PoseWrtParent(const T &_obj, ignition::math::Pose3d &_pose)
     {
@@ -111,8 +112,9 @@ namespace ignition
     /// \param[in] _stage The stage that contains the USD prim at path _usdPath.
     /// \param[in] _usdPath The path to the USD prim that should have its
     /// pose modified to match _pose.
-    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects. Each UsdError
-    /// includes an error code and message. An empty vector indicates no error.
+    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+    /// Each UsdError includes an error code and message. An empty vector
+    /// indicates no error.
     inline UsdErrors SetPose(const ignition::math::Pose3d &_pose,
         pxr::UsdStageRefPtr &_stage,
         const pxr::SdfPath &_usdPath)

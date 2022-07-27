@@ -211,8 +211,8 @@ TEST_F(UsdStageFixture, MaterialTextureName)
   const auto materialPathStr = std::string("/Looks/Material_0");
   auto materialPath = pxr::SdfPath(materialPathStr);
 
-  ignition::usd::UsdErrors errors = ignition::usd::ParseSdfMaterial(&materialSdf,
-      stage, materialPath);
+  ignition::usd::UsdErrors errors = ignition::usd::ParseSdfMaterial(
+    &materialSdf, stage, materialPath);
   EXPECT_TRUE(errors.empty());
 
   {

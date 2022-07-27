@@ -109,7 +109,8 @@ TEST_F(UsdLightStageFixture, Lights)
     const auto light = *(world->LightByIndex(i));
     const auto lightPath = std::string("/" + light.Name());
     lightPathToSdf[lightPath] = light;
-    const auto errors = ignition::usd::ParseSdfLight(light, this->stage, lightPath);
+    const auto errors = ignition::usd::ParseSdfLight(
+      light, this->stage, lightPath);
     EXPECT_TRUE(errors.empty());
   }
   EXPECT_EQ(world->LightCount(), lightPathToSdf.size());
@@ -118,8 +119,8 @@ TEST_F(UsdLightStageFixture, Lights)
   // Models can have lights attached to their links
   for (uint64_t i = 0; i < world->ModelCount(); ++i)
   {
-    // create a dummy world path so that we can call the ignition::usd::ParseSdfModel
-    // API
+    // create a dummy world path so that we can call the
+    // ignition::usd::ParseSdfModel API
     const auto worldPath = pxr::SdfPath("/" + world->Name());
 
     const auto model = *(world->ModelByIndex(i));

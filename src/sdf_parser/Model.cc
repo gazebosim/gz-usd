@@ -48,8 +48,9 @@ inline namespace IGNITION_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
-  ignition::usd::UsdErrors ParseSdfModel(const sdf::Model &_model, pxr::UsdStageRefPtr &_stage,
-      const std::string &_path, const pxr::SdfPath &_worldPath)
+  ignition::usd::UsdErrors ParseSdfModel(
+    const sdf::Model &_model, pxr::UsdStageRefPtr &_stage,
+    const std::string &_path, const pxr::SdfPath &_worldPath)
   {
     ignition::usd::UsdErrors errors;
 
@@ -68,7 +69,7 @@ namespace usd
     // plane thickness to ensure that the top of the plane is at the correct
     // height. This pose offset workaround will no longer be needed when a
     // pxr::USDGeomPlane class is created:
-    // https://graphics.pixar.com/usd/release/wp_rigid_body_physics.html#plane-shapes
+    // https://graphics.pixar.com/usd/release/wp_rigid_body_physics.html
     if (usd::IsPlane(_model))
     {
       ignition::math::Vector3d planePosition(
@@ -82,9 +83,10 @@ namespace usd
       {
         for (const auto &e : poseErrors)
           errors.push_back(e);
-        errors.push_back(UsdError(UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
-              "Unable to set the pose of the USD ground plane prim named ["
-              + _model.Name() + "]"));
+        errors.push_back(UsdError(
+          UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+          "Unable to set the pose of the USD ground plane prim named ["
+          + _model.Name() + "]"));
         return errors;
       }
     }
@@ -104,9 +106,10 @@ namespace usd
       {
         for (const auto &e : poseErrors)
           errors.push_back(e);
-        errors.push_back(UsdError(UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
-              "Unable to set the pose of the model prim corresponding to the "
-              "SDF model named [" + _model.Name() + "]"));
+        errors.push_back(UsdError(
+          UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+          "Unable to set the pose of the model prim corresponding to the "
+          "SDF model named [" + _model.Name() + "]"));
         return errors;
       }
     }
@@ -126,8 +129,9 @@ namespace usd
       if (!linkErrors.empty())
       {
         errors.push_back(
-          UsdError(ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
-          "Error parsing link [" + link.Name() + "]"));
+          UsdError(
+            ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+            "Error parsing link [" + link.Name() + "]"));
         errors.insert(errors.end(), linkErrors.begin(), linkErrors.end());
         return errors;
       }
@@ -180,9 +184,10 @@ namespace usd
     {
       if (!pxr::UsdPhysicsRigidBodyAPI::Apply(modelPrim))
       {
-        errors.push_back(UsdError(ignition::usd::UsdErrorCode::FAILED_PRIM_API_APPLY,
-              "Internal error: unable to mark model at path [" +
-              modelPrim.GetPath().GetString() + "] as a rigid body."));
+        errors.push_back(UsdError(
+          ignition::usd::UsdErrorCode::FAILED_PRIM_API_APPLY,
+          "Internal error: unable to mark model at path [" +
+          modelPrim.GetPath().GetString() + "] as a rigid body."));
         return errors;
       }
     }
