@@ -212,7 +212,8 @@ namespace usd
         // https://docs.omniverse.nvidia.com/py/isaacsim/source/extensions/omni.isaac.contact_sensor/docs/index.html
       default:
         errors.push_back(
-          UsdError(ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+          UsdError(
+            ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
             "This type of sensor [" + _sensor.TypeStr() +
             "] is not supported"));
     }

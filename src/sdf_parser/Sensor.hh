@@ -46,8 +46,9 @@ namespace ignition
     /// of _sensor.
     /// \param[in] _path The USD path of the parsed sensor in _stage, which must
     /// be a valid USD path.
-    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects. Each UsdError
-    /// includes an error code and message. An empty vector indicates no error.
+    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+    /// Each UsdError includes an error code and message. An empty vector
+    /// indicates no error.
     ignition::usd::UsdErrors ParseSdfSensor(
       const sdf::Sensor &_sensor,
       pxr::UsdStageRefPtr &_stage,

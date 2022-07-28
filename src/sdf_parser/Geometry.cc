@@ -122,8 +122,10 @@ namespace usd
   /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
   /// Each UsdError includes an error code and message. An empty vector
   /// indicates no error occurred when creating the USD equivalent of _geometry
-  ignition::usd::UsdErrors ParseSdfCylinderGeometry(const sdf::Geometry &_geometry,
-    pxr::UsdStageRefPtr &_stage, const std::string &_path)
+  ignition::usd::UsdErrors ParseSdfCylinderGeometry(
+    const sdf::Geometry &_geometry,
+    pxr::UsdStageRefPtr &_stage,
+    const std::string &_path)
   {
     ignition::usd::UsdErrors errors;
 
@@ -160,8 +162,10 @@ namespace usd
   /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
   /// Each UsdError includes an error code and message. An empty vector
   /// indicates no error occurred when creating the USD equivalent of _geometry
-  ignition::usd::UsdErrors ParseSdfSphereGeometry(const sdf::Geometry &_geometry,
-    pxr::UsdStageRefPtr &_stage, const std::string &_path)
+  ignition::usd::UsdErrors ParseSdfSphereGeometry(
+    const sdf::Geometry &_geometry,
+    pxr::UsdStageRefPtr &_stage,
+    const std::string &_path)
   {
     ignition::usd::UsdErrors errors;
 
@@ -459,8 +463,10 @@ namespace usd
   /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
   /// Each UsdError includes an error code and message. An empty vector
   /// indicates no error occurred when creating the USD equivalent of _geometry
-  ignition::usd::UsdErrors ParseSdfCapsuleGeometry(const sdf::Geometry &_geometry,
-    pxr::UsdStageRefPtr &_stage, const std::string &_path)
+  ignition::usd::UsdErrors ParseSdfCapsuleGeometry(
+    const sdf::Geometry &_geometry,
+    pxr::UsdStageRefPtr &_stage,
+    const std::string &_path)
   {
     ignition::usd::UsdErrors errors;
 
@@ -469,8 +475,9 @@ namespace usd
     auto usdCapsule = pxr::UsdGeomCapsule::Define(_stage, pxr::SdfPath(_path));
     if (!usdCapsule)
     {
-      errors.push_back(UsdError(ignition::usd::UsdErrorCode::FAILED_USD_DEFINITION,
-          "Unable to define a USD capsule geometry at path [" + _path + "]"));
+      errors.push_back(UsdError(
+        ignition::usd::UsdErrorCode::FAILED_USD_DEFINITION,
+        "Unable to define a USD capsule geometry at path [" + _path + "]"));
       return errors;
     }
 
