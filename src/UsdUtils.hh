@@ -49,7 +49,7 @@
 #include <ignition/usd/UsdError.hh>
 #include <ignition/usd/config.hh>
 
-namespace ignition
+namespace gz
 {
   // Inline bracke to help doxygen filtering.
   inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -86,7 +86,7 @@ namespace ignition
     /// \param[out] _pose The pose of _obj w.r.t. its parent.
     /// \tparam T An object that has the following method signatures:
     ///   sdf::SemanticPose SemanticPose();
-    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+    /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
     /// Each UsdError includes an error code and message. An empty vector
     /// indicates no error.
     template <typename T>
@@ -112,7 +112,7 @@ namespace ignition
     /// \param[in] _stage The stage that contains the USD prim at path _usdPath.
     /// \param[in] _usdPath The path to the USD prim that should have its
     /// pose modified to match _pose.
-    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+    /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
     /// Each UsdError includes an error code and message. An empty vector
     /// indicates no error.
     inline UsdErrors SetPose(const ignition::math::Pose3d &_pose,

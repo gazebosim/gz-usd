@@ -92,7 +92,7 @@ TEST_F(UsdStageFixture, Ellipsoid)
   const auto world = root.WorldByIndex(0u);
 
   const auto worldPath = std::string("/" + world->Name());
-  const auto usdErrors = ignition::usd::ParseSdfWorld(*world, stage, worldPath);
+  const auto usdErrors = gz::usd::ParseSdfWorld(*world, stage, worldPath);
   EXPECT_TRUE(usdErrors.empty());
 
   const auto usdSphere = pxr::UsdGeomSphere::Define(
@@ -130,9 +130,9 @@ TEST_F(UsdStageFixture, Ellipsoid)
 /////////////////////////////////////////////////
 TEST_F(UsdStageFixture, Geometry)
 {
-  sdf::setFindCallback(ignition::usd::testing::findFileCb);
+  sdf::setFindCallback(gz::usd::testing::findFileCb);
   ignition::common::addFindFileURICallback(
-    std::bind(&ignition::usd::testing::FindResourceUri, std::placeholders::_1));
+    std::bind(&gz::usd::testing::FindResourceUri, std::placeholders::_1));
 
   const auto path = gz::testing::TestFile("sdf", "basic_shapes.sdf");
   sdf::Root root;
@@ -142,7 +142,7 @@ TEST_F(UsdStageFixture, Geometry)
   const auto world = root.WorldByIndex(0u);
 
   const auto worldPath = std::string("/" + world->Name());
-  const auto usdErrors = ignition::usd::ParseSdfWorld(*world, stage, worldPath);
+  const auto usdErrors = gz::usd::ParseSdfWorld(*world, stage, worldPath);
   EXPECT_TRUE(usdErrors.empty());
 
   const auto worldPrim = this->stage->GetPrimAtPath(pxr::SdfPath(worldPath));
@@ -179,7 +179,7 @@ TEST_F(UsdStageFixture, Geometry)
   ASSERT_TRUE(scaleAttr);
   scaleAttr.Get(&scale);
   EXPECT_EQ(pxr::GfVec3f(2, 4, 0.25), scale);
-  ignition::usd::testing::HasScaleXFormOp(groundPlaneGeometry);
+  gz::usd::testing::HasScaleXFormOp(groundPlaneGeometry);
   usdGroundPlane.GetExtentAttr().Get(&extent);
   this->CheckExtent(extent, pxr::GfVec3f(-0.5), pxr::GfVec3f(0.5));
   extent.clear();
@@ -206,7 +206,7 @@ TEST_F(UsdStageFixture, Geometry)
   ASSERT_TRUE(scaleAttr);
   scaleAttr.Get(&scale);
   EXPECT_EQ(pxr::GfVec3f(1, 2, 3), scale);
-  ignition::usd::testing::HasScaleXFormOp(boxGeometry);
+  gz::usd::testing::HasScaleXFormOp(boxGeometry);
   usdCube.GetExtentAttr().Get(&extent);
   this->CheckExtent(extent, pxr::GfVec3f(-0.5), pxr::GfVec3f(0.5));
   extent.clear();
@@ -298,7 +298,7 @@ TEST_F(UsdStageFixture, Geometry)
   ASSERT_TRUE(scaleAttr);
   scaleAttr.Get(&scale);
   EXPECT_EQ(pxr::GfVec3f(1.2, 2.3, 3.4), scale);
-  ignition::usd::testing::HasScaleXFormOp(meshGeometry);
+  gz::usd::testing::HasScaleXFormOp(meshGeometry);
   const auto usdMesh = pxr::UsdGeomMesh(meshGeometry);
   ASSERT_TRUE(usdMesh);
   usdMesh.GetExtentAttr().Get(&extent);

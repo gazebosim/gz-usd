@@ -23,9 +23,9 @@
 /////////////////////////////////////////////////
 TEST(Error, DefaultConstruction)
 {
-  ignition::usd::UsdError error;
+  gz::usd::UsdError error;
   EXPECT_FALSE(error);
-  EXPECT_EQ(error.Code(), ignition::usd::UsdErrorCode::NONE);
+  EXPECT_EQ(error.Code(), gz::usd::UsdErrorCode::NONE);
   EXPECT_TRUE(error.Message().empty());
   EXPECT_FALSE(error.FilePath().has_value());
   EXPECT_FALSE(error.LineNumber().has_value());
@@ -47,11 +47,11 @@ TEST(Error, DefaultConstruction)
 /////////////////////////////////////////////////
 TEST(Error, ValueConstructionWithoutFile)
 {
-  ignition::usd::UsdError error(
-    ignition::usd::UsdErrorCode::INVALID_PRIM_PATH,
+  gz::usd::UsdError error(
+    gz::usd::UsdErrorCode::INVALID_PRIM_PATH,
     "Invalid Prim path");
   EXPECT_TRUE(error);
-  EXPECT_EQ(error.Code(), ignition::usd::UsdErrorCode::INVALID_PRIM_PATH);
+  EXPECT_EQ(error.Code(), gz::usd::UsdErrorCode::INVALID_PRIM_PATH);
   EXPECT_EQ(error.Message(), "Invalid Prim path");
   EXPECT_FALSE(error.FilePath().has_value());
   EXPECT_FALSE(error.LineNumber().has_value());
@@ -65,12 +65,12 @@ TEST(Error, ValueConstructionWithoutFile)
 TEST(Error, ValueConstructionWithFile)
 {
   const std::string emptyFilePath = "Empty/file/path";
-  ignition::usd::UsdError error(
-    ignition::usd::UsdErrorCode::INVALID_PRIM_PATH,
+  gz::usd::UsdError error(
+    gz::usd::UsdErrorCode::INVALID_PRIM_PATH,
     "Invalid Prim path",
     emptyFilePath);
   EXPECT_TRUE(error);
-  EXPECT_EQ(error.Code(), ignition::usd::UsdErrorCode::INVALID_PRIM_PATH);
+  EXPECT_EQ(error.Code(), gz::usd::UsdErrorCode::INVALID_PRIM_PATH);
   EXPECT_EQ(error.Message(), "Invalid Prim path");
   ASSERT_TRUE(error.FilePath().has_value());
   EXPECT_EQ(error.FilePath().value(), emptyFilePath);
@@ -86,13 +86,13 @@ TEST(Error, ValueConstructionWithLineNumber)
 {
   const std::string emptyFilePath = "Empty/file/path";
   const int lineNumber = 10;
-  ignition::usd::UsdError error(
-    ignition::usd::UsdErrorCode::INVALID_PRIM_PATH,
+  gz::usd::UsdError error(
+    gz::usd::UsdErrorCode::INVALID_PRIM_PATH,
     "Invalid Prim path",
     emptyFilePath,
     lineNumber);
   EXPECT_TRUE(error);
-  EXPECT_EQ(error.Code(), ignition::usd::UsdErrorCode::INVALID_PRIM_PATH);
+  EXPECT_EQ(error.Code(), gz::usd::UsdErrorCode::INVALID_PRIM_PATH);
   EXPECT_EQ(error.Message(), "Invalid Prim path");
   ASSERT_TRUE(error.FilePath().has_value());
   EXPECT_EQ(error.FilePath().value(), emptyFilePath);
@@ -115,9 +115,9 @@ TEST(Error, sdfError)
     sdfErrorMessage,
     emptyFilePath);
 
-  ignition::usd::UsdError error(errorSdf);
+  gz::usd::UsdError error(errorSdf);
   EXPECT_TRUE(error);
-  EXPECT_EQ(error.Code(), ignition::usd::UsdErrorCode::IGNITION_USD_ERROR);
+  EXPECT_EQ(error.Code(), gz::usd::UsdErrorCode::IGNITION_USD_ERROR);
   EXPECT_EQ(error.Message(), "");
   EXPECT_FALSE(error.FilePath().has_value());
   EXPECT_FALSE(error.LineNumber().has_value());

@@ -109,7 +109,7 @@ TEST_F(UsdLightStageFixture, Lights)
     const auto light = *(world->LightByIndex(i));
     const auto lightPath = std::string("/" + light.Name());
     lightPathToSdf[lightPath] = light;
-    const auto errors = ignition::usd::ParseSdfLight(
+    const auto errors = gz::usd::ParseSdfLight(
       light, this->stage, lightPath);
     EXPECT_TRUE(errors.empty());
   }
@@ -120,13 +120,13 @@ TEST_F(UsdLightStageFixture, Lights)
   for (uint64_t i = 0; i < world->ModelCount(); ++i)
   {
     // create a dummy world path so that we can call the
-    // ignition::usd::ParseSdfModel API
+    // gz::usd::ParseSdfModel API
     const auto worldPath = pxr::SdfPath("/" + world->Name());
 
     const auto model = *(world->ModelByIndex(i));
     const auto modelPath = std::string("/" + model.Name());
     const auto errors =
-      ignition::usd::ParseSdfModel(model, this->stage, modelPath, worldPath);
+      gz::usd::ParseSdfModel(model, this->stage, modelPath, worldPath);
     EXPECT_TRUE(errors.empty());
 
     // save the model's USD light paths so that they can be verified later
@@ -193,9 +193,9 @@ TEST_F(UsdLightStageFixture, Lights)
     {
       this->CheckLightIntensity(lightUsd, lightSdf);
       ignition::math::Pose3d pose;
-      const auto poseErrors = ignition::usd::PoseWrtParent(lightSdf, pose);
+      const auto poseErrors = gz::usd::PoseWrtParent(lightSdf, pose);
       EXPECT_TRUE(poseErrors.empty());
-      ignition::usd::testing::CheckPrimPose(lightUsd, pose);
+      gz::usd::testing::CheckPrimPose(lightUsd, pose);
     }
   }
   EXPECT_EQ(2, numPointLights);

@@ -26,7 +26,7 @@
 
 #include "sdf/Pbr.hh"
 
-namespace ignition
+namespace gz
 {
   // Inline bracket to help doxygen filtering.
   inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -39,11 +39,11 @@ namespace ignition
   /// \param[inout] _dest The destination for the copy of _ori. If _dest
   /// represents a file that already exists, a unique numeric suffix in the
   /// form of _<number> will be appended to the end of the file name.
-  /// \return A list of ignition::usd::UsdErrors. An empty list means no errors
+  /// \return A list of gz::usd::UsdErrors. An empty list means no errors
   ///  occurred when copying _ori to _dest
-  ignition::usd::UsdErrors copyFile(const std::string &_ori, std::string &_dest)
+  gz::usd::UsdErrors copyFile(const std::string &_ori, std::string &_dest)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
     if (ignition::common::exists(_ori))
     {
       // If the file exists then we append a number suffix to the destination
@@ -118,10 +118,10 @@ namespace ignition
   }
 
   /////////////////////////////////////////////////
-  ignition::usd::UsdErrors ParseMaterial(
+  gz::usd::UsdErrors ParseMaterial(
     const pxr::UsdPrim &_prim, sdf::Material &_material)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
     // if the prim is a Geom then get the color values
     if (_prim.IsA<pxr::UsdGeomGprim>())
     {
@@ -188,7 +188,7 @@ namespace ignition
                 ignition::common::findFile(ignition::common::basename(
                   materialPath.GetAssetPath()), false);
               std::string dest = materialPath.GetAssetPath();
-              ignition::usd::UsdErrors errorCopy = copyFile(
+              gz::usd::UsdErrors errorCopy = copyFile(
                 fullAlbedoName, dest);
               if (!errorCopy.empty())
               {

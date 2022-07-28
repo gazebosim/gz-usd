@@ -27,7 +27,7 @@
 #include <ignition/usd/Export.hh>
 #include <ignition/usd/config.hh>
 
-namespace ignition
+namespace gz
 {
   // Inline bracket to help doxygen filtering.
   inline namespace IGNITION_USD_VERSION_NAMESPACE
@@ -189,6 +189,6 @@ namespace ignition
 
   }  // namespace usd
   }  // IGNITION_USD_VERSION_NAMESPACE
-}  // namespace ignition
+}  // namespace gz
 
 #endif

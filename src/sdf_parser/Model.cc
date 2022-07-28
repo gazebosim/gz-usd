@@ -41,18 +41,18 @@
 #include "Joint.hh"
 #include "Link.hh"
 
-namespace ignition
+namespace gz
 {
 // Inline bracke to help doxygen filtering.
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
-  ignition::usd::UsdErrors ParseSdfModel(
+  gz::usd::UsdErrors ParseSdfModel(
     const sdf::Model &_model, pxr::UsdStageRefPtr &_stage,
     const std::string &_path, const pxr::SdfPath &_worldPath)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
 
     if (_model.ModelCount())
     {
@@ -122,15 +122,15 @@ namespace usd
     {
       const auto link = *(_model.LinkByIndex(i));
       auto linkPath = std::string(_path + "/" + link.Name());
-      linkPath = ignition::usd::validPath(linkPath);
+      linkPath = gz::usd::validPath(linkPath);
       sdfLinkToUSDPath[link.Name()] = pxr::SdfPath(linkPath);
-      ignition::usd::UsdErrors linkErrors = ParseSdfLink(
+      gz::usd::UsdErrors linkErrors = ParseSdfLink(
         link, _stage, linkPath, !_model.Static());
       if (!linkErrors.empty())
       {
         errors.push_back(
           UsdError(
-            ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+            gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
             "Error parsing link [" + link.Name() + "]"));
         errors.insert(errors.end(), linkErrors.begin(), linkErrors.end());
         return errors;
@@ -142,7 +142,7 @@ namespace usd
     if (!modelPrim)
     {
       errors.push_back(UsdError(
-            ignition::usd::UsdErrorCode::INVALID_PRIM_PATH,
+            gz::usd::UsdErrorCode::INVALID_PRIM_PATH,
             "Internal error: unable to find prim at path [" + _path
             + "], but a prim should exist at this path."));
       return errors;
@@ -157,7 +157,7 @@ namespace usd
       if (!jointErrors.empty())
       {
         errors.push_back(UsdError(
-              ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+              gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
               "Error parsing joint [" + joint.Name() + "]."));
         errors.insert(errors.end(), jointErrors.begin(), jointErrors.end());
         return errors;
@@ -168,7 +168,7 @@ namespace usd
         if (!pxr::UsdPhysicsArticulationRootAPI::Apply(modelPrim))
         {
           errors.push_back(UsdError(
-                ignition::usd::UsdErrorCode::FAILED_PRIM_API_APPLY,
+                gz::usd::UsdErrorCode::FAILED_PRIM_API_APPLY,
                 "Unable to mark Xform at path [" + _path +
                 "] as a pxr::UsdPhysicsArticulationRootAPI. "
                 "Some features might not work."));
@@ -185,7 +185,7 @@ namespace usd
       if (!pxr::UsdPhysicsRigidBodyAPI::Apply(modelPrim))
       {
         errors.push_back(UsdError(
-          ignition::usd::UsdErrorCode::FAILED_PRIM_API_APPLY,
+          gz::usd::UsdErrorCode::FAILED_PRIM_API_APPLY,
           "Internal error: unable to mark model at path [" +
           modelPrim.GetPath().GetString() + "] as a rigid body."));
         return errors;

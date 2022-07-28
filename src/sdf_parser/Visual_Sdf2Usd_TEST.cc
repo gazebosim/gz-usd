@@ -56,9 +56,9 @@ class UsdStageFixture : public::testing::Test
 /////////////////////////////////////////////////
 TEST_F(UsdStageFixture, Visual)
 {
-  sdf::setFindCallback(ignition::usd::testing::findFileCb);
+  sdf::setFindCallback(gz::usd::testing::findFileCb);
   ignition::common::addFindFileURICallback(
-    std::bind(&ignition::usd::testing::FindResourceUri, std::placeholders::_1));
+    std::bind(&gz::usd::testing::FindResourceUri, std::placeholders::_1));
 
   const auto path = gz::testing::TestFile("sdf", "basic_shapes.sdf");
   sdf::Root root;
@@ -68,7 +68,7 @@ TEST_F(UsdStageFixture, Visual)
   const auto world = root.WorldByIndex(0u);
 
   const auto worldPath = std::string("/" + world->Name());
-  const auto usdErrors = ignition::usd::ParseSdfWorld(*world, stage, worldPath);
+  const auto usdErrors = gz::usd::ParseSdfWorld(*world, stage, worldPath);
   EXPECT_TRUE(usdErrors.empty());
 
   const auto worldPrim = this->stage->GetPrimAtPath(pxr::SdfPath(worldPath));
@@ -90,7 +90,7 @@ TEST_F(UsdStageFixture, Visual)
   const auto groundPlaneVisual = this->stage->GetPrimAtPath(
     pxr::SdfPath(groundPlaneVisualPath));
   ASSERT_TRUE(groundPlaneVisual);
-  ignition::usd::testing::CheckPrimPose(groundPlaneVisual, targetPose);
+  gz::usd::testing::CheckPrimPose(groundPlaneVisual, targetPose);
 
   const std::string boxPath = worldPath + "/box";
   const auto box = this->stage->GetPrimAtPath(pxr::SdfPath(boxPath));
@@ -102,7 +102,7 @@ TEST_F(UsdStageFixture, Visual)
   const auto boxVisual = this->stage->GetPrimAtPath(
     pxr::SdfPath(boxVisualPath));
   ASSERT_TRUE(boxVisual);
-  ignition::usd::testing::CheckPrimPose(boxVisual, targetPose);
+  gz::usd::testing::CheckPrimPose(boxVisual, targetPose);
 
   const std::string cylinderPath = worldPath + "/cylinder";
   auto cylinder = this->stage->GetPrimAtPath(pxr::SdfPath(cylinderPath));
@@ -115,7 +115,7 @@ TEST_F(UsdStageFixture, Visual)
   const auto cylinderVisual = this->stage->GetPrimAtPath(
     pxr::SdfPath(cylinderVisualPath));
   ASSERT_TRUE(cylinderVisual);
-  ignition::usd::testing::CheckPrimPose(cylinderVisual, targetPose);
+  gz::usd::testing::CheckPrimPose(cylinderVisual, targetPose);
 
   const std::string spherePath = worldPath + "/sphere";
   const auto sphere = this->stage->GetPrimAtPath(pxr::SdfPath(spherePath));
@@ -128,7 +128,7 @@ TEST_F(UsdStageFixture, Visual)
   const auto sphereVisual = this->stage->GetPrimAtPath(
     pxr::SdfPath(sphereVisualPath));
   ASSERT_TRUE(sphereVisual);
-  ignition::usd::testing::CheckPrimPose(sphereVisual, targetPose);
+  gz::usd::testing::CheckPrimPose(sphereVisual, targetPose);
 
   const std::string capsulePath = worldPath + "/capsule";
   const auto capsule = this->stage->GetPrimAtPath(pxr::SdfPath(capsulePath));
@@ -141,7 +141,7 @@ TEST_F(UsdStageFixture, Visual)
   const auto capsuleVisual = this->stage->GetPrimAtPath(
     pxr::SdfPath(capsuleVisualPath));
   ASSERT_TRUE(capsuleVisual);
-  ignition::usd::testing::CheckPrimPose(capsuleVisual, targetPose);
+  gz::usd::testing::CheckPrimPose(capsuleVisual, targetPose);
 
   const std::string meshPath = worldPath + "/mesh";
   const auto mesh = this->stage->GetPrimAtPath(pxr::SdfPath(meshPath));
@@ -153,5 +153,5 @@ TEST_F(UsdStageFixture, Visual)
   const auto meshVisual = this->stage->GetPrimAtPath(
     pxr::SdfPath(meshVisualPath));
   ASSERT_TRUE(meshVisual);
-  ignition::usd::testing::CheckPrimPose(meshVisual, targetPose);
+  gz::usd::testing::CheckPrimPose(meshVisual, targetPose);
 }

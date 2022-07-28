@@ -47,7 +47,7 @@ TEST(USDJointTest, JointTest)
   const auto stage = pxr::UsdStage::Open(filename);
   ASSERT_TRUE(stage);
 
-  ignition::usd::USDData usdData(filename);
+  gz::usd::USDData usdData(filename);
   usdData.Init();
 
   const auto upperJoint = stage->GetPrimAtPath(pxr::SdfPath(
@@ -55,7 +55,7 @@ TEST(USDJointTest, JointTest)
   ASSERT_TRUE(upperJoint);
 
   sdf::Joint joint1;
-  auto errors = ignition::usd::ParseJoints(
+  auto errors = gz::usd::ParseJoints(
     upperJoint, usdData, joint1);
 
   EXPECT_EQ(0u, errors.size());
@@ -75,7 +75,7 @@ TEST(USDJointTest, JointTest)
   ASSERT_TRUE(lowerJoint);
 
   sdf::Joint joint2;
-  errors = ignition::usd::ParseJoints(
+  errors = gz::usd::ParseJoints(
     lowerJoint, usdData, joint2);
 
   EXPECT_EQ(0u, errors.size());

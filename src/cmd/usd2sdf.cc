@@ -52,7 +52,7 @@ struct Options
 void runCommand(const Options &_opt)
 {
   const auto errors =
-    ignition::usd::parseUSDFile(_opt.inputFilename, _opt.outputFilename,
+    gz::usd::parseUSDFile(_opt.inputFilename, _opt.outputFilename,
         _opt.useGazeboPlugins);
   if (!errors.empty())
   {

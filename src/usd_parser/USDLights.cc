@@ -34,7 +34,7 @@
 #include "ignition/usd/usd_parser/USDData.hh"
 #include "ignition/usd/usd_parser/USDTransforms.hh"
 
-namespace ignition
+namespace gz
 {
 // Inline bracket to help doxygen filtering.
 inline namespace IGNITION_USD_VERSION_NAMESPACE {

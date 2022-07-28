@@ -48,14 +48,14 @@ TEST(USDJointTest, JointTest)
   const auto stage = pxr::UsdStage::Open(filename);
   ASSERT_TRUE(stage);
 
-  ignition::usd::USDData usdData(filename);
+  gz::usd::USDData usdData(filename);
   usdData.Init();
 
   const auto cameraPrim = stage->GetPrimAtPath(pxr::SdfPath(
     "/camera"));
   ASSERT_TRUE(cameraPrim);
 
-  sdf::Sensor sensorCamera = ignition::usd::ParseSensors(
+  sdf::Sensor sensorCamera = gz::usd::ParseSensors(
     cameraPrim, usdData);
 
   EXPECT_EQ(sdf::SensorType::CAMERA, sensorCamera.Type());
@@ -75,7 +75,7 @@ TEST(USDJointTest, JointTest)
     "/lidar"));
   ASSERT_TRUE(lidarPrim);
 
-  sdf::Sensor sensorLidar = ignition::usd::ParseSensors(
+  sdf::Sensor sensorLidar = gz::usd::ParseSensors(
     lidarPrim, usdData);
 
   EXPECT_EQ(sdf::SensorType::GPU_LIDAR, sensorLidar.Type());

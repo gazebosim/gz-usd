@@ -33,7 +33,7 @@
 #include "ignition/usd/UsdError.hh"
 #include <ignition/usd/config.hh>
 
-namespace ignition
+namespace gz
 {
   // Inline bracke to help doxygen filtering.
   inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -48,11 +48,11 @@ namespace ignition
     /// be a valid USD path.
     /// \param[in] _rigidBody Whether the link is a rigid body (i.e.,
     /// non-static) or not. True for rigid body, false otherwise
-    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+    /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
     /// Each UsdError includes an error code and message. An empty vector
     /// indicates no errors occurred when parsing _link to its USD
     /// representation.
-    ignition::usd::UsdErrors ParseSdfLink(const sdf::Link &_link,
+    gz::usd::UsdErrors ParseSdfLink(const sdf::Link &_link,
         pxr::UsdStageRefPtr &_stage, const std::string &_path,
         bool _rigidBody);
   }

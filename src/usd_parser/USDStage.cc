@@ -33,7 +33,7 @@
 
 #include "ignition/usd/usd_parser/USDStage.hh"
 
-namespace ignition {
+namespace gz {
 // Inline bracke to help doxygen filtering.
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
 //
@@ -63,16 +63,16 @@ namespace usd
   }
 
   /////////////////////////////////////////////////
-  ignition::usd::UsdErrors USDStage::Init()
+  gz::usd::UsdErrors USDStage::Init()
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
 
     // Open the stage
     auto referencee = pxr::UsdStage::Open(this->dataPtr->refFileName);
     if (!referencee)
     {
       errors.emplace_back(UsdError(
-        ignition::usd::UsdErrorCode::INVALID_USD_FILE,
+        gz::usd::UsdErrorCode::INVALID_USD_FILE,
         "Failed to load usd file"));
       return errors;
     }
@@ -93,7 +93,7 @@ namespace usd
       {
         errors.emplace_back(
           UsdError(
-            ignition::usd::UsdErrorCode::INVALID_UP_AXIS,
+            gz::usd::UsdErrorCode::INVALID_UP_AXIS,
             "Up axis should be 'Y' or 'Z'"));
         return errors;
       }

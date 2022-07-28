@@ -33,7 +33,7 @@
 #include "ignition/usd/UsdError.hh"
 #include <ignition/usd/config.hh>
 
-namespace ignition
+namespace gz
 {
   // Inline bracket to help doxygen filtering.
   inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -45,10 +45,10 @@ namespace ignition
     /// \param[in] _stage The stage that should contain the USD representation
     /// of _material.
     /// \param[out] _materialPath USD Material path
-    /// \return ignition::usd::UsdErrors, which is a list of UsdError objects.
+    /// \return gz::usd::UsdErrors, which is a list of UsdError objects.
     /// This list is empty if no errors occurred when parsing _materialSdf its
     /// USD representation
-    ignition::usd::UsdErrors ParseSdfMaterial(
+    gz::usd::UsdErrors ParseSdfMaterial(
         const sdf::Material *_materialSdf,
         pxr::UsdStageRefPtr &_stage,
         pxr::SdfPath &_materialPath);

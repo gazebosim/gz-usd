@@ -60,7 +60,7 @@ TEST(Conversions, SdfToCommonMaterial)
   material.SetPbrMaterial(pbrSDF);
 
   ignition::common::Material materialCommon;
-  ignition::usd::convert(material, materialCommon);
+  gz::usd::convert(material, materialCommon);
   const ignition::common::Pbr * pbrCommon = materialCommon.PbrMaterial();
   ASSERT_NE(nullptr, pbrCommon);
 
@@ -123,7 +123,7 @@ TEST(Conversions, CommonToSdfMaterial)
 
   materialCommon.SetPbrMaterial(pbrCommon);
 
-  const sdf::Material material = ignition::usd::convert(&materialCommon);
+  const sdf::Material material = gz::usd::convert(&materialCommon);
 
   const sdf::Pbr * pbr = material.PbrMaterial();
   ASSERT_NE(nullptr, pbr);

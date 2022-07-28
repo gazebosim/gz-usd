@@ -25,7 +25,7 @@
 
 #include "sdf/World.hh"
 
-namespace ignition
+namespace gz
 {
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
 namespace usd

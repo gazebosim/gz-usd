@@ -42,7 +42,7 @@
 #include "ignition/usd/UsdError.hh"
 #include "USDData.hh"
 
-namespace ignition
+namespace gz
 {
   // Inline bracket to help doxygen filtering.
   inline namespace IGNITION_USD_VERSION_NAMESPACE {

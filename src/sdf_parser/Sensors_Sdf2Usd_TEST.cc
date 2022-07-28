@@ -58,9 +58,9 @@ class UsdStageFixture : public::testing::Test
 /////////////////////////////////////////////////
 TEST_F(UsdStageFixture, Sensors)
 {
-  sdf::setFindCallback(ignition::usd::testing::findFileCb);
+  sdf::setFindCallback(gz::usd::testing::findFileCb);
   ignition::common::addFindFileURICallback(
-    std::bind(&ignition::usd::testing::FindResourceUri, std::placeholders::_1));
+    std::bind(&gz::usd::testing::FindResourceUri, std::placeholders::_1));
 
   const auto path = gz::testing::TestFile("sdf", "usd_sensors.sdf");
   sdf::Root root;
@@ -70,7 +70,7 @@ TEST_F(UsdStageFixture, Sensors)
   auto world = root.WorldByIndex(0u);
 
   const auto worldPath = std::string("/" + world->Name());
-  auto usdErrors = ignition::usd::ParseSdfWorld(*world, stage, worldPath);
+  auto usdErrors = gz::usd::ParseSdfWorld(*world, stage, worldPath);
   EXPECT_TRUE(usdErrors.empty());
 
   auto worldPrim = this->stage->GetPrimAtPath(pxr::SdfPath(worldPath));

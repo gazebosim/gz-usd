@@ -62,7 +62,7 @@
 #include "../Conversions.hh"
 #include "../UsdUtils.hh"
 
-namespace ignition
+namespace gz
 {
 // Inline bracke to help doxygen filtering.
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -75,13 +75,13 @@ namespace usd
   /// of _geometry
   /// \param[in] _path Where the parsed USD equivalent of _geometry should exist
   /// in _stage
-  /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+  /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
   /// Each UsdError includes an error code and message. An empty vector
   /// indicates no error occurred when creating the USD equivalent of _geometry
-  ignition::usd::UsdErrors ParseSdfBoxGeometry(const sdf::Geometry &_geometry,
+  gz::usd::UsdErrors ParseSdfBoxGeometry(const sdf::Geometry &_geometry,
     pxr::UsdStageRefPtr &_stage, const std::string &_path)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
 
     const auto &sdfBox = _geometry.BoxShape();
 
@@ -92,7 +92,7 @@ namespace usd
     if (!usdCube)
     {
       errors.push_back(UsdError(
-        ignition::usd::UsdErrorCode::FAILED_USD_DEFINITION,
+        gz::usd::UsdErrorCode::FAILED_USD_DEFINITION,
         "Unable to define a USD cube geometry at path [" + _path + "]"));
       return errors;
     }
@@ -119,15 +119,15 @@ namespace usd
   /// of _geometry
   /// \param[in] _path Where the parsed USD equivalent of _geometry should exist
   /// in _stage
-  /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+  /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
   /// Each UsdError includes an error code and message. An empty vector
   /// indicates no error occurred when creating the USD equivalent of _geometry
-  ignition::usd::UsdErrors ParseSdfCylinderGeometry(
+  gz::usd::UsdErrors ParseSdfCylinderGeometry(
     const sdf::Geometry &_geometry,
     pxr::UsdStageRefPtr &_stage,
     const std::string &_path)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
 
     const auto &sdfCylinder = _geometry.CylinderShape();
 
@@ -136,7 +136,7 @@ namespace usd
     if (!usdCylinder)
     {
       errors.push_back(UsdError(
-        ignition::usd::UsdErrorCode::FAILED_USD_DEFINITION,
+        gz::usd::UsdErrorCode::FAILED_USD_DEFINITION,
         "Unable to define a USD cylinder geometry at path [" + _path + "]"));
       return errors;
     }
@@ -159,15 +159,15 @@ namespace usd
   /// of _geometry
   /// \param[in] _path Where the parsed USD equivalent of _geometry should exist
   /// in _stage
-  /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+  /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
   /// Each UsdError includes an error code and message. An empty vector
   /// indicates no error occurred when creating the USD equivalent of _geometry
-  ignition::usd::UsdErrors ParseSdfSphereGeometry(
+  gz::usd::UsdErrors ParseSdfSphereGeometry(
     const sdf::Geometry &_geometry,
     pxr::UsdStageRefPtr &_stage,
     const std::string &_path)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
 
     const auto &sdfSphere = _geometry.SphereShape();
 
@@ -175,7 +175,7 @@ namespace usd
     if (!usdSphere)
     {
       errors.push_back(UsdError(
-        ignition::usd::UsdErrorCode::FAILED_USD_DEFINITION,
+        gz::usd::UsdErrorCode::FAILED_USD_DEFINITION,
         "Unable to define a USD sphere geometry at path [" + _path + "]"));
       return errors;
     }
@@ -195,13 +195,13 @@ namespace usd
   /// of _geometry
   /// \param[in] _path Where the parsed USD equivalent of _geometry should exist
   /// in _stage
-  /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+  /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
   /// Each UsdError includes an error code and message. An empty vector
   /// indicates no error occurred when creating the USD equivalent of _geometry
-  ignition::usd::UsdErrors ParseSdfMeshGeometry(const sdf::Geometry &_geometry,
+  gz::usd::UsdErrors ParseSdfMeshGeometry(const sdf::Geometry &_geometry,
     pxr::UsdStageRefPtr &_stage, const std::string &_path)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
 
     ignition::common::URI uri(_geometry.MeshShape()->Uri());
     std::string fullName;
@@ -221,7 +221,7 @@ namespace usd
         fullName);
     if (!ignMesh)
     {
-      errors.push_back(UsdError(ignition::usd::UsdErrorCode::MESH_LOAD_FAILURE,
+      errors.push_back(UsdError(gz::usd::UsdErrorCode::MESH_LOAD_FAILURE,
               "Unable to load mesh named [" + fullName + "]"));
       return errors;
     }
@@ -243,7 +243,7 @@ namespace usd
         if (!subMesh)
         {
           errors.push_back(UsdError(
-            ignition::usd::UsdErrorCode::MESH_LOAD_FAILURE,
+            gz::usd::UsdErrorCode::MESH_LOAD_FAILURE,
             "Unable to get a shared pointer to submesh at index ["
             + std::to_string(i) + "] of parent mesh [" + ignMesh->Name()
             + "]"));
@@ -275,7 +275,7 @@ namespace usd
       if (!subMesh)
       {
         errors.push_back(UsdError(
-          ignition::usd::UsdErrorCode::MESH_LOAD_FAILURE,
+          gz::usd::UsdErrorCode::MESH_LOAD_FAILURE,
           "Unable to get a shared pointer to submesh at index ["
           + std::to_string(i) + "] of parent mesh [" + ignMesh->Name()
           + "]"));
@@ -341,7 +341,7 @@ namespace usd
         case ignition::common::SubMesh::PrimitiveType::TRISTRIPS:
         default:
           errors.push_back(UsdError(
-                ignition::usd::UsdErrorCode::INVALID_SUBMESH_PRIMITIVE_TYPE,
+                gz::usd::UsdErrorCode::INVALID_SUBMESH_PRIMITIVE_TYPE,
                 "Submesh " + subMesh->Name() + " has a primitive type that is "
                 "not supported."));
           return errors;
@@ -359,13 +359,13 @@ namespace usd
       else
         primName = _path + "/submesh_" + std::to_string(i);
 
-      primName = ignition::usd::validPath(primName);
+      primName = gz::usd::validPath(primName);
 
       auto usdMesh = pxr::UsdGeomMesh::Define(_stage, pxr::SdfPath(primName));
       if (!usdMesh)
       {
         errors.push_back(UsdError(
-          ignition::usd::UsdErrorCode::FAILED_USD_DEFINITION,
+          gz::usd::UsdErrorCode::FAILED_USD_DEFINITION,
           "Unable to define a USD mesh geometry at path [" + primName + "]"));
         return errors;
       }
@@ -399,14 +399,14 @@ namespace usd
       if (materialIndex != -1)
       {
         const auto material = ignMesh->MaterialByIndex(materialIndex).get();
-        const sdf::Material materialSdf = ignition::usd::convert(material);
+        const sdf::Material materialSdf = gz::usd::convert(material);
         pxr::SdfPath materialPath;
-        ignition::usd::UsdErrors materialErrors = ParseSdfMaterial(
+        gz::usd::UsdErrors materialErrors = ParseSdfMaterial(
           &materialSdf, _stage, materialPath);
         if (!materialErrors.empty())
         {
           errors.push_back(UsdError(
-            ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+            gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
             "Unable to convert material [" + std::to_string(materialIndex)
             + "] of submesh named [" + subMesh->Name()
             + "] to a USD material."));
@@ -417,7 +417,7 @@ namespace usd
         if (!materialPrim)
         {
           errors.push_back(UsdError(
-                ignition::usd::UsdErrorCode::INVALID_PRIM_PATH,
+                gz::usd::UsdErrorCode::INVALID_PRIM_PATH,
                 "Unable to get material prim at path ["
                 + materialPath.GetString()
                 + "], but a prim should exist at this path."));
@@ -435,7 +435,7 @@ namespace usd
         else if (!materialUSD)
         {
           errors.push_back(UsdError(
-              ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+              gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
               "The prim at path [" + materialPath.GetString()
               + "] is not a pxr::UsdShadeMaterial object."));
           return errors;
@@ -460,15 +460,15 @@ namespace usd
   /// of _geometry
   /// \param[in] _path Where the parsed USD equivalent of _geometry should exist
   /// in _stage
-  /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+  /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
   /// Each UsdError includes an error code and message. An empty vector
   /// indicates no error occurred when creating the USD equivalent of _geometry
-  ignition::usd::UsdErrors ParseSdfCapsuleGeometry(
+  gz::usd::UsdErrors ParseSdfCapsuleGeometry(
     const sdf::Geometry &_geometry,
     pxr::UsdStageRefPtr &_stage,
     const std::string &_path)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
 
     const auto &sdfCapsule = _geometry.CapsuleShape();
 
@@ -476,7 +476,7 @@ namespace usd
     if (!usdCapsule)
     {
       errors.push_back(UsdError(
-        ignition::usd::UsdErrorCode::FAILED_USD_DEFINITION,
+        gz::usd::UsdErrorCode::FAILED_USD_DEFINITION,
         "Unable to define a USD capsule geometry at path [" + _path + "]"));
       return errors;
     }
@@ -499,13 +499,13 @@ namespace usd
   /// of _geometry
   /// \param[in] _path Where the parsed USD equivalent of _geometry should exist
   /// in _stage
-  /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+  /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
   /// Each UsdError includes an error code and message. An empty vector
   /// indicates no error occurred when creating the USD equivalent of _geometry
-  ignition::usd::UsdErrors ParseSdfPlaneGeometry(const sdf::Geometry &_geometry,
+  gz::usd::UsdErrors ParseSdfPlaneGeometry(const sdf::Geometry &_geometry,
     pxr::UsdStageRefPtr &_stage, const std::string &_path)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
 
     const auto &sdfPlane = _geometry.PlaneShape();
 
@@ -544,13 +544,13 @@ namespace usd
   /// of _geometry
   /// \param[in] _path Where the parsed USD equivalent of _geometry should exist
   /// in _stage
-  /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+  /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
   /// Each UsdError includes an error code and message. An empty vector
   /// indicates no error occurred when creating the USD equivalent of _geometry
-  ignition::usd::UsdErrors ParseSdfEllipsoid(const sdf::Geometry &_geometry,
+  gz::usd::UsdErrors ParseSdfEllipsoid(const sdf::Geometry &_geometry,
     pxr::UsdStageRefPtr &_stage, const std::string &_path)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
 
     const auto sdfEllipsoid = _geometry.EllipsoidShape();
 
@@ -558,7 +558,7 @@ namespace usd
     if (!usdEllipsoid)
     {
       errors.push_back(UsdError(
-        ignition::usd::UsdErrorCode::FAILED_USD_DEFINITION,
+        gz::usd::UsdErrorCode::FAILED_USD_DEFINITION,
         "Unable to define a USD ellipsoid geometry at path [" + _path + "]"));
       return errors;
     }
@@ -579,10 +579,10 @@ namespace usd
     return errors;
   }
 
-  ignition::usd::UsdErrors ParseSdfGeometry(const sdf::Geometry &_geometry,
+  gz::usd::UsdErrors ParseSdfGeometry(const sdf::Geometry &_geometry,
     pxr::UsdStageRefPtr &_stage, const std::string &_path)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
     switch (_geometry.Type())
     {
       case sdf::GeometryType::BOX:

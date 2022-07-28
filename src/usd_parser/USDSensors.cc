@@ -30,7 +30,7 @@
 #include "sdf/Camera.hh"
 #include "sdf/Lidar.hh"
 
-namespace ignition
+namespace gz
 {
   // Inline bracket to help doxygen filtering.
   inline namespace IGNITION_USD_VERSION_NAMESPACE {

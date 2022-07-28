@@ -20,7 +20,7 @@
 
 #include "sdf/Root.hh"
 
-namespace ignition
+namespace gz
 {
 
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -32,7 +32,7 @@ namespace usd
       const std::string &_outputFilenameSdf,
       bool _useGazeboPlugins)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
     USD2SDF usd2sdf;
     sdf::Root root;
     errors = usd2sdf.Read(_inputFilenameUsd, _useGazeboPlugins, root);

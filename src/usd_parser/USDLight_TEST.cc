@@ -47,7 +47,7 @@
 TEST(USDLightsTest, DistanceLight)
 {
   std::string filename = gz::testing::TestFile("usd", "upAxisZ.usda");
-  ignition::usd::USDData usdData(filename);
+  gz::usd::USDData usdData(filename);
   EXPECT_EQ(0u, usdData.Init().size());
 
   auto stage = pxr::UsdStage::Open(filename);
@@ -57,7 +57,7 @@ TEST(USDLightsTest, DistanceLight)
     pxr::SdfPath("/defaultLight"));
   ASSERT_TRUE(prim);
 
-  auto light = ignition::usd::ParseUSDLights(
+  auto light = gz::usd::ParseUSDLights(
     prim, usdData, "");
   ASSERT_TRUE(light);
 
@@ -73,7 +73,7 @@ TEST(USDLightsTest, DistanceLight)
   prim = stage->GetPrimAtPath(pxr::SdfPath("/diskLight"));
   ASSERT_TRUE(prim);
 
-  auto diskLight = ignition::usd::ParseUSDLights(
+  auto diskLight = gz::usd::ParseUSDLights(
     prim, usdData, "");
   ASSERT_TRUE(diskLight);
 

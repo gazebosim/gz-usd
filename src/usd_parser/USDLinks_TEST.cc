@@ -45,7 +45,7 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
   const auto stage = pxr::UsdStage::Open(filename);
   ASSERT_TRUE(stage);
 
-  ignition::usd::USDData usdData(filename);
+  gz::usd::USDData usdData(filename);
   usdData.Init();
 
   ignition::math::Vector3d scale(1, 1, 1);
@@ -82,7 +82,7 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
   ASSERT_TRUE(boxLink);
 
   std::optional<sdf::Link> linkSDF;
-  ignition::usd::ParseUSDLinks(
+  gz::usd::ParseUSDLinks(
     boxLink, "/box/box_link", linkSDF, usdData, scale);
 
   EXPECT_EQ(ignition::math::Vector3d(1, 0.1, 1), scale);
@@ -91,14 +91,14 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
     pxr::SdfPath("/box/box_link/box_visual/geometry"));
   ASSERT_TRUE(boxLinkGeometry);
 
-  ignition::usd::ParseUSDLinks(
+  gz::usd::ParseUSDLinks(
     boxLinkGeometry, "/box/box_link", linkSDF, usdData, scale);
 
   const auto boxLinkCollision = stage->GetPrimAtPath(
     pxr::SdfPath("/box/box_link/box_visual/collision"));
   ASSERT_TRUE(boxLinkCollision);
 
-  ignition::usd::ParseUSDLinks(
+  gz::usd::ParseUSDLinks(
     boxLinkCollision, "/box/box_link", linkSDF, usdData, scale);
 
   ASSERT_TRUE(linkSDF);
@@ -111,7 +111,7 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
   ASSERT_TRUE(cylinderLink);
 
   std::optional<sdf::Link> linkCylinderSDF;
-  ignition::usd::ParseUSDLinks(
+  gz::usd::ParseUSDLinks(
     cylinderLink, "/cylinder/cylinder_link",
     linkCylinderSDF, usdData, scale);
 
@@ -119,7 +119,7 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
     pxr::SdfPath("/cylinder/cylinder_link/cylinder_visual/geometry"));
   EXPECT_TRUE(cylinderLinkGeometry);
 
-  ignition::usd::ParseUSDLinks(
+  gz::usd::ParseUSDLinks(
     cylinderLinkGeometry, "/cylinder/cylinder_link",
     linkCylinderSDF, usdData, scale);
 
@@ -127,7 +127,7 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
     pxr::SdfPath("/cylinder/cylinder_link/cylinder_visual/collision"));
   EXPECT_TRUE(cylinderLinkCollision);
 
-  ignition::usd::ParseUSDLinks(
+  gz::usd::ParseUSDLinks(
     cylinderLinkCollision, "/cylinder/cylinder_link",
     linkCylinderSDF, usdData, scale);
 
@@ -140,14 +140,14 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
   ASSERT_TRUE(sphereLink);
 
   std::optional<sdf::Link> linkSphereSDF;
-  ignition::usd::ParseUSDLinks(
+  gz::usd::ParseUSDLinks(
     sphereLink, "/sphere/sphere_link", linkSphereSDF, usdData, scale);
 
   const auto sphereLinkGeometry = stage->GetPrimAtPath(
     pxr::SdfPath("/sphere/sphere_link/sphere_visual/geometry"));
   EXPECT_TRUE(sphereLinkGeometry);
 
-  ignition::usd::ParseUSDLinks(
+  gz::usd::ParseUSDLinks(
     sphereLinkGeometry, "/sphere/sphere_link",
     linkSphereSDF, usdData, scale);
 
@@ -155,7 +155,7 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
     pxr::SdfPath("/sphere/sphere_link/sphere_visual/collision"));
   EXPECT_TRUE(sphereLinkCollision);
 
-  ignition::usd::ParseUSDLinks(
+  gz::usd::ParseUSDLinks(
     sphereLinkCollision, "/sphere/sphere_link",
     linkSphereSDF, usdData, scale);
 
@@ -169,14 +169,14 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
   ASSERT_TRUE(capsuleLink);
 
   std::optional<sdf::Link> linkCapsuleSDF;
-  ignition::usd::ParseUSDLinks(
+  gz::usd::ParseUSDLinks(
     capsuleLink, "/capsule/capsule_link", linkCapsuleSDF, usdData, scale);
 
   const auto capsuleLinkCollision = stage->GetPrimAtPath(
     pxr::SdfPath("/capsule/capsule_link/capsule_visual/collision"));
   EXPECT_TRUE(capsuleLinkCollision);
 
-  ignition::usd::ParseUSDLinks(
+  gz::usd::ParseUSDLinks(
     capsuleLinkCollision, "/capsule/capsule_link",
     linkCapsuleSDF, usdData, scale);
 
@@ -189,7 +189,7 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
   ASSERT_TRUE(ellipsoidLink);
 
   std::optional<sdf::Link> linkEllipsoidSDF;
-  ignition::usd::ParseUSDLinks(
+  gz::usd::ParseUSDLinks(
     ellipsoidLink, "/ellipsoid/ellipsoid_link",
     linkEllipsoidSDF, usdData, scale);
 
@@ -197,7 +197,7 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
     pxr::SdfPath("/ellipsoid/ellipsoid_link/ellipsoid_visual/collision"));
   EXPECT_TRUE(ellipsoidLinkCollision);
 
-  ignition::usd::ParseUSDLinks(
+  gz::usd::ParseUSDLinks(
     ellipsoidLinkCollision, "/ellipsoid/ellipsoid_link",
     linkEllipsoidSDF, usdData, scale);
 

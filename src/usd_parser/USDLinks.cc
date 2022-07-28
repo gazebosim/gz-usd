@@ -63,7 +63,7 @@
 #include "ignition/usd/UsdError.hh"
 #include "../Conversions.hh"
 
-namespace ignition
+namespace gz
 {
 // Inline bracket to help doxygen filtering.
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -317,9 +317,9 @@ int ParseMeshSubGeom(const pxr::UsdPrim &_prim,
 /// \param[in] _scale scale mesh
 /// \param[in] _usdData metadata of the USD file
 /// \param[out] _pose The pose of the parsed mesh
-/// \return ignition::usd::UsdErrors, which is a list of UsdError objects.
+/// \return gz::usd::UsdErrors, which is a list of UsdError objects.
 ///  An empty list means that no errors occurred when parsing the USD mesh
-ignition::usd::UsdErrors ParseMesh(
+gz::usd::UsdErrors ParseMesh(
   const pxr::UsdPrim &_prim,
   sdf::Link *_link,
   sdf::Visual &_vis,
@@ -328,7 +328,7 @@ ignition::usd::UsdErrors ParseMesh(
   const USDData &_usdData,
   ignition::math::Pose3d &_pose)
 {
-  ignition::usd::UsdErrors errors;
+  gz::usd::UsdErrors errors;
 
   const std::pair<std::string, std::shared_ptr<USDStage>> data =
     _usdData.FindStage(_prim.GetPath().GetName());
@@ -540,14 +540,14 @@ void ParseCylinder(
 }
 
 //////////////////////////////////////////////////
-ignition::usd::UsdErrors ParseUSDLinks(
+gz::usd::UsdErrors ParseUSDLinks(
   const pxr::UsdPrim &_prim,
   const std::string &_nameLink,
   std::optional<sdf::Link> &_link,
   const USDData &_usdData,
   ignition::math::Vector3d &_scale)
 {
-  ignition::usd::UsdErrors errors;
+  gz::usd::UsdErrors errors;
   const std::string primNameStr = _prim.GetPath().GetName();
   const std::string primPathStr = pxr::TfStringify(_prim.GetPath());
   const std::string primType = _prim.GetPrimTypeInfo().GetTypeName().GetText();
@@ -679,7 +679,7 @@ ignition::usd::UsdErrors ParseUSDLinks(
         if (!errors.empty())
         {
           errors.emplace_back(UsdError(
-          ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+          gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
             "Error parsing mesh"));
           return errors;
         }
@@ -747,7 +747,7 @@ ignition::usd::UsdErrors ParseUSDLinks(
         if (!errors.empty())
         {
           errors.emplace_back(UsdError(
-          ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+          gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
             "Error parsing mesh"));
           return errors;
         }

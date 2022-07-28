@@ -25,7 +25,7 @@
 
 #include "sdf/Root.hh"
 
-namespace ignition
+namespace gz
 {
 // Inline bracket to help doxygen filtering.
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -44,10 +44,10 @@ inline namespace IGNITION_USD_VERSION_NAMESPACE {
       /// in it (true) or not (false)
       /// \param[out] _root Root element to populate with the equivalent sdf
       /// information from _fileName.
-      /// \return ignition::usd::UsdErrors, which is a list of UsdError objects.
+      /// \return gz::usd::UsdErrors, which is a list of UsdError objects.
       /// An empty list means no errors occurred when populating _root with
       /// the contentsof _fileName
-      public: ignition::usd::UsdErrors Read(
+      public: gz::usd::UsdErrors Read(
         const std::string &_fileName,
         bool _useGazeboPlugins,
         sdf::Root &_root);

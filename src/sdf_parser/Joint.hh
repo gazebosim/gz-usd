@@ -36,7 +36,7 @@
 #include <ignition/usd/config.hh>
 #include "ignition/usd/UsdError.hh"
 
-namespace ignition
+namespace gz
 {
   // Inline bracke to help doxygen filtering.
   inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -55,11 +55,11 @@ namespace ignition
     /// the USD joint's relative links.
     /// \param[in] _worldPath The USD path of the world prim. This is needed if
     /// _joint's parent is the world.
-    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+    /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
     /// Each UsdError includes an error code and message. An empty vector
     /// indicates no errors occurred when parsing _joint to its USD
     /// representation.
-    ignition::usd::UsdErrors ParseSdfJoint(
+    gz::usd::UsdErrors ParseSdfJoint(
         const sdf::Joint &_joint,
         pxr::UsdStageRefPtr &_stage, const std::string &_path,
         const sdf::Model &_parentModel,

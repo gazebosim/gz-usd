@@ -83,7 +83,7 @@ class UsdJointStageFixture : public::testing::Test
 
     this->modelPath =
       std::string(this->worldPath.GetString() + "/" + this->model->Name());
-    const auto errors = ignition::usd::ParseSdfModel(
+    const auto errors = gz::usd::ParseSdfModel(
       *(this->model), this->stage,
       this->modelPath, this->worldPath);
     EXPECT_TRUE(errors.empty());
@@ -472,5 +472,5 @@ TEST_F(UsdJointStageFixture, BallPrismaticJoint)
 }
 
 // TODO(adlarkin) Add a test case for a revolute joint with the axis being "y".
-// This is a special case; see the ignition::usd::SetUSDJointPose method in
+// This is a special case; see the gz::usd::SetUSDJointPose method in
 // usd/src/sdf_parser/Joint.cc for how this is handled

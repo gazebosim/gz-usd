@@ -30,7 +30,7 @@
 #include "ignition/usd/Export.hh"
 #include "ignition/usd/UsdError.hh"
 
-namespace ignition
+namespace gz
 {
   // Inline bracket to help doxygen filtering.
   inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -48,10 +48,10 @@ namespace ignition
   /// face of the mesh.
   /// \param[out] _triangles A flat list of vertex indices, with each face
   /// converted to one or more triangles.
-  /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+  /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
   /// Each UsdError includes an error code and message. An empty vector
   /// indicates no error occurred when parsing the polygons.
-  ignition::usd::UsdErrors PolygonToTriangles(
+  gz::usd::UsdErrors PolygonToTriangles(
     const pxr::VtIntArray &_faceVertexIndices,
     const pxr::VtIntArray &_faceVertexCounts,
     std::vector<unsigned int> &_triangles);

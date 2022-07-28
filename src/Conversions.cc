@@ -21,7 +21,7 @@
 
 #include "sdf/Pbr.hh"
 
-namespace ignition
+namespace gz
 {
   inline namespace IGNITION_USD_VERSION_NAMESPACE {
   //

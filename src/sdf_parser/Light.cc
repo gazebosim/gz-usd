@@ -37,18 +37,18 @@
 #include "sdf/Light.hh"
 #include "../UsdUtils.hh"
 
-namespace ignition
+namespace gz
 {
 // Inline bracke to help doxygen filtering.
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
-  ignition::usd::UsdErrors ParseSdfLight(const sdf::Light &_light,
+  gz::usd::UsdErrors ParseSdfLight(const sdf::Light &_light,
       pxr::UsdStageRefPtr &_stage, const std::string &_path)
   {
     const pxr::SdfPath sdfLightPath(_path);
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
     switch (_light.Type())
     {
       case sdf::LightType::POINT:
@@ -76,7 +76,7 @@ namespace usd
     // to the USD API, things like UsdLuxDistantLight and UsdLuxDiskLight emit
     // light along the -Z axis, so I'm not sure if this can be changed.
     ignition::math::Pose3d pose;
-    auto poseErrors = ignition::usd::PoseWrtParent(_light, pose);
+    auto poseErrors = gz::usd::PoseWrtParent(_light, pose);
     if (!poseErrors.empty())
     {
       for (const auto &e : poseErrors)
@@ -84,7 +84,7 @@ namespace usd
       return errors;
     }
 
-    poseErrors = ignition::usd::SetPose(pose, _stage, sdfLightPath);
+    poseErrors = gz::usd::SetPose(pose, _stage, sdfLightPath);
     if (!poseErrors.empty())
     {
       for (const auto &e : poseErrors)

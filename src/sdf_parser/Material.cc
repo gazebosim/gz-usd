@@ -41,7 +41,7 @@
 
 #include "sdf/Pbr.hh"
 
-namespace ignition
+namespace gz
 {
 // Inline bracket to help doxygen filtering.
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -91,10 +91,10 @@ namespace usd
   /// \param[in] _doc Documentation of the field
   /// \param[in] _colorSpace if the material is a texture, we can specify the
   /// color space of the image
-  /// \return ignition::usd::UsdErrors, which is a list of UsdError objects.
+  /// \return gz::usd::UsdErrors, which is a list of UsdError objects.
   /// This list is empty if no errors occurred when creating the material input.
   template<typename T>
-  ignition::usd::UsdErrors CreateMaterialInput(
+  gz::usd::UsdErrors CreateMaterialInput(
     const pxr::UsdPrim &_prim,
     const std::string &_name,
     const pxr::SdfValueTypeName &_vType,
@@ -105,12 +105,12 @@ namespace usd
     const std::string &_doc,
     const pxr::TfToken &_colorSpace = pxr::TfToken(""))
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
     auto shader = pxr::UsdShadeShader(_prim);
     if (!shader)
     {
       errors.emplace_back(UsdError(
-        ignition::usd::UsdErrorCode::INVALID_PRIM_PATH,
+        gz::usd::UsdErrorCode::INVALID_PRIM_PATH,
         "Unable to convert the prim to a UsdShadeShader"));
       return errors;
     }
@@ -153,10 +153,10 @@ namespace usd
     return errors;
   }
 
-  ignition::usd::UsdErrors ParseSdfMaterial(const sdf::Material *_materialSdf,
+  gz::usd::UsdErrors ParseSdfMaterial(const sdf::Material *_materialSdf,
       pxr::UsdStageRefPtr &_stage, pxr::SdfPath &_materialPath)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
 
     const auto looksPath = pxr::SdfPath("/Looks");
     auto looksPrim = _stage->GetPrimAtPath(looksPath);
@@ -189,7 +189,7 @@ namespace usd
     if (!shaderPrim)
     {
       errors.emplace_back(UsdError(
-        ignition::usd::UsdErrorCode::INVALID_PRIM_PATH,
+        gz::usd::UsdErrorCode::INVALID_PRIM_PATH,
         "Not able to cast the UsdShadeShader at path [" + shaderPath.GetString()
         + "] to a Prim"));
       return errors;

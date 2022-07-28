@@ -34,7 +34,7 @@
 #include "ignition/usd/Export.hh"
 #include "ignition/usd/UsdError.hh"
 
-namespace ignition
+namespace gz
 {
   // Inline bracket to help doxygen filtering.
   inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -54,18 +54,18 @@ namespace ignition
       /// defined in the constructor
       /// \return A vector of Error objects. Each Error includes
       /// an error code and message. An empty vector indicates no error.
-      public: ignition::usd::UsdErrors Init();
+      public: gz::usd::UsdErrors Init();
 
       /// \brief If a stage contains substages, this will allow to include
       /// them.
       /// \return A vector of Error objects. Each Error includes
       /// an error code and message. An empty vector indicates no error.
-      public: ignition::usd::UsdErrors AddStage(const std::string &_ref);
+      public: gz::usd::UsdErrors AddStage(const std::string &_ref);
 
       /// \brief Read materials
       /// \return A vector of Error objects. Each Error includes
       /// an error code and message. An empty vector indicates no error.
-      public: ignition::usd::UsdErrors ParseMaterials();
+      public: gz::usd::UsdErrors ParseMaterials();
 
       /// \brief Get all materials readed in the stage
       public: const std::unordered_map<std::string, sdf::Material> &
@@ -82,7 +82,7 @@ namespace ignition
       /// \param[in] _name Name of the path to find
       /// \return A pair with the name of the stage and the data
       public: const std::pair<std::string,
-                              std::shared_ptr<ignition::usd::USDStage>>
+                              std::shared_ptr<gz::usd::USDStage>>
           FindStage(const std::string &_name) const;
 
       public: friend std::ostream& operator<<(

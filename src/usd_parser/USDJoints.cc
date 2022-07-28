@@ -37,19 +37,19 @@
 #include "sdf/Joint.hh"
 #include "sdf/JointAxis.hh"
 
-namespace ignition
+namespace gz
 {
   // Inline bracket to help doxygen filtering.
   inline namespace IGNITION_USD_VERSION_NAMESPACE {
   //
   namespace usd
   {
-    ignition::usd::UsdErrors ParseJoints(
+    gz::usd::UsdErrors ParseJoints(
       const pxr::UsdPrim &_prim,
       const USDData &_usdData,
       sdf::Joint &_joint)
     {
-      ignition::usd::UsdErrors errors;
+      gz::usd::UsdErrors errors;
 
       std::pair<std::string, std::shared_ptr<USDStage>> usdData =
         _usdData.FindStage(_prim.GetPath().GetName());
@@ -214,7 +214,7 @@ namespace ignition
         if (!errorsAxis.empty())
         {
           errors.emplace_back(UsdError(
-            ignition::usd::UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
+            gz::usd::UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
               "Errors encountered when setting xyz of prismatic "
               "joint axis: [" + std::string(_prim.GetName()) + "]"));
           for (const auto & error : errorsAxis)
@@ -244,7 +244,7 @@ namespace ignition
         if (!errorsAxis.empty())
         {
           errors.emplace_back(UsdError(
-            ignition::usd::UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
+            gz::usd::UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
               "Errors encountered when setting xyz of revolute "
               "joint axis: [" + std::string(_prim.GetName()) + "]"));
           for (const auto & error : errorsAxis)
@@ -270,7 +270,7 @@ namespace ignition
       else
       {
         errors.emplace_back(UsdError(
-              ignition::usd::UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
+              gz::usd::UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
               "Unable to create a SDF joint from USD prim [" +
               std::string(_prim.GetName()) +
               "] because the prim is not a USD joint."));

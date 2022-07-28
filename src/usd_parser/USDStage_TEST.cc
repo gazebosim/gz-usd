@@ -33,8 +33,8 @@ TEST(USDStage, Constructor)
   // Check up Axis equal to Z and metersPerUnit
   {
     std::string filename = gz::testing::TestFile("usd", "upAxisZ.usda");
-    ignition::usd::USDStage stage(filename);
-    ignition::usd::UsdErrors errors = stage.Init();
+    gz::usd::USDStage stage(filename);
+    gz::usd::UsdErrors errors = stage.Init();
     EXPECT_EQ(0u, errors.size());
 
     EXPECT_EQ("Z", stage.UpAxis());
@@ -45,8 +45,8 @@ TEST(USDStage, Constructor)
   // Check up Axis equal to Y and metersPerUnit
   {
     std::string filename = gz::testing::TestFile("usd", "upAxisY.usda");
-    ignition::usd::USDStage stage(filename);
-    ignition::usd::UsdErrors errors = stage.Init();
+    gz::usd::USDStage stage(filename);
+    gz::usd::UsdErrors errors = stage.Init();
     EXPECT_EQ(0u, errors.size());
 
     EXPECT_EQ("Y", stage.UpAxis());
@@ -56,16 +56,16 @@ TEST(USDStage, Constructor)
 
   // Wrong upaxis
   {
-    ignition::usd::USDStage stage(
+    gz::usd::USDStage stage(
       gz::testing::TestFile("usd", "/upAxis_wrong.usda"));
-    ignition::usd::UsdErrors errors = stage.Init();
+    gz::usd::UsdErrors errors = stage.Init();
     EXPECT_EQ(1u, errors.size());
   }
 
   // Invalid file
   {
-    ignition::usd::USDStage stage(gz::testing::TestFile("usd", "invalid_name"));
-    ignition::usd::UsdErrors errors = stage.Init();
+    gz::usd::USDStage stage(gz::testing::TestFile("usd", "invalid_name"));
+    gz::usd::UsdErrors errors = stage.Init();
     EXPECT_EQ(1u, errors.size());
   }
 }

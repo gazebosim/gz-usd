@@ -41,7 +41,7 @@
 #include "sdf/Sensor.hh"
 #include "../UsdUtils.hh"
 
-namespace ignition
+namespace gz
 {
 // Inline bracket to help doxygen filtering.
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -54,19 +54,19 @@ namespace usd
   /// camera
   /// \param[in] _path The path where the USD representation of _sensor should
   /// be defined in _stage
-  /// \return ignition::usd::UsdErrors, which is a list of UsdError objects.
+  /// \return gz::usd::UsdErrors, which is a list of UsdError objects.
   /// An empty list means there were no issues defining the USD representation
   /// of _sensor in_stage
-  ignition::usd::UsdErrors ParseSdfCameraSensor(const sdf::Sensor &_sensor,
+  gz::usd::UsdErrors ParseSdfCameraSensor(const sdf::Sensor &_sensor,
     pxr::UsdStageRefPtr &_stage, const pxr::SdfPath &_path)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
 
     auto usdCamera = pxr::UsdGeomCamera::Define(_stage, _path);
     if (!usdCamera)
     {
       errors.push_back(UsdError(
-          ignition::usd::UsdErrorCode::FAILED_USD_DEFINITION,
+          gz::usd::UsdErrorCode::FAILED_USD_DEFINITION,
           "Unable to define a USD camera at path [" + _path.GetString() + "]"));
       return errors;
     }
@@ -101,19 +101,19 @@ namespace usd
   /// lidar sensor
   /// \param[in] _path The path where the USD representation of _sensor should
   /// be defined in _stage
-  /// \return ignition::usd::UsdErrors, which is a list of UsdError objects.
+  /// \return gz::usd::UsdErrors, which is a list of UsdError objects.
   /// An empty list means there were no issues defining the USD representation
   /// of _sensor in _stage
-  ignition::usd::UsdErrors ParseSdfLidarSensor(const sdf::Sensor &_sensor,
+  gz::usd::UsdErrors ParseSdfLidarSensor(const sdf::Sensor &_sensor,
     pxr::UsdStageRefPtr &_stage, const pxr::SdfPath &_path)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
 
     pxr::UsdGeomXform::Define(_stage, _path);
     auto lidarPrim = _stage->GetPrimAtPath(_path);
     if (!lidarPrim)
     {
-      errors.push_back(UsdError(ignition::usd::UsdErrorCode::INVALID_PRIM_PATH,
+      errors.push_back(UsdError(gz::usd::UsdErrorCode::INVALID_PRIM_PATH,
             "Unable to find a lidar sensor prim at path ["
             + _path.GetString() + "]"));
       return errors;
@@ -156,13 +156,13 @@ namespace usd
   /// \param[in] _stage The stage that contains the definition of the USD
   /// IMU sensor
   /// \param[in] _path The path where the USD IMU should be defined in _stage
-  /// \return ignition::usd::UsdErrors, which is a list of UsdError objects.
+  /// \return gz::usd::UsdErrors, which is a list of UsdError objects.
   /// An empty list means there were no issues defining the USD IMU sensor in
   /// _stage
-  ignition::usd::UsdErrors ParseSdfImuSensor(
+  gz::usd::UsdErrors ParseSdfImuSensor(
     pxr::UsdStageRefPtr &_stage, pxr::SdfPath &_path)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
 
     // for now, IMUs are defined as a cube geometry named "imu"
     // (there will be an IMU schema released upstream in the future).
@@ -178,7 +178,7 @@ namespace usd
     if (!usdCube)
     {
       errors.push_back(
-          UsdError(ignition::usd::UsdErrorCode::FAILED_USD_DEFINITION,
+          UsdError(gz::usd::UsdErrorCode::FAILED_USD_DEFINITION,
             "Unable to define an IMU at path [" + _path.GetString() + "]"));
       return errors;
     }
@@ -188,10 +188,10 @@ namespace usd
     return errors;
   }
 
-  ignition::usd::UsdErrors ParseSdfSensor(const sdf::Sensor &_sensor,
+  gz::usd::UsdErrors ParseSdfSensor(const sdf::Sensor &_sensor,
     pxr::UsdStageRefPtr &_stage, const std::string &_path)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
     pxr::SdfPath sdfSensorPath(_path);
 
     switch (_sensor.Type())
@@ -213,7 +213,7 @@ namespace usd
       default:
         errors.push_back(
           UsdError(
-            ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+            gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
             "This type of sensor [" + _sensor.TypeStr() +
             "] is not supported"));
     }
@@ -221,7 +221,7 @@ namespace usd
     if (errors.empty())
     {
       ignition::math::Pose3d pose;
-      auto poseErrors = ignition::usd::PoseWrtParent(_sensor, pose);
+      auto poseErrors = gz::usd::PoseWrtParent(_sensor, pose);
       if (!poseErrors.empty())
       {
         errors.insert(errors.end(), poseErrors.begin(), poseErrors.end());

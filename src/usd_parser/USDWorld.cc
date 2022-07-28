@@ -58,15 +58,15 @@
 #include "sdf/Visual.hh"
 #include "sdf/World.hh"
 
-namespace ignition
+namespace gz
 {
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
 namespace usd
 {
-  ignition::usd::UsdErrors parseUSDWorld(const std::string &_inputFileName,
+  gz::usd::UsdErrors parseUSDWorld(const std::string &_inputFileName,
       bool _useGazeboPlugins, sdf::World &_world)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
     USDData usdData(_inputFileName);
     errors = usdData.Init();
     if (!errors.empty())
@@ -366,7 +366,7 @@ namespace usd
           scale = linkScaleMap.insert(
               {linkName, ignition::math::Vector3d(1, 1, 1)}).first;
         }
-        ignition::usd::ParseUSDLinks(
+        gz::usd::ParseUSDLinks(
           prim, linkName, optionalLink, usdData, scale->second);
         *linkInserted = optionalLink.value();
         linkScaleMap[linkName] = scale->second;
@@ -375,7 +375,7 @@ namespace usd
       {
         ignition::math::Vector3d scale{1, 1, 1};
 
-        ignition::usd::ParseUSDLinks(
+        gz::usd::ParseUSDLinks(
           prim, linkName, optionalLink, usdData, scale);
         linkScaleMap[linkName] = scale;
 

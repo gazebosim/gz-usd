@@ -33,7 +33,7 @@
 #include <ignition/usd/config.hh>
 #include "ignition/usd/UsdError.hh"
 
-namespace ignition
+namespace gz
 {
   // Inline bracke to help doxygen filtering.
   inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -46,10 +46,10 @@ namespace ignition
     /// of _geometry.
     /// \param[in] _path The USD path of the parsed geometry in _stage, which
     /// must be a valid USD path.
-    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+    /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
     /// Each UsdError includes an error code and message. An empty vector
     /// indicates no error.
-    ignition::usd::UsdErrors ParseSdfGeometry(
+    gz::usd::UsdErrors ParseSdfGeometry(
         const sdf::Geometry &_geometry, pxr::UsdStageRefPtr &_stage,
         const std::string &_path);
   }

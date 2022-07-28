@@ -47,8 +47,8 @@ void checkTransforms(
   pxr::UsdPrim prim = _stage->GetPrimAtPath(pxr::SdfPath(_primName));
   ASSERT_TRUE(prim);
 
-  ignition::usd::UDSTransforms usdTransforms =
-    ignition::usd::ParseUSDTransform(prim);
+  gz::usd::UDSTransforms usdTransforms =
+    gz::usd::ParseUSDTransform(prim);
 
   EXPECT_EQ(_translation, usdTransforms.Translation());
   EXPECT_EQ(_scale, usdTransforms.Scale());
@@ -158,7 +158,7 @@ TEST(USDTransformsTest, GetAllTransform)
     auto stage = pxr::UsdStage::Open(filename);
     ASSERT_TRUE(stage);
 
-    ignition::usd::USDData usdData(filename);
+    gz::usd::USDData usdData(filename);
     usdData.Init();
 
     pxr::UsdPrim prim = stage->GetPrimAtPath(
@@ -169,7 +169,7 @@ TEST(USDTransformsTest, GetAllTransform)
     ignition::math::Pose3d pose;
     ignition::math::Vector3d scale{1, 1, 1};
 
-    ignition::usd::GetTransform(prim, usdData, pose, scale, "/shapes");
+    gz::usd::GetTransform(prim, usdData, pose, scale, "/shapes");
 
     EXPECT_EQ(ignition::math::Vector3d(0.4, 0.6, 1), scale);
     EXPECT_EQ(
@@ -186,7 +186,7 @@ TEST(USDTransformsTest, GetAllTransform)
     auto stage = pxr::UsdStage::Open(filename);
     ASSERT_TRUE(stage);
 
-    ignition::usd::USDData usdData(filename);
+    gz::usd::USDData usdData(filename);
     usdData.Init();
 
     std::function<void(
@@ -203,7 +203,7 @@ TEST(USDTransformsTest, GetAllTransform)
         ignition::math::Pose3d pose;
         ignition::math::Vector3d scale{1, 1, 1};
 
-        ignition::usd::GetTransform(prim, usdData, pose, scale, "/transforms");
+        gz::usd::GetTransform(prim, usdData, pose, scale, "/transforms");
 
         EXPECT_EQ(ignition::math::Vector3d(1, 1, 1), scale);
         EXPECT_EQ(ignition::math::Pose3d(_posePrim, _qPrim), pose);

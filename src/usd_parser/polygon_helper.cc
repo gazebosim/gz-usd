@@ -20,19 +20,19 @@
 #include <vector>
 #include <cassert>
 
-namespace ignition
+namespace gz
 {
 // Inline bracke to help doxygen filtering.
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
-  ignition::usd::UsdErrors PolygonToTriangles(
+  gz::usd::UsdErrors PolygonToTriangles(
       const pxr::VtIntArray &_faceVertexIndices,
       const pxr::VtIntArray &_faceVertexCounts,
       std::vector<unsigned int> &_triangles)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
     // TODO(koon peng) Use more robust algorithms.
     // For reference, blender supports "ear-clipping", and "Beauty".
     // https://blender.stackexchange.com/questions/215553/what-algorithm-is-used-for-beauty-triangulation

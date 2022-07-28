@@ -59,11 +59,11 @@ TEST(UsdUtils, PoseWrtParent)
   ASSERT_NE(nullptr, linkL3);
 
   ignition::math::Pose3d pose;
-  auto errors = ignition::usd::PoseWrtParent(*linkL2, pose);
+  auto errors = gz::usd::PoseWrtParent(*linkL2, pose);
   EXPECT_TRUE(errors.empty());
   EXPECT_EQ(ignition::math::Pose3d(2, 0, 0, 0, 0, 0), pose);
 
-  errors = ignition::usd::PoseWrtParent(*linkL3, pose);
+  errors = gz::usd::PoseWrtParent(*linkL3, pose);
   EXPECT_TRUE(errors.empty());
   EXPECT_EQ(ignition::math::Pose3d(1, 0, -3, 0, linkL1->RawPose().Pitch(), 0),
       pose);
@@ -85,10 +85,10 @@ TEST(UsdUtils, SetPose)
   ASSERT_TRUE(prim);
 
   const ignition::math::Pose3d pose(1, 2, 3, 0, 0, 0);
-  auto errors = ignition::usd::SetPose(pose, stage, primPath);
+  auto errors = gz::usd::SetPose(pose, stage, primPath);
   EXPECT_TRUE(errors.empty());
 
-  ignition::usd::testing::CheckPrimPose(prim, pose);
+  gz::usd::testing::CheckPrimPose(prim, pose);
 }
 
 //////////////////////////////////////////////////
@@ -105,32 +105,32 @@ TEST(UsdUtils, IsPlane)
   ASSERT_EQ(1u, world->ModelCount());
   const auto model = world->ModelByIndex(0u);
   ASSERT_NE(nullptr, model);
-  EXPECT_TRUE(ignition::usd::IsPlane(*model));
+  EXPECT_TRUE(gz::usd::IsPlane(*model));
 
   // make the model non-static to verify it's no longer considered a plane
   auto mutableModel = const_cast<sdf::Model *>(model);
   ASSERT_NE(nullptr, mutableModel);
   mutableModel->SetStatic(false);
-  EXPECT_FALSE(ignition::usd::IsPlane(*mutableModel));
+  EXPECT_FALSE(gz::usd::IsPlane(*mutableModel));
 }
 
 //////////////////////////////////////////////////
 TEST(UsdUtils, validPath)
 {
   const std::string alreadyValid = "/valid/path";
-  EXPECT_EQ(alreadyValid, ignition::usd::validPath(alreadyValid));
+  EXPECT_EQ(alreadyValid, gz::usd::validPath(alreadyValid));
 
-  EXPECT_EQ("", ignition::usd::validPath(""));
+  EXPECT_EQ("", gz::usd::validPath(""));
 
   EXPECT_EQ("_0/start/with/digit",
-            ignition::usd::validPath("0/start/with/digit"));
+            gz::usd::validPath("0/start/with/digit"));
 
-  EXPECT_EQ("/hasSpaces", ignition::usd::validPath("/has Spaces"));
+  EXPECT_EQ("/hasSpaces", gz::usd::validPath("/has Spaces"));
 
-  EXPECT_EQ("/has_period", ignition::usd::validPath("/has.period"));
+  EXPECT_EQ("/has_period", gz::usd::validPath("/has.period"));
 
-  EXPECT_EQ("/has_dash", ignition::usd::validPath("/has-dash"));
+  EXPECT_EQ("/has_dash", gz::usd::validPath("/has-dash"));
 
   EXPECT_EQ("_5/has_period/hasSpace/has_dash",
-      ignition::usd::validPath("5/has.period/has Space/has-dash"));
+      gz::usd::validPath("5/has.period/has Space/has-dash"));
 }

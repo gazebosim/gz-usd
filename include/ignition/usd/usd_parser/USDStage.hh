@@ -29,7 +29,7 @@
 #include "ignition/usd/Export.hh"
 #include "ignition/usd/UsdError.hh"
 
-namespace ignition
+namespace gz
 {
   // Inline bracket to help doxygen filtering.
   inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -49,7 +49,7 @@ namespace ignition
       /// \brief Initialize the data structure
       /// \return A vector of Error objects. Each Error includes
       /// an error code and message. An empty vector indicates no error.
-      public: ignition::usd::UsdErrors Init();
+      public: gz::usd::UsdErrors Init();
 
       /// \brief Get stage up axis
       public: const std::string &UpAxis() const;

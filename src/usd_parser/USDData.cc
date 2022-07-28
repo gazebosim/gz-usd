@@ -38,7 +38,7 @@
 #include "sdf/Material.hh"
 #include "USDMaterial.hh"
 
-namespace ignition {
+namespace gz {
 // Inline bracket to help doxygen filtering.
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
 //
@@ -110,12 +110,12 @@ namespace usd {
   }
 
   /////////////////////////////////////////////////
-  ignition::usd::UsdErrors USDData::Init()
+  gz::usd::UsdErrors USDData::Init()
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
 
     auto usdStage = std::make_shared<USDStage>(this->dataPtr->filename);
-    ignition::usd::UsdErrors errorsInit = usdStage->Init();
+    gz::usd::UsdErrors errorsInit = usdStage->Init();
     if(!errorsInit.empty())
     {
       errors.insert(errors.end(), errorsInit.begin(), errorsInit.end());
@@ -133,7 +133,7 @@ namespace usd {
     if (!referencee)
     {
       errors.emplace_back(UsdError(
-        ignition::usd::UsdErrorCode::INVALID_USD_FILE,
+        gz::usd::UsdErrorCode::INVALID_USD_FILE,
         "Failed to load usd file"));
       return errors;
     }
@@ -182,14 +182,14 @@ namespace usd {
   }
 
   /////////////////////////////////////////////////
-  ignition::usd::UsdErrors USDData::ParseMaterials()
+  gz::usd::UsdErrors USDData::ParseMaterials()
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
     auto referencee = pxr::UsdStage::Open(this->dataPtr->filename);
     if (!referencee)
     {
       errors.emplace_back(UsdError(
-        ignition::usd::UsdErrorCode::INVALID_USD_FILE,
+        gz::usd::UsdErrorCode::INVALID_USD_FILE,
         "Failed to load usd file"));
       return errors;
     }
@@ -210,11 +210,11 @@ namespace usd {
         }
 
         sdf::Material material;
-        ignition::usd::UsdErrors errrosMaterial = ParseMaterial(prim, material);
+        gz::usd::UsdErrors errrosMaterial = ParseMaterial(prim, material);
         if (!errrosMaterial.empty())
         {
           errors.emplace_back(UsdError(
-            ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+            gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
             "Error parsing material"));
           errors.insert(
             errors.end(), errrosMaterial.begin(), errrosMaterial.end());
@@ -248,9 +248,9 @@ namespace usd {
   }
 
   /////////////////////////////////////////////////
-  ignition::usd::UsdErrors USDData::AddStage(const std::string &_ref)
+  gz::usd::UsdErrors USDData::AddStage(const std::string &_ref)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
     std::string key = _ref;
 
     auto search = this->dataPtr->references.find(_ref);
@@ -270,13 +270,13 @@ namespace usd {
       if (fileNameRef.empty())
       {
         errors.emplace_back(UsdError(
-          ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+          gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
           "Not able to find asset [" + _ref + "]"));
         return errors;
       }
 
       auto usdStage = std::make_shared<USDStage>(fileNameRef);
-      ignition::usd::UsdErrors errorsInit = usdStage->Init();
+      gz::usd::UsdErrors errorsInit = usdStage->Init();
       if(!errorsInit.empty())
       {
         errors.insert(errors.end(), errorsInit.begin(), errorsInit.end());
@@ -292,7 +292,7 @@ namespace usd {
     else
     {
       errors.emplace_back(UsdError(
-        ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+        gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
         "Element already exists"));
       return errors;
     }

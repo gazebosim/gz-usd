@@ -35,8 +35,8 @@
 TEST(USDData, Constructor)
 {
   // Open a invalid USD file
-  ignition::usd::USDData data(gz::testing::TestFile("usd", "invalid_name"));
-  ignition::usd::UsdErrors errors = data.Init();
+  gz::usd::USDData data(gz::testing::TestFile("usd", "invalid_name"));
+  gz::usd::UsdErrors errors = data.Init();
   EXPECT_EQ(1u, errors.size());
 
   // Add test/usd directory to find some resources
@@ -53,7 +53,7 @@ TEST(USDData, Constructor)
 
     // Open a valid USD file
     std::string filename = gz::testing::TestFile("usd", "upAxisZ.usda");
-    ignition::usd::USDData usdData(filename);
+    gz::usd::USDData usdData(filename);
     EXPECT_EQ(0u, usdData.Init().size());
     EXPECT_EQ(0u, usdData.ParseMaterials().size());
 

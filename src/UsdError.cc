@@ -19,10 +19,10 @@
 
 #include <iostream>
 
-class ignition::usd::UsdError::Implementation
+class gz::usd::UsdError::Implementation
 {
   /// \brief The error code value.
-  public: ignition::usd::UsdErrorCode code = ignition::usd::UsdErrorCode::NONE;
+  public: gz::usd::UsdErrorCode code = gz::usd::UsdErrorCode::NONE;
 
   /// \brief Description of the error.
   public: std::string message = "";
@@ -37,7 +37,7 @@ class ignition::usd::UsdError::Implementation
   public: std::optional<sdf::Error> sdfError = std::nullopt;
 };
 
-namespace ignition
+namespace gz
 {
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
 //
@@ -143,7 +143,7 @@ bool UsdError::operator==(const bool _value) const
 
 /////////////////////////////////////////////////
 std::ostream &operator<<(std::ostream &_out,
-                         const ignition::usd::UsdError &_err)
+                         const gz::usd::UsdError &_err)
 {
   if (_err.Code() == UsdErrorCode::IGNITION_USD_ERROR)
   {
@@ -174,11 +174,11 @@ std::ostream &operator<<(std::ostream &_out,
     pathInfo = "[" + pathInfo + "]: ";
 
   _out << "Error Code "
-       << static_cast<std::underlying_type<ignition::usd::UsdErrorCode>::type>(
+       << static_cast<std::underlying_type<gz::usd::UsdErrorCode>::type>(
               _err.Code())
        << ": " << pathInfo << "Msg: " << _err.Message();
   return _out;
 }
 }  // namespace usd
 }  // IGNITION_USD_VERSION_NAMESPACE
-}  // namespace ignition
+}  // namespace gz

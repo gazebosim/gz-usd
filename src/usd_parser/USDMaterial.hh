@@ -31,7 +31,7 @@
 #include <ignition/usd/config.hh>
 #include "ignition/usd/UsdError.hh"
 
-namespace ignition
+namespace gz
 {
   // Inline bracket to help doxygen filtering.
   inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -44,10 +44,10 @@ namespace ignition
     /// \param[in] _prim USD prim where the material is extracted
     /// \param[out] _material The sdf::Material representation of _prim's
     /// material
-    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+    /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
     /// Each UsdErrorincludes an error code and message. An empty vector
     /// indicates no error.
-    ignition::usd::UsdErrors ParseMaterial(const pxr::UsdPrim &_prim,
+    gz::usd::UsdErrors ParseMaterial(const pxr::UsdPrim &_prim,
         sdf::Material &_material);
 }
 }

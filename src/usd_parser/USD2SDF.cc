@@ -27,15 +27,15 @@
 
 #include "ignition/usd/UsdError.hh"
 
-namespace ignition {
+namespace gz {
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
 namespace usd {
 ////////////////////////////////////////////////
-ignition::usd::UsdErrors USD2SDF::Read(
+gz::usd::UsdErrors USD2SDF::Read(
   const std::string &_fileName, bool _useGazeboPlugins,
   sdf::Root &_root)
 {
-  ignition::usd::UsdErrors errors;
+  gz::usd::UsdErrors errors;
 
   sdf::World sdfWorld;
 

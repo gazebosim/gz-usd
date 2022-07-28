@@ -24,7 +24,7 @@
 #include "ignition/usd/Export.hh"
 #include "ignition/usd/UsdError.hh"
 
-namespace ignition
+namespace gz
 {
   // Inline bracket to help doxygen filtering.
   inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -36,7 +36,7 @@ namespace ignition
     /// \param[in] _outputFilenameSdf Path where the SDF file will be located
     /// \param[in] _useGazeboPlugins Whether _outputFilenameSdf should have
     /// gazebo plugins in it (true) or not (false)
-    /// \return ignition::usd::UsdErrors, which is a vector of UsdError objects.
+    /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
     /// Each UsdError includes an error code and message. An empty vector
     /// indicates no error occurred when parsing the USD file to its SDF
     /// representation.

@@ -198,20 +198,20 @@ TEST_F(UsdStageFixture, MaterialTextureName)
           ignition::common::joinPaths(ignition::common::cwd(), "materials"));
       });
 
-  sdf::setFindCallback(ignition::usd::testing::findFileCb);
+  sdf::setFindCallback(gz::usd::testing::findFileCb);
   ignition::common::addFindFileURICallback(
-    std::bind(&ignition::usd::testing::FindResourceUri, std::placeholders::_1));
+    std::bind(&gz::usd::testing::FindResourceUri, std::placeholders::_1));
   const auto path = gz::testing::TestFile("sdf", "basic_shapes.sdf");
 
   ignition::common::Material materialCommon;
   materialCommon.SetTextureImage("materials/textures/albedo_map.png");
 
-  const sdf::Material materialSdf = ignition::usd::convert(&materialCommon);
+  const sdf::Material materialSdf = gz::usd::convert(&materialCommon);
 
   const auto materialPathStr = std::string("/Looks/Material_0");
   auto materialPath = pxr::SdfPath(materialPathStr);
 
-  ignition::usd::UsdErrors errors = ignition::usd::ParseSdfMaterial(
+  gz::usd::UsdErrors errors = gz::usd::ParseSdfMaterial(
     &materialSdf, stage, materialPath);
   EXPECT_TRUE(errors.empty());
 
@@ -257,9 +257,9 @@ TEST_F(UsdStageFixture, Material)
           ignition::common::joinPaths(ignition::common::cwd(), "materials"));
       });
 
-  sdf::setFindCallback(ignition::usd::testing::findFileCb);
+  sdf::setFindCallback(gz::usd::testing::findFileCb);
   ignition::common::addFindFileURICallback(
-    std::bind(&ignition::usd::testing::FindResourceUri, std::placeholders::_1));
+    std::bind(&gz::usd::testing::FindResourceUri, std::placeholders::_1));
 
   const auto path = gz::testing::TestFile("sdf", "basic_shapes.sdf");
   sdf::Root root;
@@ -269,7 +269,7 @@ TEST_F(UsdStageFixture, Material)
   auto world = root.WorldByIndex(0u);
 
   const auto worldPath = std::string("/" + world->Name());
-  auto usdErrors = ignition::usd::ParseSdfWorld(*world, stage, worldPath);
+  auto usdErrors = gz::usd::ParseSdfWorld(*world, stage, worldPath);
   EXPECT_TRUE(usdErrors.empty());
 
   auto worldPrim = this->stage->GetPrimAtPath(pxr::SdfPath(worldPath));

@@ -40,24 +40,24 @@
 #include "../UsdUtils.hh"
 #include "Geometry.hh"
 
-namespace ignition
+namespace gz
 {
 // Inline bracket to help doxygen filtering.
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
-  ignition::usd::UsdErrors ParseSdfCollision(const sdf::Collision &_collision,
+  gz::usd::UsdErrors ParseSdfCollision(const sdf::Collision &_collision,
       pxr::UsdStageRefPtr &_stage, const std::string &_path)
   {
-    ignition::usd::UsdErrors errors;
+    gz::usd::UsdErrors errors;
     const pxr::SdfPath sdfCollisionPath(_path);
     auto usdCollisionXform = pxr::UsdGeomXform::Define(
       _stage, sdfCollisionPath);
     if (!usdCollisionXform)
     {
       errors.push_back(UsdError(
-        ignition::usd::UsdErrorCode::FAILED_USD_DEFINITION,
+        gz::usd::UsdErrorCode::FAILED_USD_DEFINITION,
         "Not able to define a Geom Xform at path [" + _path + "]"));
       return errors;
     }
@@ -104,7 +104,7 @@ namespace usd
     {
       errors.insert(errors.end(), geomErrors.begin(), geomErrors.end());
       errors.push_back(UsdError(
-        ignition::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+        gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
         "Error parsing geometry attached to _collision [" +
         _collision.Name() + "]"));
       return errors;
@@ -113,7 +113,7 @@ namespace usd
     auto geomPrim = _stage->GetPrimAtPath(pxr::SdfPath(geometryPath));
     if (!geomPrim)
     {
-      errors.push_back(UsdError(ignition::usd::UsdErrorCode::INVALID_PRIM_PATH,
+      errors.push_back(UsdError(gz::usd::UsdErrorCode::INVALID_PRIM_PATH,
         "Internal error: unable to get prim at path ["
         + geometryPath + "], but a geom prim should exist at this path"));
       return errors;
@@ -122,7 +122,7 @@ namespace usd
     if (!pxr::UsdPhysicsCollisionAPI::Apply(geomPrim))
     {
       errors.push_back(UsdError(
-        ignition::usd::UsdErrorCode::FAILED_PRIM_API_APPLY,
+        gz::usd::UsdErrorCode::FAILED_PRIM_API_APPLY,
         "Internal error: unable to apply a collision to the prim at path ["
         + geometryPath + "]"));
       return errors;

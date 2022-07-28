@@ -44,7 +44,7 @@
 #include "sdf/system_util.hh"
 #include <ignition/usd/config.hh>
 
-namespace ignition
+namespace gz
 {
 // Inline bracke to help doxygen filtering.
 inline namespace IGNITION_USD_VERSION_NAMESPACE {
@@ -230,6 +230,6 @@ void CheckInertial(const pxr::UsdPrim &_usdPrim,
 }  // namespace testing
 }  // namespace usd
 }
-}  // namespace ignition
+}  // namespace gz
 
 #endif

@@ -265,9 +265,9 @@ void runCommand(const Options &_opt)
 
       auto stage = pxr::UsdStage::CreateInMemory();
       std::string modelName = model->Name();
-      modelName = ignition::usd::validPath(modelName);
+      modelName = gz::usd::validPath(modelName);
       auto modelPath = std::string("/" + modelName);
-      auto usdErrors = ignition::usd::ParseSdfModel(
+      auto usdErrors = gz::usd::ParseSdfModel(
         *model,
         stage,
         modelPath,
@@ -307,8 +307,8 @@ void runCommand(const Options &_opt)
   auto stage = pxr::UsdStage::CreateInMemory();
 
   auto worldPath = std::string("/" + world->Name());
-  worldPath = ignition::usd::validPath(worldPath);
-  auto usdErrors = ignition::usd::ParseSdfWorld(*world, stage, worldPath);
+  worldPath = gz::usd::validPath(worldPath);
+  auto usdErrors = gz::usd::ParseSdfWorld(*world, stage, worldPath);
   if (!usdErrors.empty())
   {
     std::cerr << "The following errors occurred when parsing world ["
