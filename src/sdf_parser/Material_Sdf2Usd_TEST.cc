@@ -279,7 +279,7 @@ TEST_F(UsdStageFixture, Material)
   ASSERT_TRUE(this->stage->GetPrimAtPath(pxr::SdfPath(meshGeometryPath)));
 
   {
-    const std::string materialPath = "/Looks/Material_2";
+    const std::string materialPath = "/Looks/Material_3";
     ASSERT_TRUE(this->stage->GetPrimAtPath(pxr::SdfPath(materialPath)));
 
     const std::string materialshaderPath = materialPath + "/Shader";
@@ -298,7 +298,7 @@ TEST_F(UsdStageFixture, Material)
   }
 
   {
-    const std::string materialPath = "/Looks/Material_0";
+    const std::string materialPath = "/Looks/Material_1";
     ASSERT_TRUE(this->stage->GetPrimAtPath(pxr::SdfPath(materialPath)));
 
     const std::string materialshaderPath = materialPath + "/Shader";
