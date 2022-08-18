@@ -5,11 +5,7 @@ This repo provides tools to convert between SDF and USD files.
 
 **USD requires CMAKE 3.12 this package is available from Ubuntu 20.04**
 
-# Converting between SDF and USD
-
-This example shows how a world in a SDF file can be converted to [USD](https://graphics.pixar.com/usd/release/index.html).
-
-## Requirements
+# Requirements
 
 You will need all of the dependencies for sdformat, along with the following additional dependencies:
 * [USD](https://github.com/PixarAnimationStudios/USD/tree/v21.11#getting-and-building-the-code):
@@ -43,7 +39,7 @@ You will need all of the dependencies for sdformat, along with the following add
 * [gz-usd](https://github.com/gazebosim/gz-usd)
 * [sdformat](https://github.com/gazebosim/sdformat)
 
-## Setup
+# Setup
 
 Build `gz-usd`. The steps below follow a traditional cmake build, but `gz-usd`
 can also be built with [colcon](https://colcon.readthedocs.io/en/released/index.html):
@@ -66,29 +62,16 @@ To see how the executable works, run the following command from the `./build/bin
 ./sdf2usd -h
 ```
 
-To convert [shapes_world.sdf](https://github.com/gazebosim/sdformat/blob/sdf12/test/sdf/shapes_world.sdf) to its USD representation as a file called `shapes.usd`, run the following commands:
-
-```bash
-wget https://raw.githubusercontent.com/gazebosim/sdformat/sdf12/test/sdf/shapes_world.sdf
-./sdf2usd shapes_world.sdf shapes.usd
-```
-
-You can now view the contents of the generated USD file with `usdcat` (this should have been installed when setting up the USD dependency):
-```bash
-usdcat shapes.usd
-```
-
-To see the visual representation of the USD world, run `usdview` (this should have also been installed when setting up the USD dependency):
-```bash
-usdview shapes.usd
-```
 
 ### Note about building with colcon
+
 You may need to add the USD library path to your `LD_LIBRARY_PATH` environment variable after sourcing the colcon workspace.
 If the USD library path is not a part of `LD_LIBRARY_PATH`, you will probably see the following error when running the `sdf2usd` executable:
+
 ```bash
 sdf2usd: error while loading shared libraries: libusd_usd.so: cannot open shared object file: No such file or directory
 ```
+
 The typical USD library path is `<usd_installation_path>/lib`.
 So, if you installed USD at `/usr/local/USD`, the following command on Linux properly updates the `LD_LIBRARY_PATH` environment variable:
 ```bash
