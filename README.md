@@ -1,3 +1,10 @@
+USD is a high-performance extensible software platform for collaboratively constructing animated 3D
+scenes, designed to meet the needs of large-scale film and visual effects production.
+
+This repo provides tools to convert between SDF and USD files.
+
+**USD requires CMAKE 3.12 this package is available from Ubuntu 20.04**
+
 # Converting between SDF and USD
 
 This example shows how a world in a SDF file can be converted to [USD](https://graphics.pixar.com/usd/release/index.html).
@@ -40,6 +47,9 @@ You will need all of the dependencies for sdformat, along with the following add
 
 Build `gz-usd`. The steps below follow a traditional cmake build, but `gz-usd`
 can also be built with [colcon](https://colcon.readthedocs.io/en/released/index.html):
+
+**Note: Be sure to build gz-usd on a terminal with the above environment variables exported.**
+
 ```bash
 git clone https://github.com/gazebosim/gz-usd
 cd gz-usd
