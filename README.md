@@ -5,6 +5,10 @@ This repo provides tools to convert between SDF and USD files.
 
 **USD requires CMAKE 3.12 this package is available from Ubuntu 20.04**
 
+# Tutorials
+
+If you have already installed `gz-usd` you might want to visit [the tutorial section](./tutorials/README.md).
+
 # Requirements
 
 You will need all of the dependencies for sdformat, along with the following additional dependencies:
