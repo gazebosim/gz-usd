@@ -3,7 +3,7 @@ scenes, designed to meet the needs of large-scale film and visual effects produc
 
 This repo provides tools to convert between SDF and USD files.
 
-**USD requires CMAKE 3.12 this package is available from Ubuntu 20.04**
+**USD requires CMAKE 3.12; this package is available from Ubuntu 20.04**
 
 # Tutorials
 
