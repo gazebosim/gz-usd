@@ -85,3 +85,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/USD/lib
 Another thing to note if building with colcon is that after sourcing the workspace with sdformat,
 the `sdf2usd` executable can be run without having to go to the `./build/bin` directory.
 So, instead of going to that directory and running `./sdf2usd ...`, you should be able to run `sdf2usd ...` from anywhere.
+
+## ROSCon 2022
+
+[![](img/video_img.png)](https://vimeo.com/767140085)
