@@ -30,7 +30,7 @@ then
   mkdir usd_binaries
   cd usd_binaries
 
-  apt-get install libboost-all-dev libtbb-dev p7zip-full -y
+  apt-get install libboost-all-dev p7zip-full -y
 
   wget https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v$USD_VERSION.zip
   unzip v$USD_VERSION.zip
