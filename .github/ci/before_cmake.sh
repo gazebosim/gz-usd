@@ -9,7 +9,11 @@ cd /tmp
 # check that we can compile USD from sources (only Focal)
 # see https://github.com/ignitionrobotics/sdformat/issues/869
 return_code=0
-if [ "$(lsb_release -r -s)" != "20.04" ]; then
+if [ "$(lsb_release -r -s)" == "20.04" ]; then
+  USD_VERSION="v21.11"
+elif [ "$(lsb_release -r -s)" == "22.04" ]; then
+  USD_VERSION="v22.11"
+else
   return_code=$(($return_code + 1))
 fi
 
@@ -28,9 +32,9 @@ then
 
   apt-get install libboost-all-dev libtbb-dev p7zip-full -y
 
-  wget https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v21.11.zip
-  unzip v21.11.zip
-  cd USD-21.11
+  wget https://github.com/PixarAnimationStudios/USD/archive/refs/tags/$USD_VERSION.zip
+  unzip $USD_VERSION.zip
+  cd USD-$USD_VERSION
   mkdir build
   cd build
 
