@@ -34,11 +34,13 @@
 
 #include <ignition/common/Util.hh>
 
-#include "ignition/usd/sdf_parser/World.hh"
+#include "gz/usd/sdf_parser/World.hh"
 #include "sdf/Root.hh"
 #include "test_config.h"
 #include "test_utils.hh"
 #include "../UsdTestUtils.hh"
+
+using namespace gz;
 
 /////////////////////////////////////////////////
 // Fixture that creates a USD stage for each test case.

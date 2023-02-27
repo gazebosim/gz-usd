@@ -413,7 +413,7 @@ class ParameterizedTestFactory : public TestFactoryBase {
  private:
   const ParamType parameter_;
 
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(ParameterizedTestFactory);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(ParameterizedTestFactory);
 };
 
 // INTERNAL IMPLEMENTATION - DO NOT USE IN USER CODE.
@@ -449,7 +449,7 @@ class TestMetaFactory
   }
 
  private:
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(TestMetaFactory);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(TestMetaFactory);
 };
 
 // INTERNAL IMPLEMENTATION - DO NOT USE IN USER CODE.
@@ -480,7 +480,7 @@ class ParameterizedTestCaseInfoBase {
   ParameterizedTestCaseInfoBase() {}
 
  private:
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(ParameterizedTestCaseInfoBase);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(ParameterizedTestCaseInfoBase);
 };
 
 // INTERNAL IMPLEMENTATION - DO NOT USE IN USER CODE.
@@ -650,7 +650,7 @@ class ParameterizedTestCaseInfo : public ParameterizedTestCaseInfoBase {
   TestInfoContainer tests_;
   InstantiationContainer instantiations_;
 
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(ParameterizedTestCaseInfo);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(ParameterizedTestCaseInfo);
 };  // class ParameterizedTestCaseInfo
 
 // INTERNAL IMPLEMENTATION - DO NOT USE IN USER CODE.
@@ -714,7 +714,7 @@ class ParameterizedTestCaseRegistry {
 
   TestCaseInfoContainer test_case_infos_;
 
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(ParameterizedTestCaseRegistry);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(ParameterizedTestCaseRegistry);
 };
 
 }  // namespace internal

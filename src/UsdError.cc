@@ -15,7 +15,7 @@
  *
  */
 
-#include "ignition/usd/UsdError.hh"
+#include "gz/usd/UsdError.hh"
 
 #include <iostream>
 
@@ -39,7 +39,7 @@ class gz::usd::UsdError::Implementation
 
 namespace gz
 {
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
@@ -82,7 +82,7 @@ UsdError::UsdError(const UsdErrorCode _code, const std::string &_message,
 UsdError::UsdError(const sdf::Error &_sdfError)
     : dataPtr(ignition::utils::MakeImpl<Implementation>())
 {
-  this->dataPtr->code = UsdErrorCode::IGNITION_USD_ERROR;
+  this->dataPtr->code = UsdErrorCode::GZ_USD_ERROR;
   this->dataPtr->sdfError = _sdfError;
 }
 
@@ -145,7 +145,7 @@ bool UsdError::operator==(const bool _value) const
 std::ostream &operator<<(std::ostream &_out,
                          const gz::usd::UsdError &_err)
 {
-  if (_err.Code() == UsdErrorCode::IGNITION_USD_ERROR)
+  if (_err.Code() == UsdErrorCode::GZ_USD_ERROR)
   {
     // make sure that an SdfError was wrapped into the UsdError if the error
     // code indicates an SDF error
@@ -155,7 +155,7 @@ std::ostream &operator<<(std::ostream &_out,
     }
     else
     {
-      _out << "Error code is of type IGNITION_USD_ERROR, but no sdf::Error "
+      _out << "Error code is of type GZ_USD_ERROR, but no sdf::Error "
            << "object has been wrapped into this UsdError object.";
     }
 
@@ -180,5 +180,5 @@ std::ostream &operator<<(std::ostream &_out,
   return _out;
 }
 }  // namespace usd
-}  // IGNITION_USD_VERSION_NAMESPACE
+}  // GZ_USD_VERSION_NAMESPACE
 }  // namespace gz

@@ -15,7 +15,7 @@
  *
 */
 
-#include "ignition/usd/usd_parser/Parser.hh"
+#include "gz/usd/usd_parser/Parser.hh"
 #include "USD2SDF.hh"
 
 #include "sdf/Root.hh"
@@ -23,7 +23,7 @@
 namespace gz
 {
 
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 
 namespace usd
 {
@@ -45,7 +45,7 @@ namespace usd
     if (!out)
     {
       errors.emplace_back(UsdError(
-        UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+        UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
         "Unable to open file [" + _outputFilenameSdf + "] for writing"));
       return errors;
     }

@@ -44,7 +44,7 @@
 namespace gz
 {
 // Inline bracke to help doxygen filtering.
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
@@ -72,19 +72,19 @@ namespace usd
     // https://graphics.pixar.com/usd/release/wp_rigid_body_physics.html
     if (usd::IsPlane(_model))
     {
-      ignition::math::Vector3d planePosition(
+      math::Vector3d planePosition(
           _model.RawPose().X(),
           _model.RawPose().Y(),
           _model.RawPose().Z() - (0.5 * kPlaneThickness));
       const auto poseErrors = usd::SetPose(
-          ignition::math::Pose3d(planePosition, _model.RawPose().Rot()),
+          math::Pose3d(planePosition, _model.RawPose().Rot()),
           _stage, sdfModelPath);
       if (!poseErrors.empty())
       {
         for (const auto &e : poseErrors)
           errors.push_back(e);
         errors.push_back(UsdError(
-          UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+          UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
           "Unable to set the pose of the USD ground plane prim named ["
           + _model.Name() + "]"));
         return errors;
@@ -92,7 +92,7 @@ namespace usd
     }
     else
     {
-      ignition::math::Pose3d pose;
+      math::Pose3d pose;
       auto poseErrors = usd::PoseWrtParent(_model, pose);
       if (!poseErrors.empty())
       {
@@ -107,7 +107,7 @@ namespace usd
         for (const auto &e : poseErrors)
           errors.push_back(e);
         errors.push_back(UsdError(
-          UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+          UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
           "Unable to set the pose of the model prim corresponding to the "
           "SDF model named [" + _model.Name() + "]"));
         return errors;
@@ -130,7 +130,7 @@ namespace usd
       {
         errors.push_back(
           UsdError(
-            gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+            gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
             "Error parsing link [" + link.Name() + "]"));
         errors.insert(errors.end(), linkErrors.begin(), linkErrors.end());
         return errors;
@@ -157,7 +157,7 @@ namespace usd
       if (!jointErrors.empty())
       {
         errors.push_back(UsdError(
-              gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+              gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
               "Error parsing joint [" + joint.Name() + "]."));
         errors.insert(errors.end(), jointErrors.begin(), jointErrors.end());
         return errors;

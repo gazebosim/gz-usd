@@ -455,7 +455,7 @@ class TestFactoryBase {
   TestFactoryBase() {}
 
  private:
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(TestFactoryBase);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(TestFactoryBase);
 };
 
 // This class provides implementation of TeastFactoryBase interface.
@@ -746,7 +746,7 @@ class GTEST_API_ Random {
 
  private:
   UInt32 state_;
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(Random);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(Random);
 };
 
 // Defining a variable of type CompileAssertTypesEqual<T1, T2> will cause a
@@ -1133,7 +1133,7 @@ class NativeArray {
   size_t size_;
   void (NativeArray::*clone_)(const Element*, size_t);
 
-  GTEST_DISALLOW_ASSIGN_(NativeArray);
+  GTEST_DISALLOW_ASSGZ_(NativeArray);
 };
 
 }  // namespace internal
@@ -1258,7 +1258,7 @@ class GTEST_TEST_CLASS_NAME_(test_case_name, test_name) : public parent_class {\
  private:\
   virtual void TestBody();\
   static ::testing::TestInfo* const test_info_ GTEST_ATTRIBUTE_UNUSED_;\
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(\
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(\
       GTEST_TEST_CLASS_NAME_(test_case_name, test_name));\
 };\
 \

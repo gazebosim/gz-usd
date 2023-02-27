@@ -139,7 +139,7 @@ class GTEST_API_ TestPartResultArray {
  private:
   std::vector<TestPartResult> array_;
 
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(TestPartResultArray);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(TestPartResultArray);
 };
 
 // This interface knows how to report a test part result.
@@ -169,7 +169,7 @@ class GTEST_API_ HasNewFatalFailureHelper
   bool has_new_fatal_failure_;
   TestPartResultReporterInterface* original_reporter_;
 
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(HasNewFatalFailureHelper);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(HasNewFatalFailureHelper);
 };
 
 }  // namespace internal

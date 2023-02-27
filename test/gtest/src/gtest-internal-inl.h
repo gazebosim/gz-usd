@@ -434,7 +434,7 @@ class OsStackTraceGetterInterface {
   static const char* const kElidedFramesMarker;
 
  private:
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(OsStackTraceGetterInterface);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(OsStackTraceGetterInterface);
 };
 
 // A working implementation of the OsStackTraceGetterInterface interface.
@@ -446,7 +446,7 @@ class OsStackTraceGetter : public OsStackTraceGetterInterface {
   virtual void UponLeavingGTest();
 
  private:
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(OsStackTraceGetter);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(OsStackTraceGetter);
 };
 
 // Information about a Google Test trace point.
@@ -469,7 +469,7 @@ class DefaultGlobalTestPartResultReporter
  private:
   UnitTestImpl* const unit_test_;
 
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(DefaultGlobalTestPartResultReporter);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(DefaultGlobalTestPartResultReporter);
 };
 
 // This is the default per thread test part result reporter used in
@@ -485,7 +485,7 @@ class DefaultPerThreadTestPartResultReporter
  private:
   UnitTestImpl* const unit_test_;
 
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(DefaultPerThreadTestPartResultReporter);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(DefaultPerThreadTestPartResultReporter);
 };
 
 // The private implementation of the UnitTest class.  We don't protect
@@ -911,7 +911,7 @@ class GTEST_API_ UnitTestImpl {
   // starts.
   bool catch_exceptions_;
 
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(UnitTestImpl);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(UnitTestImpl);
 };  // class UnitTestImpl
 
 // Convenience function for accessing the global UnitTest
@@ -1084,7 +1084,7 @@ class StreamingListener : public EmptyTestEventListener {
     const std::string host_name_;
     const std::string port_num_;
 
-    GTEST_DISALLOW_COPY_AND_ASSIGN_(SocketWriter);
+    GTEST_DISALLOW_COPY_AND_ASSGZ_(SocketWriter);
   };  // class SocketWriter
 
   // Escapes '=', '&', '%', and '\n' characters in str as "%xx".
@@ -1164,7 +1164,7 @@ class StreamingListener : public EmptyTestEventListener {
 
   const scoped_ptr<AbstractSocketWriter> socket_writer_;
 
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(StreamingListener);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(StreamingListener);
 };  // class StreamingListener
 
 #endif  // GTEST_CAN_STREAM_RESULTS_

@@ -83,7 +83,7 @@ class GTEST_API_ ScopedFakeTestPartResultReporter
   TestPartResultReporterInterface* old_reporter_;
   TestPartResultArray* const result_;
 
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(ScopedFakeTestPartResultReporter);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(ScopedFakeTestPartResultReporter);
 };
 
 namespace internal {
@@ -104,7 +104,7 @@ class GTEST_API_ SingleFailureChecker {
   const TestPartResult::Type type_;
   const std::string substr_;
 
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(SingleFailureChecker);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(SingleFailureChecker);
 };
 
 }  // namespace internal

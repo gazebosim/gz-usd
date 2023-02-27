@@ -27,7 +27,7 @@ set(sources
 )
 
 # Create the library target
-ign_create_core_library(SOURCES ${sources} CXX_STANDARD ${c++standard})
+gz_create_core_library(SOURCES ${sources} CXX_STANDARD ${c++standard})
 
 target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
@@ -36,10 +36,10 @@ target_include_directories(${PROJECT_LIBRARY_TARGET_NAME}
 
 target_link_libraries(${PROJECT_LIBRARY_TARGET_NAME}
   PUBLIC
-    ignition-common${IGN_COMMON_VER}::ignition-common${IGN_COMMON_VER}
-    ignition-common${IGN_COMMON_VER}::graphics
+    ${GZ_COMMON_LIB}
+    ${GZ_COMMON_GRAPHICS_LIB}
     ${PXR_LIBRARIES}
-    sdformat12::sdformat12
+    sdformat${SDFORMAT_VER}::sdformat${SDFORMAT_VER}
 )
 
 set(gtest_sources
@@ -67,7 +67,7 @@ set(gtest_sources
 )
 
 # Build the unit tests
-ign_build_tests(
+gz_build_tests(
   TYPE UNIT
   SOURCES ${gtest_sources}
   LIB_DEPS ${PROJECT_LIBRARY_TARGET_NAME}

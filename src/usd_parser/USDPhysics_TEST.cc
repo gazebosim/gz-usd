@@ -35,6 +35,8 @@
 #include "sdf/World.hh"
 #include "USDPhysics.hh"
 
+using namespace gz;
+
 /////////////////////////////////////////////////
 TEST(USDPhysicsTest, AvailablePhysics)
 {
@@ -52,7 +54,7 @@ TEST(USDPhysicsTest, AvailablePhysics)
 
   gz::usd::ParseUSDPhysicsScene(
     physicsScene, world, metersPerUnit);
-  EXPECT_EQ(ignition::math::Vector3d(0, 0, -9.8), world.Gravity());
+  EXPECT_EQ(math::Vector3d(0, 0, -9.8), world.Gravity());
 }
 
 /////////////////////////////////////////////////
@@ -72,5 +74,5 @@ TEST(USDPhysicsTest, UnavailablePhysics)
 
   gz::usd::ParseUSDPhysicsScene(
     physicsScene, world, metersPerUnit);
-  EXPECT_EQ(ignition::math::Vector3d(0, 0, -9.8), world.Gravity());
+  EXPECT_EQ(math::Vector3d(0, 0, -9.8), world.Gravity());
 }

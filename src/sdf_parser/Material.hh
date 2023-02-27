@@ -15,8 +15,8 @@
  *
 */
 
-#ifndef IGNITION_USD_USD_IGNITION_USD_PARSER_MATERIALS_HH_
-#define IGNITION_USD_USD_IGNITION_USD_PARSER_MATERIALS_HH_
+#ifndef GZ_USD_USD_GZ_USD_PARSER_MATERIALS_HH_
+#define GZ_USD_USD_GZ_USD_PARSER_MATERIALS_HH_
 
 // TODO(ahcorde) this is to remove deprecated "warnings" in usd, these warnings
 // are reported using #pragma message so normal diagnostic flags cannot remove
@@ -30,13 +30,13 @@
 #pragma pop_macro ("__DEPRECATED")
 
 #include "sdf/Material.hh"
-#include "ignition/usd/UsdError.hh"
-#include <ignition/usd/config.hh>
+#include "gz/usd/UsdError.hh"
+#include <gz/usd/config.hh>
 
 namespace gz
 {
   // Inline bracket to help doxygen filtering.
-  inline namespace IGNITION_USD_VERSION_NAMESPACE {
+  inline namespace GZ_USD_VERSION_NAMESPACE {
   //
   namespace usd
   {

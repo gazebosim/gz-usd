@@ -44,7 +44,7 @@
 namespace gz
 {
 // Inline bracket to help doxygen filtering.
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
@@ -213,7 +213,7 @@ namespace usd
        pxr::VtValue(pxr::GfVec3f(100000, 100000, 100000))},
       {pxr::TfToken("range:min"), pxr::VtValue(pxr::GfVec3f(0, 0, 0))}
     };
-    const ignition::math::Color diffuse = _materialSdf->Diffuse();
+    const math::Color diffuse = _materialSdf->Diffuse();
 
     auto errorsMaterialDiffuseColorConstant = CreateMaterialInput<pxr::GfVec3f>(
       shaderPrim,
@@ -244,7 +244,7 @@ namespace usd
        pxr::VtValue(pxr::GfVec3f(100000, 100000, 100000))},
       {pxr::TfToken("range:min"), pxr::VtValue(pxr::GfVec3f(0, 0, 0))}
     };
-    ignition::math::Color emissive = _materialSdf->Emissive();
+    math::Color emissive = _materialSdf->Emissive();
     auto errorsMaterialEmissiveColor = CreateMaterialInput<pxr::GfVec3f>(
       shaderPrim,
       "emissive_color",

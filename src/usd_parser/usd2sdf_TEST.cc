@@ -25,7 +25,7 @@
 
 #include <ignition/utils/ExtraTestMacros.hh>
 
-#include "ignition/usd/config.hh"
+#include "gz/usd/config.hh"
 
 #include "sdf/Light.hh"
 #include "sdf/Link.hh"
@@ -69,15 +69,15 @@ std::string custom_exec_str(std::string _cmd)
 }
 
 /////////////////////////////////////////////////
-TEST(version_cmd, IGN_UTILS_TEST_DISABLED_ON_WIN32(SDF))
+TEST(version_cmd, GZ_UTILS_TEST_DISABLED_ON_WIN32(SDF))
 {
   std::string output =
     custom_exec_str(usd2sdfCommand() + " --version");
-  EXPECT_EQ(output, std::string(IGNITION_USD_VERSION_FULL) + "\n");
+  EXPECT_EQ(output, std::string(GZ_USD_VERSION_FULL) + "\n");
 }
 
 /////////////////////////////////////////////////
-TEST(check_cmd, IGN_UTILS_TEST_DISABLED_ON_WIN32(SDF))
+TEST(check_cmd, GZ_UTILS_TEST_DISABLED_ON_WIN32(SDF))
 {
   const auto tmp = ignition::common::createTempDirectory("usd",
       ignition::common::tempDirectoryPath());
@@ -108,22 +108,22 @@ TEST(check_cmd, IGN_UTILS_TEST_DISABLED_ON_WIN32(SDF))
     ASSERT_NE(nullptr, world);
     EXPECT_DOUBLE_EQ(0.0, world->Gravity()[0]);
     EXPECT_DOUBLE_EQ(0.0, world->Gravity()[1]);
-    EXPECT_DOUBLE_EQ(-0.098, world->Gravity()[2]);
+    EXPECT_FLOAT_EQ(-0.098f, world->Gravity()[2]);
 
     auto plugins = world->Plugins();
     EXPECT_EQ(4u, plugins.size());
-    EXPECT_EQ("ignition::gazebo::systems::Physics", plugins[0].Name());
-    EXPECT_EQ("ignition-gazebo-physics-system", plugins[0].Filename());
+    EXPECT_EQ("gz::sim::systems::Physics", plugins[0].Name());
+    EXPECT_EQ("gz-sim-physics-system", plugins[0].Filename());
 
-    EXPECT_EQ("ignition::gazebo::systems::Sensors", plugins[1].Name());
-    EXPECT_EQ("ignition-gazebo-sensors-system", plugins[1].Filename());
+    EXPECT_EQ("gz::sim::systems::Sensors", plugins[1].Name());
+    EXPECT_EQ("gz-sim-sensors-system", plugins[1].Filename());
 
-    EXPECT_EQ("ignition::gazebo::systems::UserCommands", plugins[2].Name());
-    EXPECT_EQ("ignition-gazebo-user-commands-system", plugins[2].Filename());
+    EXPECT_EQ("gz::sim::systems::UserCommands", plugins[2].Name());
+    EXPECT_EQ("gz-sim-user-commands-system", plugins[2].Filename());
 
-    EXPECT_EQ("ignition::gazebo::systems::SceneBroadcaster", plugins[3].Name());
+    EXPECT_EQ("gz::sim::systems::SceneBroadcaster", plugins[3].Name());
     EXPECT_EQ(
-      "ignition-gazebo-scene-broadcaster-system", plugins[3].Filename());
+      "gz-sim-scene-broadcaster-system", plugins[3].Filename());
 
     // the world should have lights attached to it
     std::set<std::string> savedLightNames;

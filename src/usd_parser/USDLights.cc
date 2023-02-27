@@ -31,13 +31,13 @@
 #include "pxr/usd/usdLux/diskLight.h"
 #pragma pop_macro ("__DEPRECATED")
 
-#include "ignition/usd/usd_parser/USDData.hh"
-#include "ignition/usd/usd_parser/USDTransforms.hh"
+#include "gz/usd/usd_parser/USDData.hh"
+#include "gz/usd/usd_parser/USDTransforms.hh"
 
 namespace gz
 {
 // Inline bracket to help doxygen filtering.
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
@@ -51,8 +51,8 @@ namespace usd
 
     auto variantLight = pxr::UsdLuxBoundableLightBase(_prim);
 
-    ignition::math::Pose3d pose;
-    ignition::math::Vector3d scale(1, 1, 1);
+    math::Pose3d pose;
+    math::Vector3d scale(1, 1, 1);
     GetTransform(_prim, _usdData, pose, scale, _linkName);
 
     light->SetName(_prim.GetPath().GetName());
@@ -65,10 +65,10 @@ namespace usd
     light->SetIntensity(intensity / 10000);
     float diffuse;
     variantLight.GetDiffuseAttr().Get(&diffuse);
-    light->SetDiffuse(ignition::math::Color(diffuse, diffuse, diffuse, 1));
+    light->SetDiffuse(math::Color(diffuse, diffuse, diffuse, 1));
     float specular;
     variantLight.GetSpecularAttr().Get(&specular);
-    light->SetSpecular(ignition::math::Color(specular, specular, specular, 1));
+    light->SetSpecular(math::Color(specular, specular, specular, 1));
     light->SetCastShadows(true);
 
     if (_prim.IsA<pxr::UsdLuxDistantLight>())
@@ -77,10 +77,10 @@ namespace usd
 
       // DistantLight in USD does not define height. Added some height to the
       // light. The default sun light in ign-gazebo sdf world is 10.
-      pose += ignition::math::Pose3d(0, 0, 10, 0, 0, 0);
+      pose += math::Pose3d(0, 0, 10, 0, 0, 0);
       // Light emitted from a distant source along the -Z axis
       // The pose should set the direction
-      light->SetDirection(ignition::math::Vector3d(0, 0, -1));
+      light->SetDirection(math::Vector3d(0, 0, -1));
     }
     else if (_prim.IsA<pxr::UsdLuxDiskLight>())
     {

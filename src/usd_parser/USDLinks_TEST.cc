@@ -38,6 +38,8 @@
 #include "sdf/Geometry.hh"
 #include "sdf/Visual.hh"
 
+using namespace gz;
+
 /////////////////////////////////////////////////
 TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
 {
@@ -48,13 +50,13 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
   gz::usd::USDData usdData(filename);
   usdData.Init();
 
-  ignition::math::Vector3d scale(1, 1, 1);
+  math::Vector3d scale(1, 1, 1);
 
   auto checkLink =
     [](const sdf::Link &_link,
        const std::string &_name,
        double mass,
-       const ignition::math::Vector3d &_diagonalMoment,
+       const math::Vector3d &_diagonalMoment,
        unsigned int _nvisual,
        sdf::GeometryType _type)
     {
@@ -85,7 +87,7 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
   gz::usd::ParseUSDLinks(
     boxLink, "/box/box_link", linkSDF, usdData, scale);
 
-  EXPECT_EQ(ignition::math::Vector3d(1, 0.1, 1), scale);
+  EXPECT_EQ(math::Vector3d(1, 0.1, 1), scale);
 
   const auto boxLinkGeometry = stage->GetPrimAtPath(
     pxr::SdfPath("/box/box_link/box_visual/geometry"));
@@ -103,7 +105,7 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
 
   ASSERT_TRUE(linkSDF);
   checkLink(linkSDF.value(), "box_link", 1.0,
-            ignition::math::Vector3d(0.1666, 0.1666, 0.1666),
+            math::Vector3d(0.1666, 0.1666, 0.1666),
             1u, sdf::GeometryType::BOX);
 
   const auto cylinderLink = stage->GetPrimAtPath(
@@ -132,7 +134,7 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
     linkCylinderSDF, usdData, scale);
 
   checkLink(linkCylinderSDF.value(), "cylinder_link", 1.7,
-            ignition::math::Vector3d(0.1458, 0.1458, 0.125),
+            math::Vector3d(0.1458, 0.1458, 0.125),
             1u, sdf::GeometryType::CYLINDER);
 
   const auto sphereLink = stage->GetPrimAtPath(
@@ -161,7 +163,7 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
 
   ASSERT_TRUE(linkSphereSDF);
   checkLink(linkSphereSDF.value(), "sphere_link", 2,
-            ignition::math::Vector3d(0.1, 0.1, 0.1),
+            math::Vector3d(0.1, 0.1, 0.1),
             1u, sdf::GeometryType::SPHERE);
 
   const auto capsuleLink = stage->GetPrimAtPath(
@@ -181,7 +183,7 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
     linkCapsuleSDF, usdData, scale);
 
   checkLink(linkCapsuleSDF.value(), "capsule_link", 1,
-            ignition::math::Vector3d(0.074154, 0.074154, 0.018769),
+            math::Vector3d(0.074154, 0.074154, 0.018769),
             0u, sdf::GeometryType::EMPTY);
 
   const auto ellipsoidLink = stage->GetPrimAtPath(
@@ -202,6 +204,6 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
     linkEllipsoidSDF, usdData, scale);
 
   checkLink(linkEllipsoidSDF.value(), "ellipsoid_link", 1,
-            ignition::math::Vector3d(0.068, 0.058, 0.026),
+            math::Vector3d(0.068, 0.058, 0.026),
             0u, sdf::GeometryType::EMPTY);
 }

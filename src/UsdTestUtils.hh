@@ -14,8 +14,8 @@
  * limitations under the License.
  *
 */
-#ifndef IGNITION_USD_USDTESTUTILS_HH_
-#define IGNITION_USD_USDTESTUTILS_HH_
+#ifndef GZ_USD_USDTESTUTILS_HH_
+#define GZ_USD_USDTESTUTILS_HH_
 
 #include <string>
 
@@ -42,12 +42,12 @@
 #pragma pop_macro ("__DEPRECATED")
 
 #include "sdf/system_util.hh"
-#include <ignition/usd/config.hh>
+#include <gz/usd/config.hh>
 
 namespace gz
 {
 // Inline bracke to help doxygen filtering.
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
@@ -85,7 +85,7 @@ std::string FindResourceUri(const ignition::common::URI &_uri)
 /// \param[in] _usdPrim The USD prim
 /// \param[in] _targetPose The pose that _usdPrim should have
 void CheckPrimPose(const pxr::UsdPrim &_usdPrim,
-            const ignition::math::Pose3d &_targetPose)
+            const math::Pose3d &_targetPose)
 {
   bool checkedTranslate = false;
   if (auto translateAttr =
@@ -109,13 +109,13 @@ void CheckPrimPose(const pxr::UsdPrim &_usdPrim,
     // USD uses degrees, but SDF uses radians. USD also uses floats for angles
     // here, but SDF uses doubles
     const auto sdfRollAngle = static_cast<float>(
-        ignition::math::Angle(_targetPose.Rot().Roll()).Degree());
+        math::Angle(_targetPose.Rot().Roll()).Degree());
     EXPECT_FLOAT_EQ(usdRotation[0], sdfRollAngle);
     const auto sdfPitchAngle = static_cast<float>(
-        ignition::math::Angle(_targetPose.Rot().Pitch()).Degree());
+        math::Angle(_targetPose.Rot().Pitch()).Degree());
     EXPECT_FLOAT_EQ(usdRotation[1], sdfPitchAngle);
     const auto sdfYawAngle = static_cast<float>(
-        ignition::math::Angle(_targetPose.Rot().Yaw()).Degree());
+        math::Angle(_targetPose.Rot().Yaw()).Degree());
     EXPECT_FLOAT_EQ(usdRotation[2], sdfYawAngle);
     checkedRotate = true;
   }

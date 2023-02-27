@@ -29,15 +29,15 @@
 
 #include "sdf/Light.hh"
 
-#include <ignition/usd/config.hh>
-#include "ignition/usd/Export.hh"
+#include <gz/usd/config.hh>
+#include "gz/usd/Export.hh"
 
-#include "ignition/usd/usd_parser/USDData.hh"
+#include "gz/usd/usd_parser/USDData.hh"
 
 namespace gz
 {
   // Inline bracket to help doxygen filtering.
-  inline namespace IGNITION_USD_VERSION_NAMESPACE {
+  inline namespace GZ_USD_VERSION_NAMESPACE {
   //
   namespace usd
   {
@@ -50,7 +50,7 @@ namespace gz
     /// \param[in] _linkName Name of the link to find the transform
     /// \return Shared point with the sdf Light object or std::nullopt if the
     /// light is not supported.
-    std::optional<sdf::Light> IGNITION_USD_VISIBLE ParseUSDLights(
+    std::optional<sdf::Light> GZ_USD_VISIBLE ParseUSDLights(
       const pxr::UsdPrim &_prim,
       const USDData &_usdData,
       const std::string &_linkName);

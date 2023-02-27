@@ -42,7 +42,7 @@
 namespace gz
 {
 // Inline bracke to help doxygen filtering.
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
@@ -60,7 +60,7 @@ namespace usd
       return errors;
     }
 
-    ignition::math::Pose3d pose;
+    math::Pose3d pose;
     auto poseErrors = usd::PoseWrtParent(_visual, pose);
     if (!poseErrors.empty())
     {
@@ -74,7 +74,7 @@ namespace usd
     {
       for (const auto &e : poseErrors)
         errors.push_back(e);
-      errors.push_back(UsdError(UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+      errors.push_back(UsdError(UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
             "Unable to set the pose of the link prim corresponding to the "
             "SDF visual named [" + _visual.Name() + "]"));
       return errors;
@@ -88,7 +88,7 @@ namespace usd
     {
       errors.insert(errors.end(), geomErrors.begin(), geomErrors.end());
       errors.push_back(UsdError(
-        gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+        gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
         "Error parsing geometry attached to visual [" + _visual.Name() + "]"));
       return errors;
     }
@@ -105,7 +105,7 @@ namespace usd
           errors.insert(errors.end(), materialErrors.begin(),
               materialErrors.end());
           errors.push_back(UsdError(
-            gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+            gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
             "Error parsing material attached to visual ["
             + _visual.Name() + "]"));
           return errors;
@@ -116,7 +116,7 @@ namespace usd
         if (!materialUSD)
         {
           errors.push_back(UsdError(
-            gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+            gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
             "Unable to convert prim at path [" + materialPath.GetString()
             + "] to a pxr::UsdShadeMaterial."));
           return errors;

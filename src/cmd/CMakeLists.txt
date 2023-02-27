@@ -9,11 +9,11 @@ target_include_directories(sdf2usd
 
 target_link_libraries(sdf2usd
   PUBLIC
-    ignition-utils${IGN_UTILS_VER}::ignition-utils${IGN_UTILS_VER}
-    ignition-utils${IGN_UTILS_VER}::cli
-    ignition-common${IGN_COMMON_VER}::ignition-common${IGN_COMMON_VER}
-    ignition-common${IGN_COMMON_VER}::graphics
-    sdformat12::sdformat12
+    ${GZ_COMMON_LIB}
+    ${GZ_COMMON_GRAPHICS_LIB}
+    ${GZ_UTILS_LIB}
+    ${GZ_UTILS_CLI_LIB}
+    sdformat${SDFORMAT_VER}::sdformat${SDFORMAT_VER}
     ${PXR_LIBRARIES}
     ${PROJECT_LIBRARY_TARGET_NAME}
 )
@@ -29,11 +29,11 @@ target_include_directories(usd2sdf
 
 target_link_libraries(usd2sdf
   PUBLIC
-    ignition-utils${IGN_UTILS_VER}::ignition-utils${IGN_UTILS_VER}
-    ignition-utils${IGN_UTILS_VER}::cli
-    ignition-common${IGN_COMMON_VER}::ignition-common${IGN_COMMON_VER}
-    ignition-common${IGN_COMMON_VER}::graphics
-    sdformat12::sdformat12
+    ${GZ_UTILS_LIB}
+    ${GZ_UTILS_CLI_LIB}
+    ${GZ_COMMON_LIB}
+    ${GZ_COMMON_GRAPHICS_LIB}
+    sdformat${SDFORMAT_VER}::sdformat${SDFORMAT_VER}
     ${PXR_LIBRARIES}
     ${PROJECT_LIBRARY_TARGET_NAME}
 )

@@ -32,11 +32,13 @@
 #include <pxr/usd/usd/stage.h>
 #pragma pop_macro ("__DEPRECATED")
 
-#include "ignition/usd/sdf_parser/World.hh"
+#include "gz/usd/sdf_parser/World.hh"
 #include "sdf/Root.hh"
 #include "test_config.h"
 #include "test_utils.hh"
 #include "../UsdTestUtils.hh"
+
+using namespace gz;
 
 /////////////////////////////////////////////////
 // Fixture that creates a USD stage for each test case.
@@ -74,9 +76,9 @@ TEST_F(UsdStageFixture, Visual)
   const auto worldPrim = this->stage->GetPrimAtPath(pxr::SdfPath(worldPath));
   ASSERT_TRUE(worldPrim);
 
-  const auto targetPose = ignition::math::Pose3d(
-      ignition::math::Vector3d(0, 0, 0),
-      ignition::math::Quaterniond(0, 0, 0));
+  const auto targetPose = math::Pose3d(
+      math::Vector3d(0, 0, 0),
+      math::Quaterniond(0, 0, 0));
 
   const std::string groundPlanePath = worldPath + "/ground_plane";
   const auto groundPlane =

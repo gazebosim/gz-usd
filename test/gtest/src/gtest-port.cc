@@ -383,7 +383,7 @@ class ThreadWithParamSupport : public ThreadWithParamBase {
   // Prohibit instantiation.
   ThreadWithParamSupport();
 
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(ThreadWithParamSupport);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(ThreadWithParamSupport);
 };
 
 }  // namespace
@@ -1023,7 +1023,7 @@ class CapturedStream {
   // Name of the temporary file holding the stderr output.
   ::std::string filename_;
 
-  GTEST_DISALLOW_COPY_AND_ASSIGN_(CapturedStream);
+  GTEST_DISALLOW_COPY_AND_ASSGZ_(CapturedStream);
 };
 
 GTEST_DISABLE_MSC_WARNINGS_POP_()

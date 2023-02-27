@@ -31,11 +31,11 @@
 #include <pxr/usd/usdShade/material.h>
 #pragma pop_macro ("__DEPRECATED")
 
-#include "ignition/usd/usd_parser/USDStage.hh"
+#include "gz/usd/usd_parser/USDStage.hh"
 
 namespace gz {
 // Inline bracke to help doxygen filtering.
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {

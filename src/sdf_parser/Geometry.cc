@@ -67,7 +67,7 @@
 namespace gz
 {
 // Inline bracke to help doxygen filtering.
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
@@ -399,7 +399,7 @@ namespace usd
       // TODO(adlarkin) update this call in sdf13 to avoid casting the index to
       // an int:
       // https://github.com/ignitionrobotics/ign-common/pull/319
-      int materialIndex = subMesh->MaterialIndex();
+      int materialIndex = subMesh->GetMaterialIndex().value();
       if (materialIndex != -1)
       {
         const auto material = ignMesh->MaterialByIndex(materialIndex).get();
@@ -410,7 +410,7 @@ namespace usd
         if (!materialErrors.empty())
         {
           errors.push_back(UsdError(
-            gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+            gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
             "Unable to convert material [" + std::to_string(materialIndex)
             + "] of submesh named [" + subMesh->Name()
             + "] to a USD material."));
@@ -430,8 +430,8 @@ namespace usd
 
         auto materialUSD = pxr::UsdShadeMaterial(materialPrim);
         if (materialUSD &&
-            (materialSdf.Emissive() != ignition::math::Color(0, 0, 0, 1)
-             || materialSdf.Specular() != ignition::math::Color(0, 0, 0, 1)
+            (materialSdf.Emissive() != math::Color(0, 0, 0, 1)
+             || materialSdf.Specular() != math::Color(0, 0, 0, 1)
              || materialSdf.PbrMaterial()))
         {
           pxr::UsdShadeMaterialBindingAPI(usdMesh).Bind(materialUSD);
@@ -439,7 +439,7 @@ namespace usd
         else if (!materialUSD)
         {
           errors.push_back(UsdError(
-              gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+              gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
               "The prim at path [" + materialPath.GetString()
               + "] is not a pxr::UsdShadeMaterial object."));
           return errors;
@@ -447,7 +447,7 @@ namespace usd
       }
 
       pxr::UsdGeomXformCommonAPI xform(usdMesh);
-      ignition::math::Vector3d scale = _geometry.MeshShape()->Scale();
+      math::Vector3d scale = _geometry.MeshShape()->Scale();
       xform.SetScale(pxr::GfVec3f{
         static_cast<float>(scale.X()),
         static_cast<float>(scale.Y()),
@@ -523,7 +523,7 @@ namespace usd
     // (can update comment above once this functionality is added)
     // TODO(adlarkin) update this to use the pxr::USDGeomPlane class when it's
     // added
-    if (sdfPlane->Normal() != ignition::math::Vector3d::UnitZ)
+    if (sdfPlane->Normal() != math::Vector3d::UnitZ)
     {
       errors.push_back(UsdError(
             sdf::Error(sdf::ErrorCode::ATTRIBUTE_INCORRECT_TYPE,
@@ -532,7 +532,7 @@ namespace usd
     }
 
     sdf::Box box;
-    box.SetSize(ignition::math::Vector3d(
+    box.SetSize(math::Vector3d(
           sdfPlane->Size().X(), sdfPlane->Size().Y(), usd::kPlaneThickness));
 
     sdf::Geometry planeBoxGeometry;

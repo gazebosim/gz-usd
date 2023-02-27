@@ -15,8 +15,8 @@
  *
 */
 
-#ifndef IGNITION_USD_USD_USD_PARSER_USDTRANSFORMS_HH_
-#define IGNITION_USD_USD_USD_PARSER_USDTRANSFORMS_HH_
+#ifndef GZ_USD_USD_USD_PARSER_USDTRANSFORMS_HH_
+#define GZ_USD_USD_USD_PARSER_USDTRANSFORMS_HH_
 
 #include <string>
 #include <vector>
@@ -36,16 +36,16 @@
 #include <pxr/usd/usdGeom/gprim.h>
 #pragma pop_macro ("__DEPRECATED")
 
-#include <ignition/usd/config.hh>
+#include <gz/usd/config.hh>
 #include "sdf/system_util.hh"
-#include "ignition/usd/Export.hh"
-#include "ignition/usd/UsdError.hh"
+#include "gz/usd/Export.hh"
+#include "gz/usd/UsdError.hh"
 #include "USDData.hh"
 
 namespace gz
 {
   // Inline bracket to help doxygen filtering.
-  inline namespace IGNITION_USD_VERSION_NAMESPACE {
+  inline namespace GZ_USD_VERSION_NAMESPACE {
   //
   namespace usd
   {
@@ -53,38 +53,38 @@ namespace gz
     /// This might contain scale, translate or rotation operations
     /// The booleans are used to check if there is a transform defined
     /// in the schema
-    class IGNITION_USD_VISIBLE UDSTransforms
+    class GZ_USD_VISIBLE UDSTransforms
     {
       /// \brief Default constructor
       public: UDSTransforms();
 
       /// \brief Translate
       /// \return A 3D vector with the translation
-      public: const ignition::math::Vector3d Translation() const;
+      public: const math::Vector3d Translation() const;
 
       /// \brief Scale
       /// \return A 3D vector with the scale
-      public: const ignition::math::Vector3d Scale() const;
+      public: const math::Vector3d Scale() const;
 
       /// \brief Get the Rotation
       /// \return Return The rotation, if one exists. If no rotation exists,
       /// std::nullopt is returned
-      public: const std::optional<ignition::math::Quaterniond> Rotation() const;
+      public: const std::optional<math::Quaterniond> Rotation() const;
 
       /// \brief Set translate
       /// \param[in] _translate Translate to set
-      public: void SetTranslation(const ignition::math::Vector3d &_translate);
+      public: void SetTranslation(const math::Vector3d &_translate);
 
       /// \brief Set scale
       /// \param[in] _scale Scale to set
-      public: void SetScale(const ignition::math::Vector3d &_scale);
+      public: void SetScale(const math::Vector3d &_scale);
 
       /// \brief Set rotation
       /// \param[in] _q Quaternion that defines the rotation
-      public: void SetRotation(const ignition::math::Quaterniond &_q);
+      public: void SetRotation(const math::Quaterniond &_q);
 
       /// \brief Private data pointer.
-      IGN_UTILS_IMPL_PTR(dataPtr)
+      GZ_UTILS_IMPL_PTR(dataPtr)
     };
 
     /// \brief This function gets the transform from a prim to the specified
@@ -96,11 +96,11 @@ namespace gz
     /// \param[out] _scale The scale of the prim
     /// \param[in] _schemaToStop Name of the prim where the loop will stop
     /// reading transforms
-    void IGNITION_USD_VISIBLE GetTransform(
+    void GZ_USD_VISIBLE GetTransform(
       const pxr::UsdPrim &_prim,
       const USDData &_usdData,
-      ignition::math::Pose3d &_pose,
-      ignition::math::Vector3d &_scale,
+      math::Pose3d &_pose,
+      math::Vector3d &_scale,
       const std::string &_schemaToStop);
 
     /// \brief Read the usd prim transforms. Scale, rotation or transform might
@@ -108,7 +108,7 @@ namespace gz
     /// \param[in] _prim Prim where the transforms are read
     /// \return A USDTransforms class with all the transforms related to
     /// the prim
-    UDSTransforms IGNITION_USD_VISIBLE ParseUSDTransform(
+    UDSTransforms GZ_USD_VISIBLE ParseUSDTransform(
       const pxr::UsdPrim &_prim);
 }
 }
