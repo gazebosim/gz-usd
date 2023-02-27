@@ -10,9 +10,9 @@ cd /tmp
 # see https://github.com/ignitionrobotics/sdformat/issues/869
 return_code=0
 if [ "$(lsb_release -r -s)" == "20.04" ]; then
-  USD_VERSION="v21.11"
+  USD_VERSION="21.11"
 elif [ "$(lsb_release -r -s)" == "22.04" ]; then
-  USD_VERSION="v22.11"
+  USD_VERSION="22.11"
 else
   return_code=$(($return_code + 1))
 fi
@@ -32,8 +32,8 @@ then
 
   apt-get install libboost-all-dev libtbb-dev p7zip-full -y
 
-  wget https://github.com/PixarAnimationStudios/USD/archive/refs/tags/$USD_VERSION.zip
-  unzip $USD_VERSION.zip
+  wget https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v$USD_VERSION.zip
+  unzip v$USD_VERSION.zip
   cd USD-$USD_VERSION
   mkdir build
   cd build
