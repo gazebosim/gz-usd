@@ -25,7 +25,7 @@
 #include "pxr/usd/usdGeom/gprim.h"
 #pragma pop_macro ("__DEPRECATED")
 
-#include "ignition/usd/usd_parser/USDTransforms.hh"
+#include "gz/usd/usd_parser/USDTransforms.hh"
 
 #include "sdf/Camera.hh"
 #include "sdf/Lidar.hh"
@@ -33,7 +33,7 @@
 namespace gz
 {
   // Inline bracket to help doxygen filtering.
-  inline namespace IGNITION_USD_VERSION_NAMESPACE {
+  inline namespace GZ_USD_VERSION_NAMESPACE {
   //
   namespace usd
   {
@@ -46,8 +46,8 @@ namespace gz
     const std::string primType =
       _prim.GetPrimTypeInfo().GetTypeName().GetText();
 
-    ignition::math::Pose3d pose;
-    ignition::math::Vector3d scale(1, 1, 1);
+    math::Pose3d pose;
+    math::Vector3d scale(1, 1, 1);
     GetTransform(
       _prim,
       _usdData,
@@ -72,7 +72,7 @@ namespace gz
       camera.SetHorizontalFov(20.955);
       camera.SetLensFocalLength(focalLength);
       // Camera is Y up axis, rotate the camera to match with Ignition
-      ignition::math::Pose3d poseCamera(0, 0, 0, IGN_PI_2, 0, -IGN_PI_2);
+      math::Pose3d poseCamera(0, 0, 0, GZ_PI_2, 0, -GZ_PI_2);
       sensor.SetRawPose(pose * -poseCamera);
       camera.SetNearClip(clippingRange[0]);
       camera.SetFarClip(clippingRange[1]);
@@ -98,18 +98,18 @@ namespace gz
         pxr::TfToken("horizontalResolution")).Get(&hResolution);
       _prim.GetAttribute(pxr::TfToken("verticalFov")).Get(&vFOV);
       _prim.GetAttribute(pxr::TfToken("verticalResolution")).Get(&vResolution);
-      hResolution = IGN_DTOR(hResolution);
-      vResolution = IGN_DTOR(vResolution);
-      hFOV = IGN_DTOR(hFOV);
-      vFOV = IGN_DTOR(vFOV);
+      hResolution = GZ_DTOR(hResolution);
+      vResolution = GZ_DTOR(vResolution);
+      hFOV = GZ_DTOR(hFOV);
+      vFOV = GZ_DTOR(vFOV);
 
-      lidar.SetHorizontalScanMinAngle(ignition::math::Angle(-hFOV / 2));
-      lidar.SetHorizontalScanMaxAngle(ignition::math::Angle(hFOV / 2));
+      lidar.SetHorizontalScanMinAngle(math::Angle(-hFOV / 2));
+      lidar.SetHorizontalScanMaxAngle(math::Angle(hFOV / 2));
       lidar.SetHorizontalScanResolution(1);
       lidar.SetHorizontalScanSamples(hFOV / hResolution);
 
-      lidar.SetVerticalScanMinAngle(ignition::math::Angle(-vFOV / 2));
-      lidar.SetVerticalScanMaxAngle(ignition::math::Angle(vFOV / 2));
+      lidar.SetVerticalScanMinAngle(math::Angle(-vFOV / 2));
+      lidar.SetVerticalScanMaxAngle(math::Angle(vFOV / 2));
       lidar.SetVerticalScanResolution(1);
       lidar.SetVerticalScanSamples(vFOV / vResolution);
 

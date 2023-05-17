@@ -15,7 +15,7 @@
  *
 */
 
-#include "ignition/usd/sdf_parser/World.hh"
+#include "gz/usd/sdf_parser/World.hh"
 
 #include <cctype>
 #include <iostream>
@@ -45,7 +45,7 @@
 namespace gz
 {
 // Inline bracke to help doxygen filtering.
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
@@ -83,7 +83,7 @@ namespace usd
       if (!modelErrors.empty())
       {
         errors.push_back(UsdError(
-              gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+              gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
               "Error parsing model [" + modelName + "]"));
         errors.insert(errors.end(), modelErrors.begin(), modelErrors.end());
       }
@@ -99,7 +99,7 @@ namespace usd
       if (!lightErrors.empty())
       {
         errors.push_back(UsdError(
-              gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+              gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
               "Error parsing light [" + light.Name() + "]"));
         errors.insert(errors.end(), lightErrors.begin(), lightErrors.end());
       }

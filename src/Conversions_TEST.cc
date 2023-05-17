@@ -27,14 +27,16 @@
 #include "sdf/Pbr.hh"
 #include "Conversions.hh"
 
+using namespace gz;
+
 /////////////////////////////////////////////////
 TEST(Conversions, SdfToCommonMaterial)
 {
   sdf::Material material;
-  material.SetEmissive(ignition::math::Color(1, 0.2, 0.2, 0.7));
-  material.SetDiffuse(ignition::math::Color(0.1, 0.3, 0.4, 0.5));
-  material.SetSpecular(ignition::math::Color(0.11, 0.22, 0.23, 0.77));
-  material.SetAmbient(ignition::math::Color(0.25, 0.21, 0.28, 0.5));
+  material.SetEmissive(math::Color(1, 0.2, 0.2, 0.7));
+  material.SetDiffuse(math::Color(0.1, 0.3, 0.4, 0.5));
+  material.SetSpecular(math::Color(0.11, 0.22, 0.23, 0.77));
+  material.SetAmbient(math::Color(0.25, 0.21, 0.28, 0.5));
   material.SetRenderOrder(5);
   material.SetLighting(true);
   material.SetDoubleSided(false);
@@ -96,10 +98,10 @@ TEST(Conversions, SdfToCommonMaterial)
 TEST(Conversions, CommonToSdfMaterial)
 {
   ignition::common::Material materialCommon;
-  materialCommon.SetEmissive(ignition::math::Color(1, 0.2, 0.2, 0.7));
-  materialCommon.SetDiffuse(ignition::math::Color(0.1, 0.3, 0.4, 0.5));
-  materialCommon.SetSpecular(ignition::math::Color(0.11, 0.22, 0.23, 0.77));
-  materialCommon.SetAmbient(ignition::math::Color(0.25, 0.21, 0.28, 0.5));
+  materialCommon.SetEmissive(math::Color(1, 0.2, 0.2, 0.7));
+  materialCommon.SetDiffuse(math::Color(0.1, 0.3, 0.4, 0.5));
+  materialCommon.SetSpecular(math::Color(0.11, 0.22, 0.23, 0.77));
+  materialCommon.SetAmbient(math::Color(0.25, 0.21, 0.28, 0.5));
   materialCommon.SetRenderOrder(5);
   materialCommon.SetLighting(true);
   materialCommon.SetAlphaFromTexture(false, 0.5, true);

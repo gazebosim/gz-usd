@@ -25,10 +25,10 @@
 #include "sdf/Root.hh"
 #include "sdf/World.hh"
 
-#include "ignition/usd/UsdError.hh"
+#include "gz/usd/UsdError.hh"
 
 namespace gz {
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 namespace usd {
 ////////////////////////////////////////////////
 gz::usd::UsdErrors USD2SDF::Read(
@@ -43,7 +43,7 @@ gz::usd::UsdErrors USD2SDF::Read(
   if (!errors.empty())
   {
     errors.emplace_back(UsdError(
-      UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+      UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
       "Error parsing usd file [" + _fileName + "]"));
     return errors;
   }

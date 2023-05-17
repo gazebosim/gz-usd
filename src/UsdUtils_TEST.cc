@@ -39,7 +39,9 @@
 #include "test_utils.hh"
 #include "UsdTestUtils.hh"
 #include "UsdUtils.hh"
-#include <ignition/usd/config.hh>
+#include <gz/usd/config.hh>
+
+using namespace gz;
 
 //////////////////////////////////////////////////
 TEST(UsdUtils, PoseWrtParent)
@@ -58,14 +60,14 @@ TEST(UsdUtils, PoseWrtParent)
   const auto linkL3 = model->LinkByName("L3");
   ASSERT_NE(nullptr, linkL3);
 
-  ignition::math::Pose3d pose;
+  math::Pose3d pose;
   auto errors = gz::usd::PoseWrtParent(*linkL2, pose);
   EXPECT_TRUE(errors.empty());
-  EXPECT_EQ(ignition::math::Pose3d(2, 0, 0, 0, 0, 0), pose);
+  EXPECT_EQ(math::Pose3d(2, 0, 0, 0, 0, 0), pose);
 
   errors = gz::usd::PoseWrtParent(*linkL3, pose);
   EXPECT_TRUE(errors.empty());
-  EXPECT_EQ(ignition::math::Pose3d(1, 0, -3, 0, linkL1->RawPose().Pitch(), 0),
+  EXPECT_EQ(math::Pose3d(1, 0, -3, 0, linkL1->RawPose().Pitch(), 0),
       pose);
 }
 
@@ -84,7 +86,7 @@ TEST(UsdUtils, SetPose)
   auto prim = stage->GetPrimAtPath(primPath);
   ASSERT_TRUE(prim);
 
-  const ignition::math::Pose3d pose(1, 2, 3, 0, 0, 0);
+  const math::Pose3d pose(1, 2, 3, 0, 0, 0);
   auto errors = gz::usd::SetPose(pose, stage, primPath);
   EXPECT_TRUE(errors.empty());
 

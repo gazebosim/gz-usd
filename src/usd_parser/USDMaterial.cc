@@ -29,7 +29,7 @@
 namespace gz
 {
   // Inline bracket to help doxygen filtering.
-  inline namespace IGNITION_USD_VERSION_NAMESPACE {
+  inline namespace GZ_USD_VERSION_NAMESPACE {
   //
   namespace usd
   {
@@ -151,16 +151,16 @@ namespace gz
       // Refer to this comment in github to understand the ambient and diffuse
       // https://github.com/osrf/sdformat/pull/526#discussion_r623937715
       _material.SetAmbient(
-        ignition::math::Color(
-          ignition::math::clamp(color[0][2] / 0.4, 0.0, 1.0),
-          ignition::math::clamp(color[0][1] / 0.4, 0.0, 1.0),
-          ignition::math::clamp(color[0][0] / 0.4, 0.0, 1.0),
+        math::Color(
+          math::clamp(color[0][2] / 0.4, 0.0, 1.0),
+          math::clamp(color[0][1] / 0.4, 0.0, 1.0),
+          math::clamp(color[0][0] / 0.4, 0.0, 1.0),
           alpha));
       _material.SetDiffuse(
-        ignition::math::Color(
-          ignition::math::clamp(color[0][2] / 0.8, 0.0, 1.0),
-          ignition::math::clamp(color[0][1] / 0.8, 0.0, 1.0),
-          ignition::math::clamp(color[0][0] / 0.8, 0.0, 1.0),
+        math::Color(
+          math::clamp(color[0][2] / 0.8, 0.0, 1.0),
+          math::clamp(color[0][1] / 0.8, 0.0, 1.0),
+          math::clamp(color[0][0] / 0.8, 0.0, 1.0),
           alpha));
     }
     // if the prim is a shade Material then get the texture values
@@ -176,7 +176,7 @@ namespace gz
           bool enableEmission = false;
           bool isPBR = false;
           sdf::PbrWorkflow pbrWorkflow;
-          ignition::math::Color emissiveColorCommon;
+          math::Color emissiveColorCommon;
 
           for (const auto &input : variantShader.GetInputs())
           {
@@ -199,8 +199,8 @@ namespace gz
 
               // We need to set diffuse and specular to (1, 1, 1) otherwise
               // the texture is completely black
-              _material.SetDiffuse(ignition::math::Color(1, 1, 1));
-              _material.SetSpecular(ignition::math::Color(1, 1, 1));
+              _material.SetDiffuse(math::Color(1, 1, 1));
+              _material.SetSpecular(math::Color(1, 1, 1));
 
               isPBR = true;
             }
@@ -283,7 +283,7 @@ namespace gz
                 diffuseShaderInput.Get(&diffuseColor);
               }
               _material.SetDiffuse(
-                ignition::math::Color(
+                math::Color(
                   diffuseColor[0],
                   diffuseColor[1],
                   diffuseColor[2]));
@@ -344,7 +344,7 @@ namespace gz
                 variantShader.GetInput(pxr::TfToken("emissive_color"));
               if (emissiveColorShaderInput.Get(&emissiveColor))
               {
-                emissiveColorCommon = ignition::math::Color(
+                emissiveColorCommon = math::Color(
                   emissiveColor[0],
                   emissiveColor[1],
                   emissiveColor[2]);

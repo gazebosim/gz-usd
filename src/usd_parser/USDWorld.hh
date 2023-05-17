@@ -20,15 +20,15 @@
 
 #include <string>
 
-#include <ignition/usd/config.hh>
-#include "ignition/usd/UsdError.hh"
+#include <gz/usd/config.hh>
+#include "gz/usd/UsdError.hh"
 
 #include "sdf/World.hh"
 
 namespace gz
 {
   // Inline bracket to help doxygen filtering.
-  inline namespace IGNITION_USD_VERSION_NAMESPACE {
+  inline namespace GZ_USD_VERSION_NAMESPACE {
   //
   namespace usd
   {

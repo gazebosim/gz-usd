@@ -44,6 +44,8 @@
 #include "../UsdTestUtils.hh"
 #include "../UsdUtils.hh"
 
+using namespace gz;
+
 /////////////////////////////////////////////////
 // Fixture that creates a USD stage for each test case.
 // This fixture also has helper methods to assist with comparing usd light
@@ -192,7 +194,7 @@ TEST_F(UsdLightStageFixture, Lights)
     if (validLight)
     {
       this->CheckLightIntensity(lightUsd, lightSdf);
-      ignition::math::Pose3d pose;
+      math::Pose3d pose;
       const auto poseErrors = gz::usd::PoseWrtParent(lightSdf, pose);
       EXPECT_TRUE(poseErrors.empty());
       gz::usd::testing::CheckPrimPose(lightUsd, pose);

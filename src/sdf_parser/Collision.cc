@@ -43,7 +43,7 @@
 namespace gz
 {
 // Inline bracket to help doxygen filtering.
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
@@ -77,7 +77,7 @@ namespace usd
     collisionPrim.CreateAttribute(pxr::TfToken("purpose"),
         pxr::SdfValueTypeNames->Token, false).Set(pxr::TfToken("guide"));
 
-    ignition::math::Pose3d pose;
+    math::Pose3d pose;
     auto poseErrors = usd::PoseWrtParent(_collision, pose);
     if (!poseErrors.empty())
     {
@@ -91,7 +91,7 @@ namespace usd
     {
       for (const auto &e : poseErrors)
         errors.push_back(e);
-      errors.push_back(UsdError(UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+      errors.push_back(UsdError(UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
             "Unable to set the pose of the prim corresponding to the "
             "SDF collision named [" + _collision.Name() + "]"));
       return errors;
@@ -104,7 +104,7 @@ namespace usd
     {
       errors.insert(errors.end(), geomErrors.begin(), geomErrors.end());
       errors.push_back(UsdError(
-        gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+        gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
         "Error parsing geometry attached to _collision [" +
         _collision.Name() + "]"));
       return errors;

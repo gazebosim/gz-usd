@@ -15,8 +15,8 @@
  *
 */
 
-#ifndef IGNITION_USD_USD_USD_PARSER_USDSTAGE_HH_
-#define IGNITION_USD_USD_USD_PARSER_USDSTAGE_HH_
+#ifndef GZ_USD_USD_USD_PARSER_USDSTAGE_HH_
+#define GZ_USD_USD_USD_PARSER_USDSTAGE_HH_
 
 #include <set>
 #include <string>
@@ -24,15 +24,15 @@
 #include <ignition/utils/ImplPtr.hh>
 
 #include "sdf/Types.hh"
-#include <ignition/usd/config.hh>
+#include <gz/usd/config.hh>
 #include "sdf/system_util.hh"
-#include "ignition/usd/Export.hh"
-#include "ignition/usd/UsdError.hh"
+#include "gz/usd/Export.hh"
+#include "gz/usd/UsdError.hh"
 
 namespace gz
 {
   // Inline bracket to help doxygen filtering.
-  inline namespace IGNITION_USD_VERSION_NAMESPACE {
+  inline namespace GZ_USD_VERSION_NAMESPACE {
   //
   namespace usd
   {
@@ -40,7 +40,7 @@ namespace gz
     /// - UpAxis
     /// - MetersPerUnit
     /// - All USD paths
-    class IGNITION_USD_VISIBLE USDStage
+    class GZ_USD_VISIBLE USDStage
     {
       /// \brief Default constructor
       /// \param[in] _refFileName File name of the stage in the disk
@@ -61,9 +61,9 @@ namespace gz
       public: const std::set<std::string> &USDPaths() const;
 
       /// \brief Private data pointer.
-      IGN_UTILS_IMPL_PTR(dataPtr)
+      GZ_UTILS_IMPL_PTR(dataPtr)
     };
   }
   }
 }
-#endif  // IGNITION_USD_USD_PARSER_USDSTAGE_HH
+#endif  // GZ_USD_USD_PARSER_USDSTAGE_HH

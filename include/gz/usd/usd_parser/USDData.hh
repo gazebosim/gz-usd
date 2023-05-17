@@ -15,8 +15,8 @@
  *
 */
 
-#ifndef IGNITION_USD_USD_USD_PARSER_USDDATA_HH_
-#define IGNITION_USD_USD_USD_PARSER_USDDATA_HH_
+#ifndef GZ_USD_USD_USD_PARSER_USDDATA_HH_
+#define GZ_USD_USD_USD_PARSER_USDDATA_HH_
 
 #include <memory>
 #include <set>
@@ -28,16 +28,16 @@
 
 #include "sdf/Material.hh"
 #include "sdf/Types.hh"
-#include <ignition/usd/config.hh>
+#include <gz/usd/config.hh>
 #include "sdf/system_util.hh"
-#include "ignition/usd/usd_parser/USDStage.hh"
-#include "ignition/usd/Export.hh"
-#include "ignition/usd/UsdError.hh"
+#include "gz/usd/usd_parser/USDStage.hh"
+#include "gz/usd/Export.hh"
+#include "gz/usd/UsdError.hh"
 
 namespace gz
 {
   // Inline bracket to help doxygen filtering.
-  inline namespace IGNITION_USD_VERSION_NAMESPACE {
+  inline namespace GZ_USD_VERSION_NAMESPACE {
   //
   namespace usd
   {
@@ -45,7 +45,7 @@ namespace gz
     /// It will parse the materials in the stage
     /// If the stage has some references to other stages, this class
     /// will read them and make this data available here too.
-    class IGNITION_USD_VISIBLE USDData
+    class GZ_USD_VISIBLE USDData
     {
       /// \brief Constructor
       public: explicit USDData(const std::string &_filename);
@@ -110,7 +110,7 @@ namespace gz
       }
 
       /// \brief Private data pointer.
-      IGN_UTILS_IMPL_PTR(dataPtr)
+      GZ_UTILS_IMPL_PTR(dataPtr)
     };
   }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  *
 */
-#include "ignition/usd/usd_parser/USDData.hh"
+#include "gz/usd/usd_parser/USDData.hh"
 
 #include <set>
 #include <string>
@@ -40,7 +40,7 @@
 
 namespace gz {
 // Inline bracket to help doxygen filtering.
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 //
 namespace usd {
   /// \brief USDStage private data.
@@ -214,7 +214,7 @@ namespace usd {
         if (!errrosMaterial.empty())
         {
           errors.emplace_back(UsdError(
-            gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+            gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
             "Error parsing material"));
           errors.insert(
             errors.end(), errrosMaterial.begin(), errrosMaterial.end());
@@ -270,7 +270,7 @@ namespace usd {
       if (fileNameRef.empty())
       {
         errors.emplace_back(UsdError(
-          gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+          gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
           "Not able to find asset [" + _ref + "]"));
         return errors;
       }
@@ -292,7 +292,7 @@ namespace usd {
     else
     {
       errors.emplace_back(UsdError(
-        gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+        gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
         "Element already exists"));
       return errors;
     }

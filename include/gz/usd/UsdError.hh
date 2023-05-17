@@ -14,8 +14,8 @@
  * limitations under the License.
  *
  */
-#ifndef IGNITION_USD_USD_USDERROR_HH_
-#define IGNITION_USD_USD_USDERROR_HH_
+#ifndef GZ_USD_USD_USDERROR_HH_
+#define GZ_USD_USD_USDERROR_HH_
 
 #include <optional>
 #include <string>
@@ -24,13 +24,13 @@
 #include <ignition/utils/ImplPtr.hh>
 
 #include <sdf/Error.hh>
-#include <ignition/usd/Export.hh>
-#include <ignition/usd/config.hh>
+#include <gz/usd/Export.hh>
+#include <gz/usd/config.hh>
 
 namespace gz
 {
   // Inline bracket to help doxygen filtering.
-  inline namespace IGNITION_USD_VERSION_NAMESPACE
+  inline namespace GZ_USD_VERSION_NAMESPACE
   {
   namespace usd
   {
@@ -47,10 +47,10 @@ namespace gz
     NONE = 0,
 
     /// \brief A wrapped SDF error.
-    IGNITION_USD_ERROR,
+    GZ_USD_ERROR,
 
     /// \brief Parsing of SDF object to a USD object failed.
-    IGNITION_USD_TO_USD_PARSING_ERROR,
+    GZ_USD_TO_USD_PARSING_ERROR,
 
     /// \brief The pxr::SdfPath does not point to a valid USD prim.
     INVALID_PRIM_PATH,
@@ -83,20 +83,20 @@ namespace gz
     PRIM_INCORRECT_SCHEMA_TYPE,
 
     /// \brief Parsing of USD object to a SDF object failed.
-    USD_TO_IGNITION_USD_PARSING_ERROR,
+    USD_TO_GZ_USD_PARSING_ERROR,
 
     /// \brief Parsing of USD polygin object to a SDF object failed.
-    USD_TO_IGNITION_USD_POLYGON_PARSING_ERROR,
+    USD_TO_GZ_USD_POLYGON_PARSING_ERROR,
   };
 
-  class IGNITION_USD_VISIBLE UsdError
+  class GZ_USD_VISIBLE UsdError
   {
     /// \brief Default constructor
     public: UsdError();
 
     /// \brief Constructor.
     /// \param[in] _code The error code. If the error code is
-    /// IGNITION_USD_ERROR, the constructor that takes an sdf::Error object
+    /// GZ_USD_ERROR, the constructor that takes an sdf::Error object
     /// should be used instead.
     /// \param[in] _message A description of the error.
     /// \sa ErrorCode.
@@ -104,7 +104,7 @@ namespace gz
 
     /// \brief Constructor.
     /// \param[in] _code The error code. If the error code is
-    /// IGNITION_USD_ERROR, the constructor that takes an sdf::Error object
+    /// GZ_USD_ERROR, the constructor that takes an sdf::Error object
     /// should be used instead.
     /// \param[in] _message A description of the error.
     /// \param[in] _filePath The file path that is related to this error.
@@ -114,7 +114,7 @@ namespace gz
 
     /// \brief Constructor.
     /// \param[in] _code The error code. If the error code is
-    /// IGNITION_USD_ERROR, the constructor that takes an sdf::Error object
+    /// GZ_USD_ERROR, the constructor that takes an sdf::Error object
     /// should be used instead.
     /// \param[in] _message A description of the error.
     /// \param[in] _filePath The file path that is related to this error.
@@ -178,17 +178,17 @@ namespace gz
     /// \param[in,out] _out The output stream.
     /// \param[in] _err The error to output.
     /// \return Reference to the given output stream
-   public: friend IGNITION_USD_VISIBLE std::ostream &operator<<(
+   public: friend GZ_USD_VISIBLE std::ostream &operator<<(
         std::ostream &_out, const UsdError &_err);
 
     /// \brief Private data pointer.
-    IGN_UTILS_IMPL_PTR(dataPtr)
+    GZ_UTILS_IMPL_PTR(dataPtr)
   };
 
   using UsdErrors = std::vector<UsdError>;
 
   }  // namespace usd
-  }  // IGNITION_USD_VERSION_NAMESPACE
+  }  // GZ_USD_VERSION_NAMESPACE
 }  // namespace gz
 
 #endif

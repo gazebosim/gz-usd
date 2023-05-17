@@ -25,14 +25,14 @@
 
 #include "sdf/Sensor.hh"
 
-#include "ignition/usd/usd_parser/USDData.hh"
+#include "gz/usd/usd_parser/USDData.hh"
 
-#include <ignition/usd/config.hh>
+#include <gz/usd/config.hh>
 
 namespace gz
 {
   // Inline bracket to help doxygen filtering.
-  inline namespace IGNITION_USD_VERSION_NAMESPACE {
+  inline namespace GZ_USD_VERSION_NAMESPACE {
   //
   namespace usd
   {

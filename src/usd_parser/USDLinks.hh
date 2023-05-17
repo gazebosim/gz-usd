@@ -15,8 +15,8 @@
  *
 */
 
-#ifndef IGNITION_USD_USD_USD_PARSER_USD_LINKS_HH
-#define IGNITION_USD_USD_USD_PARSER_USD_LINKS_HH
+#ifndef GZ_USD_USD_USD_PARSER_USD_LINKS_HH
+#define GZ_USD_USD_USD_PARSER_USD_LINKS_HH
 
 #include <optional>
 #include <string>
@@ -26,15 +26,15 @@
 #include <pxr/usd/usdGeom/gprim.h>
 #pragma pop_macro ("__DEPRECATED")
 
-#include <ignition/usd/config.hh>
-#include "ignition/usd/usd_parser/USDData.hh"
-#include "ignition/usd/UsdError.hh"
+#include <gz/usd/config.hh>
+#include "gz/usd/usd_parser/USDData.hh"
+#include "gz/usd/UsdError.hh"
 #include "sdf/Link.hh"
 
 namespace gz
 {
   // Inline bracket to help doxygen filtering.
-  inline namespace IGNITION_USD_VERSION_NAMESPACE {
+  inline namespace GZ_USD_VERSION_NAMESPACE {
   //
   namespace usd
   {
@@ -54,7 +54,7 @@ namespace gz
       const std::string &_nameLink,
       std::optional<sdf::Link> &_link,
       const USDData &_usdData,
-      ignition::math::Vector3d &_scale);
+      math::Vector3d &_scale);
   }
   }
 }

@@ -44,7 +44,7 @@
 namespace gz
 {
 // Inline bracket to help doxygen filtering.
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
@@ -74,7 +74,7 @@ namespace usd
     const auto sdfCamera = _sensor.CameraSensor();
 
     // When then focal length is not defined in SDF, the default value is 1
-    if (!ignition::math::equal(sdfCamera->LensFocalLength(), 1.0))
+    if (!math::equal(sdfCamera->LensFocalLength(), 1.0))
     {
       usdCamera.CreateFocalLengthAttr().Set(
           static_cast<float>(sdfCamera->LensFocalLength()));
@@ -213,14 +213,14 @@ namespace usd
       default:
         errors.push_back(
           UsdError(
-            gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+            gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
             "This type of sensor [" + _sensor.TypeStr() +
             "] is not supported"));
     }
 
     if (errors.empty())
     {
-      ignition::math::Pose3d pose;
+      math::Pose3d pose;
       auto poseErrors = gz::usd::PoseWrtParent(_sensor, pose);
       if (!poseErrors.empty())
       {
@@ -232,8 +232,8 @@ namespace usd
       {
         // Camera sensors are upAxis equal to "Y", we need to rotate the camera
         // properly.
-        const ignition::math::Pose3d poseCamera(
-          0, 0, 0, IGN_PI_2, 0, -IGN_PI_2);
+        const math::Pose3d poseCamera(
+          0, 0, 0, GZ_PI_2, 0, -GZ_PI_2);
         usd::SetPose(
           pose * poseCamera, _stage, sdfSensorPath);
       }

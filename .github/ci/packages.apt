@@ -1,7 +1,7 @@
-libignition-cmake2-dev
-libignition-common4-dev
-libignition-math6-dev
-libignition-tools-dev
-libignition-utils1-dev
-libignition-utils1-cli-dev
-libsdformat12-dev
+libgz-cmake3-dev
+libgz-common5-dev
+libgz-math7-dev
+libgz-tools-dev
+libgz-utils2-dev
+libgz-utils2-cli-dev
+libsdformat13-dev

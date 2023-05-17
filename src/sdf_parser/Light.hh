@@ -15,8 +15,8 @@
  *
 */
 
-#ifndef IGNITION_USD_USD_IGNITION_USD_PARSER_LIGHT_HH_
-#define IGNITION_USD_USD_IGNITION_USD_PARSER_LIGHT_HH_
+#ifndef GZ_USD_USD_GZ_USD_PARSER_LIGHT_HH_
+#define GZ_USD_USD_GZ_USD_PARSER_LIGHT_HH_
 
 #include <string>
 
@@ -29,14 +29,14 @@
 #include <pxr/usd/usd/stage.h>
 #pragma pop_macro ("__DEPRECATED")
 
-#include <ignition/usd/config.hh>
-#include "ignition/usd/UsdError.hh"
+#include <gz/usd/config.hh>
+#include "gz/usd/UsdError.hh"
 #include "sdf/Light.hh"
 
 namespace gz
 {
   // Inline bracke to help doxygen filtering.
-  inline namespace IGNITION_USD_VERSION_NAMESPACE {
+  inline namespace GZ_USD_VERSION_NAMESPACE {
   //
   namespace usd
   {
