@@ -500,7 +500,7 @@ class GTEST_API_ Test {
   virtual Setup_should_be_spelled_SetUp* Setup() { return NULL; }
 
   // We disallow copying Tests.
-  GTEST_DISALLOW_COPY_AND_ASSGZ_(Test);
+  GTEST_DISALLOW_COPY_AND_ASSIGN_(Test);
 };
 
 typedef internal::TimeInMillis TimeInMillis;
@@ -653,7 +653,7 @@ class GTEST_API_ TestResult {
   TimeInMillis elapsed_time_;
 
   // We disallow copying TestResult.
-  GTEST_DISALLOW_COPY_AND_ASSGZ_(TestResult);
+  GTEST_DISALLOW_COPY_AND_ASSIGN_(TestResult);
 };  // class TestResult
 
 // A TestInfo object stores the following information about a test:
@@ -798,7 +798,7 @@ class GTEST_API_ TestInfo {
   // test for the second time.
   TestResult result_;
 
-  GTEST_DISALLOW_COPY_AND_ASSGZ_(TestInfo);
+  GTEST_DISALLOW_COPY_AND_ASSIGN_(TestInfo);
 };
 
 // A test case, which consists of a vector of TestInfos.
@@ -981,7 +981,7 @@ class GTEST_API_ TestCase {
   TestResult ad_hoc_test_result_;
 
   // We disallow copying TestCases.
-  GTEST_DISALLOW_COPY_AND_ASSGZ_(TestCase);
+  GTEST_DISALLOW_COPY_AND_ASSIGN_(TestCase);
 };
 
 // An Environment object is capable of setting up and tearing down an
@@ -1178,7 +1178,7 @@ class GTEST_API_ TestEventListeners {
   TestEventListener* default_xml_generator_;
 
   // We disallow copying TestEventListeners.
-  GTEST_DISALLOW_COPY_AND_ASSGZ_(TestEventListeners);
+  GTEST_DISALLOW_COPY_AND_ASSIGN_(TestEventListeners);
 };
 
 // A UnitTest consists of a vector of TestCases.
@@ -1367,7 +1367,7 @@ class GTEST_API_ UnitTest {
   internal::UnitTestImpl* impl_;
 
   // We disallow copying UnitTest.
-  GTEST_DISALLOW_COPY_AND_ASSGZ_(UnitTest);
+  GTEST_DISALLOW_COPY_AND_ASSIGN_(UnitTest);
 };
 
 // A convenient wrapper for adding an environment for the test
@@ -1735,12 +1735,12 @@ class GTEST_API_ AssertHelper {
     std::string const message;
 
    private:
-    GTEST_DISALLOW_COPY_AND_ASSGZ_(AssertHelperData);
+    GTEST_DISALLOW_COPY_AND_ASSIGN_(AssertHelperData);
   };
 
   AssertHelperData* const data_;
 
-  GTEST_DISALLOW_COPY_AND_ASSGZ_(AssertHelper);
+  GTEST_DISALLOW_COPY_AND_ASSIGN_(AssertHelper);
 };
 
 }  // namespace internal
@@ -2179,7 +2179,7 @@ class GTEST_API_ ScopedTrace {
  private:
   void PushTrace(const char* file, int line, std::string message);
 
-  GTEST_DISALLOW_COPY_AND_ASSGZ_(ScopedTrace);
+  GTEST_DISALLOW_COPY_AND_ASSIGN_(ScopedTrace);
 } GTEST_ATTRIBUTE_UNUSED_;  // A ScopedTrace object does its job in its
                             // c'tor and d'tor.  Therefore it doesn't
                             // need to be used otherwise.
