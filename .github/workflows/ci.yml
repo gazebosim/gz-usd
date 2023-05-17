@@ -3,7 +3,7 @@ name: Ubuntu
 on: [push, pull_request]
 
 jobs:
-  focal-ci:
+  jammy-ci:
     runs-on: ubuntu-latest
     name: Ubuntu Jammy CI
     steps:
