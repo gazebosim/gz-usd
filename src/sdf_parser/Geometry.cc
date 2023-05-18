@@ -41,6 +41,8 @@
 #include <pxr/usd/usdGeom/capsule.h>
 #include <pxr/usd/usdGeom/cube.h>
 #include <pxr/usd/usdGeom/cylinder.h>
+#include <pxr/usd/usdGeom/primvarsAPI.h>
+#include <pxr/usd/usdGeom/primvar.h>
 #include <pxr/usd/usdGeom/mesh.h>
 #include <pxr/usd/usdGeom/sphere.h>
 #include <pxr/usd/usdGeom/xform.h>
@@ -373,7 +375,9 @@ namespace usd
       usdMesh.CreateFaceVertexIndicesAttr().Set(faceVertexIndices);
       usdMesh.CreateFaceVertexCountsAttr().Set(faceVertexCounts);
 
-      auto coordinates = usdMesh.CreatePrimvar(
+      auto primvarTemp = pxr::UsdGeomPrimvarsAPI(usdMesh);
+
+      auto coordinates = primvarTemp.CreatePrimvar(
           pxr::TfToken("st"), pxr::SdfValueTypeNames->Float2Array,
           pxr::UsdGeomTokens->vertex);
       coordinates.Set(uvs);
