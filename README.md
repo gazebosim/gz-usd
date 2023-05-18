@@ -1,3 +1,8 @@
+Gazebo version | Branch
+-- | --
+Fortress | [fortress](https://github.com/gazebosim/gz-usd/tree/fortress) |
+Garden and higher versions | [main](https://github.com/gazebosim/gz-usd) |
+
 USD is a high-performance extensible software platform for collaboratively constructing animated 3D
 scenes, designed to meet the needs of large-scale film and visual effects production.
 
