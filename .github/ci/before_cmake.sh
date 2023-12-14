@@ -46,7 +46,7 @@ then
 
   wget https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v$USD_VERSION.zip
   unzip v$USD_VERSION.zip
-  cd USD-$USD_VERSION
+  cd OpenUSD-$USD_VERSION
   mkdir build
   cd build
 
