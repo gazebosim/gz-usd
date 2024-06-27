@@ -17,8 +17,8 @@
 
 #include <gtest/gtest.h>
 #include <optional>
-#include <ignition/usd/config.hh>
-#include "ignition/usd/UsdError.hh"
+#include <gz/usd/config.hh>
+#include "gz/usd/UsdError.hh"
 
 /////////////////////////////////////////////////
 TEST(Error, DefaultConstruction)
@@ -117,7 +117,7 @@ TEST(Error, sdfError)
 
   gz::usd::UsdError error(errorSdf);
   EXPECT_TRUE(error);
-  EXPECT_EQ(error.Code(), gz::usd::UsdErrorCode::IGNITION_USD_ERROR);
+  EXPECT_EQ(error.Code(), gz::usd::UsdErrorCode::GZ_USD_ERROR);
   EXPECT_EQ(error.Message(), "");
   EXPECT_FALSE(error.FilePath().has_value());
   EXPECT_FALSE(error.LineNumber().has_value());

@@ -40,7 +40,7 @@
 namespace gz
 {
 // Inline bracke to help doxygen filtering.
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
@@ -75,7 +75,7 @@ namespace usd
     // TODO(adlarkin) incorporate sdf::Light's <direction> somehow? According
     // to the USD API, things like UsdLuxDistantLight and UsdLuxDiskLight emit
     // light along the -Z axis, so I'm not sure if this can be changed.
-    ignition::math::Pose3d pose;
+    math::Pose3d pose;
     auto poseErrors = gz::usd::PoseWrtParent(_light, pose);
     if (!poseErrors.empty())
     {
@@ -89,7 +89,7 @@ namespace usd
     {
       for (const auto &e : poseErrors)
         errors.push_back(e);
-      errors.push_back(UsdError(UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+      errors.push_back(UsdError(UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
             "Unable to set the pose of the light prim corresponding to the "
             "SDF light named [" + _light.Name() + "]"));
       return errors;

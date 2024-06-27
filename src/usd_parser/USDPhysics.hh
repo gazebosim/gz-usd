@@ -23,15 +23,15 @@
 #include <pxr/usd/usdPhysics/scene.h>
 #pragma pop_macro ("__DEPRECATED")
 
-#include <ignition/usd/config.hh>
-#include "ignition/usd/Export.hh"
+#include <gz/usd/config.hh>
+#include "gz/usd/Export.hh"
 
 #include "sdf/World.hh"
 
 namespace gz
 {
   // Inline bracket to help doxygen filtering.
-  inline namespace IGNITION_USD_VERSION_NAMESPACE {
+  inline namespace GZ_USD_VERSION_NAMESPACE {
   //
   namespace usd
   {

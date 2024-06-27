@@ -40,9 +40,9 @@
 #include <pxr/usd/usdShade/material.h>
 #pragma pop_macro ("__DEPRECATED")
 
-#include "ignition/usd/usd_parser/USDData.hh"
-#include "ignition/usd/usd_parser/USDStage.hh"
-#include "ignition/usd/usd_parser/USDTransforms.hh"
+#include "gz/usd/usd_parser/USDData.hh"
+#include "gz/usd/usd_parser/USDStage.hh"
+#include "gz/usd/usd_parser/USDTransforms.hh"
 
 #include "USDJoints.hh"
 #include "USDLights.hh"
@@ -60,7 +60,7 @@
 
 namespace gz
 {
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 namespace usd
 {
   gz::usd::UsdErrors parseUSDWorld(const std::string &_inputFileName,
@@ -97,7 +97,7 @@ namespace usd
 
     // USD link may have scale, store this value to apply this to the sdf visual
     // the key is the name of the link and the value is the scale value
-    std::map<std::string, ignition::math::Vector3d> linkScaleMap;
+    std::map<std::string, math::Vector3d> linkScaleMap;
 
     auto range = pxr::UsdPrimRange::Stage(reference);
     for (const auto &prim : range)
@@ -127,8 +127,8 @@ namespace usd
         model.SetName(primPathTokens[0]);
         currentModelName = primPathTokens[0];
 
-        ignition::math::Pose3d pose;
-        ignition::math::Vector3d scale{1, 1, 1};
+        math::Pose3d pose;
+        math::Vector3d scale{1, 1, 1};
 
         GetTransform(
           prim,
@@ -182,7 +182,7 @@ namespace usd
         if (!modelPtr)
         {
           errors.push_back(UsdError(
-            UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
+            UsdErrorCode::USD_TO_GZ_USD_PARSING_ERROR,
             "Unable to find a sdf::Model named [" + currentModelName +
             "] in world named [" + _world.Name() +
             "], but a sdf::Model with this name should exist."));
@@ -195,7 +195,7 @@ namespace usd
         if (!modelPtr)
         {
           errors.push_back(UsdError(
-            UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
+            UsdErrorCode::USD_TO_GZ_USD_PARSING_ERROR,
             "Unable to store RosDifferentialBase in a DiffDrive plugin "
             "because the corresponding sdf::Model object wasn't found."));
           return errors;
@@ -211,8 +211,8 @@ namespace usd
           pxr::TfToken("wheelRadius"));
 
         sdf::Plugin diffDrivePlugin;
-        diffDrivePlugin.SetName("ignition::gazebo::systems::DiffDrive");
-        diffDrivePlugin.SetFilename("ignition-gazebo-diff-drive-system");
+        diffDrivePlugin.SetName("gz::sim::systems::DiffDrive");
+        diffDrivePlugin.SetFilename("gz-sim-diff-drive-system");
 
         std::string leftWheelName;
         std::string rightWheelName;
@@ -290,7 +290,7 @@ namespace usd
         if (!modelPtr)
         {
           errors.push_back(UsdError(
-            UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
+            UsdErrorCode::USD_TO_GZ_USD_PARSING_ERROR,
             "Unable to parse joint corresponding to USD prim [" +
             std::string(prim.GetName()) +
             "] because the corresponding sdf::Model object wasn't found."));
@@ -301,7 +301,7 @@ namespace usd
         if (!errorsJoint.empty())
         {
           errors.push_back(UsdError(
-            UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
+            UsdErrorCode::USD_TO_GZ_USD_PARSING_ERROR,
             "Unable to find parse UsdPhysicsJoint [" +
             std::string(prim.GetName()) + "]"));
           return errors;
@@ -349,7 +349,7 @@ namespace usd
       if (!modelPtr)
       {
         errors.push_back(UsdError(
-          UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
+          UsdErrorCode::USD_TO_GZ_USD_PARSING_ERROR,
           "Unable to parse link named [" + linkName +
           "] because the corresponding sdf::Model object wasn't found."));
         return errors;
@@ -364,7 +364,7 @@ namespace usd
         if (scale == linkScaleMap.end())
         {
           scale = linkScaleMap.insert(
-              {linkName, ignition::math::Vector3d(1, 1, 1)}).first;
+              {linkName, math::Vector3d(1, 1, 1)}).first;
         }
         gz::usd::ParseUSDLinks(
           prim, linkName, optionalLink, usdData, scale->second);
@@ -373,7 +373,7 @@ namespace usd
       }
       else
       {
-        ignition::math::Vector3d scale{1, 1, 1};
+        math::Vector3d scale{1, 1, 1};
 
         gz::usd::ParseUSDLinks(
           prim, linkName, optionalLink, usdData, scale);
@@ -413,25 +413,25 @@ namespace usd
     {
       // Add some plugins to run the Ignition Gazebo simulation
       sdf::Plugin physicsPlugin;
-      physicsPlugin.SetName("ignition::gazebo::systems::Physics");
-      physicsPlugin.SetFilename("ignition-gazebo-physics-system");
+      physicsPlugin.SetName("gz::sim::systems::Physics");
+      physicsPlugin.SetFilename("gz-sim-physics-system");
       _world.AddPlugin(physicsPlugin);
 
       sdf::Plugin sensorsPlugin;
-      sensorsPlugin.SetName("ignition::gazebo::systems::Sensors");
-      sensorsPlugin.SetFilename("ignition-gazebo-sensors-system");
+      sensorsPlugin.SetName("gz::sim::systems::Sensors");
+      sensorsPlugin.SetFilename("gz-sim-sensors-system");
       _world.AddPlugin(sensorsPlugin);
 
       sdf::Plugin userCommandsPlugin;
-      userCommandsPlugin.SetName("ignition::gazebo::systems::UserCommands");
-      userCommandsPlugin.SetFilename("ignition-gazebo-user-commands-system");
+      userCommandsPlugin.SetName("gz::sim::systems::UserCommands");
+      userCommandsPlugin.SetFilename("gz-sim-user-commands-system");
       _world.AddPlugin(userCommandsPlugin);
 
       sdf::Plugin sceneBroadcasterPlugin;
       sceneBroadcasterPlugin.SetName(
-        "ignition::gazebo::systems::SceneBroadcaster");
+        "gz::sim::systems::SceneBroadcaster");
       sceneBroadcasterPlugin.SetFilename(
-        "ignition-gazebo-scene-broadcaster-system");
+        "gz-sim-scene-broadcaster-system");
       _world.AddPlugin(sceneBroadcasterPlugin);
     }
 

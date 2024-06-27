@@ -15,8 +15,8 @@
  *
 */
 
-#ifndef IGNITION_USD_USD_IGNITION_USD_PARSER_JOINT_HH_
-#define IGNITION_USD_USD_IGNITION_USD_PARSER_JOINT_HH_
+#ifndef GZ_USD_USD_GZ_USD_PARSER_JOINT_HH_
+#define GZ_USD_USD_GZ_USD_PARSER_JOINT_HH_
 
 #include <unordered_map>
 #include <string>
@@ -33,13 +33,13 @@
 
 #include "sdf/Joint.hh"
 #include "sdf/Model.hh"
-#include <ignition/usd/config.hh>
-#include "ignition/usd/UsdError.hh"
+#include <gz/usd/config.hh>
+#include "gz/usd/UsdError.hh"
 
 namespace gz
 {
   // Inline bracke to help doxygen filtering.
-  inline namespace IGNITION_USD_VERSION_NAMESPACE {
+  inline namespace GZ_USD_VERSION_NAMESPACE {
   //
   namespace usd
   {

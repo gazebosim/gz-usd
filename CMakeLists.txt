@@ -9,37 +9,39 @@ project(ignition-usd0 VERSION 0.0.1)
 # Find ignition-cmake
 #============================================================================
 # If you get an error at this line, you need to install ignition-cmake
-find_package(ignition-cmake2 REQUIRED)
-
+find_package(gz-cmake3 REQUIRED)
 #--------------------------------------
 # Find ignition-common
-ign_find_package(ignition-common4 REQUIRED COMPONENTS graphics)
-set(IGN_COMMON_VER ${ignition-common4_VERSION_MAJOR})
-
+gz_find_package(gz-common5 REQUIRED COMPONENTS graphics)
+set(GZ_COMMON_VER ${gz-common5_VERSION_MAJOR})
+set(GZ_COMMON_LIB gz-common${GZ_COMMON_VER}::gz-common${GZ_COMMON_VER})
+set(GZ_COMMON_GRAPHICS_LIB gz-common${GZ_COMMON_VER}::graphics)
 #--------------------------------------
 # Find ignition-utils
-ign_find_package(ignition-utils1 REQUIRED COMPONENTS cli)
-set(IGN_UTILS_VER ${ignition-utils1_VERSION_MAJOR})
+gz_find_package(gz-utils2 REQUIRED COMPONENTS cli)
+set(GZ_UTILS_VER ${gz-utils2_VERSION_MAJOR})
+set(GZ_UTILS_LIB gz-utils${GZ_UTILS_VER}::gz-utils${GZ_UTILS_VER})
+set(GZ_UTILS_CLI_LIB gz-utils${GZ_UTILS_VER}::cli)
+find_package(sdformat13 REQUIRED)
+SET(SDFORMAT_VER 13)
 
 ########################################
 # Find PXR
-ign_find_package(pxr REQUIRED)
-
-find_package(sdformat12 REQUIRED)
+gz_find_package(pxr REQUIRED)
 
 #============================================================================
 # Configure the project
 #============================================================================
 set(c++standard 17)
 set (CMAKE_CXX_STANDARD 17)
-ign_configure_project(VERSION_SUFFIX)
+gz_configure_project(VERSION_SUFFIX)
 
 #============================================================================
 # Configure the build
 #============================================================================
-ign_configure_build(QUIT_IF_BUILD_ERRORS)
+gz_configure_build(QUIT_IF_BUILD_ERRORS)
 
 #============================================================================
 # Create package information
 #============================================================================
-ign_create_packages()
+gz_create_packages()

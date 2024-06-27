@@ -32,14 +32,16 @@
 
 #include "Material.hh"
 
-#include "ignition/usd/UsdError.hh"
-#include "ignition/usd/sdf_parser/World.hh"
+#include "gz/usd/UsdError.hh"
+#include "gz/usd/sdf_parser/World.hh"
 #include "sdf/Material.hh"
 #include "sdf/Root.hh"
 #include "test_config.h"
 #include "test_utils.hh"
 #include "../UsdTestUtils.hh"
 #include "../Conversions.hh"
+
+using namespace gz;
 
 void CheckMaterial(
   const pxr::UsdPrim &_prim,

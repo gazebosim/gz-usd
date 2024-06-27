@@ -20,9 +20,9 @@
 
 #include <ignition/utils/cli/CLI.hpp>
 
-#include <ignition/usd/config.hh>
-#include <ignition/usd/usd_parser/Parser.hh>
-#include <ignition/usd/UsdError.hh>
+#include <gz/usd/config.hh>
+#include <gz/usd/usd_parser/Parser.hh>
+#include <gz/usd/UsdError.hh>
 
 //////////////////////////////////////////////////
 /// \brief Enumeration of available commands
@@ -93,7 +93,7 @@ int main(int argc, char** argv)
   app.set_help_all_flag("--help-all", "Show all help");
 
   app.add_flag_callback("--version", [](){
-    std::cout << IGNITION_USD_VERSION_FULL << std::endl;
+    std::cout << GZ_USD_VERSION_FULL << std::endl;
     throw CLI::Success();
   });
 

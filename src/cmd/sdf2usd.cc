@@ -33,7 +33,7 @@
 #pragma pop_macro ("__DEPRECATED")
 
 #include "sdf/sdf.hh"
-#include "ignition/usd/sdf_parser/World.hh"
+#include "gz/usd/sdf_parser/World.hh"
 #include "../sdf_parser/Model.hh"
 #include "../UsdUtils.hh"
 
@@ -351,7 +351,7 @@ int main(int argc, char** argv)
   app.set_help_all_flag("--help-all", "Show all help");
 
   app.add_flag_callback("--version", [](){
-    std::cout << IGNITION_USD_VERSION_FULL << std::endl;
+    std::cout << GZ_USD_VERSION_FULL << std::endl;
     throw CLI::Success();
   });
 

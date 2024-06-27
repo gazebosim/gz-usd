@@ -45,7 +45,7 @@
 namespace gz
 {
 // Inline bracket to help doxygen filtering.
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
@@ -59,7 +59,7 @@ namespace usd
 
     auto usdLinkXform = pxr::UsdGeomXform::Define(_stage, sdfLinkPath);
 
-    ignition::math::Pose3d pose;
+    math::Pose3d pose;
     auto poseErrors = gz::usd::PoseWrtParent(_link, pose);
     if (!poseErrors.empty())
     {
@@ -71,7 +71,7 @@ namespace usd
     if (!poseErrors.empty())
     {
       errors.insert(errors.end(), poseErrors.begin(), poseErrors.end());
-      errors.push_back(UsdError(UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+      errors.push_back(UsdError(UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
             "Unable to set the pose of the link prim corresponding to the "
             "SDF link named [" + _link.Name() + "]"));
       return errors;
@@ -143,7 +143,7 @@ namespace usd
       {
         errors.insert(errors.end(), errorsLink.begin(), errorsLink.end());
         errors.push_back(UsdError(
-          gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+          gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
           "Error parsing visual [" + visual.Name() + "]"));
         return errors;
       }
@@ -162,7 +162,7 @@ namespace usd
         errors.insert(errors.end(), errorsCollision.begin(),
             errorsCollision.end());
         errors.push_back(UsdError(
-          gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+          gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
           "Error parsing collision [" + collision.Name()
           + "] attached to link [" + _link.Name() + "]"));
         return errors;
@@ -181,7 +181,7 @@ namespace usd
       {
         errors.push_back(
             UsdError(
-              gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+              gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
               "Error parsing sensor [" + sensor.Name() + "]"));
         errors.insert(errors.end(), errorsSensor.begin(), errorsSensor.end());
         return errors;
@@ -200,7 +200,7 @@ namespace usd
       {
         errors.push_back(
             UsdError(
-              gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+              gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
               "Error parsing light [" + light.Name() + "]"));
         errors.insert(errors.end(), lightErrors.begin(), lightErrors.end());
       }

@@ -23,7 +23,7 @@
 namespace gz
 {
 // Inline bracke to help doxygen filtering.
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
@@ -59,7 +59,7 @@ namespace usd
     if (_triangles.size() != count * 3)
     {
       errors.push_back(UsdError(
-        UsdErrorCode::USD_TO_IGNITION_USD_POLYGON_PARSING_ERROR,
+        UsdErrorCode::USD_TO_GZ_USD_POLYGON_PARSING_ERROR,
         "Unable to parse the polygon mesh"));
     }
 

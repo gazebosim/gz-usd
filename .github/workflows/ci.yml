@@ -3,9 +3,9 @@ name: Ubuntu
 on: [push, pull_request]
 
 jobs:
-  focal-ci:
+  jammy-ci:
     runs-on: ubuntu-latest
-    name: Ubuntu Focal CI
+    name: Ubuntu Jammy CI
     steps:
       - name: Set env
         run: |
@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Compile and test
         id: ci
-        uses: ignition-tooling/action-ignition-ci@focal
+        uses: gazebo-tooling/action-gz-ci@jammy
         with:
           codecov-enabled: true
           cppcheck-enabled: true

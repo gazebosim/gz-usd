@@ -32,15 +32,15 @@
 
 #include <ignition/common/Util.hh>
 
-#include "ignition/usd/UsdError.hh"
-#include "ignition/usd/usd_parser/USDData.hh"
+#include "gz/usd/UsdError.hh"
+#include "gz/usd/usd_parser/USDData.hh"
 #include "sdf/Joint.hh"
 #include "sdf/JointAxis.hh"
 
 namespace gz
 {
   // Inline bracket to help doxygen filtering.
-  inline namespace IGNITION_USD_VERSION_NAMESPACE {
+  inline namespace GZ_USD_VERSION_NAMESPACE {
   //
   namespace usd
   {
@@ -66,24 +66,24 @@ namespace gz
 
       if (body1.size() > 0)
       {
-        _joint.SetChildLinkName(ignition::common::basename(
+        _joint.SetChildName(ignition::common::basename(
           body1[0].GetString()));
       }
       else if (body0.size() > 0)
       {
-        _joint.SetParentLinkName("world");
-        _joint.SetChildLinkName(ignition::common::basename(
+        _joint.SetParentName("world");
+        _joint.SetChildName(ignition::common::basename(
           body0[0].GetString()));
       }
 
-      if (body0.size() > 0 && _joint.ParentLinkName().empty())
+      if (body0.size() > 0 && _joint.ParentName().empty())
       {
-        _joint.SetParentLinkName(ignition::common::basename(
+        _joint.SetParentName(ignition::common::basename(
           body0[0].GetString()));
       }
       else
       {
-        _joint.SetParentLinkName("world");
+        _joint.SetParentName("world");
       }
 
       std::string primName = _prim.GetName();
@@ -103,16 +103,16 @@ namespace gz
       float maxForce;
       float jointFriction;
       float vel;
-      ignition::math::Quaterniond q1;
-      ignition::math::Quaterniond q2;
+      math::Quaterniond q1;
+      math::Quaterniond q2;
       pxr::GfVec3f trans;
-      ignition::math::Vector3d axisVector;
+      math::Vector3d axisVector;
       sdf::JointAxis jointAxis;
 
       if (_prim.IsA<pxr::UsdPhysicsPrismaticJoint>() ||
           _prim.IsA<pxr::UsdPhysicsRevoluteJoint>())
       {
-        _joint.SetPoseRelativeTo(_joint.ParentLinkName());
+        _joint.SetPoseRelativeTo(_joint.ParentName());
 
         pxr::TfToken axis;
         if (_prim.IsA<pxr::UsdPhysicsPrismaticJoint>())
@@ -126,15 +126,15 @@ namespace gz
 
         if (axis == pxr::UsdGeomTokens->x)
         {
-          axisVector = ignition::math::Vector3d(1, 0, 0);
+          axisVector = math::Vector3d(1, 0, 0);
         }
         else if (axis == pxr::UsdGeomTokens->y)
         {
-          axisVector = ignition::math::Vector3d(0, 1, 0);
+          axisVector = math::Vector3d(0, 1, 0);
         }
         else if (axis == pxr::UsdGeomTokens->z)
         {
-          axisVector = ignition::math::Vector3d(0, 0, 1);
+          axisVector = math::Vector3d(0, 0, 1);
         }
 
         pxr::GfVec3f localPose0, localPose1;
@@ -148,12 +148,12 @@ namespace gz
 
         trans = (localPose0 + localPose1) * metersPerUnit;
 
-        q1 = ignition::math::Quaterniond(
+        q1 = math::Quaterniond(
           localRot0.GetReal(),
           localRot0.GetImaginary()[0],
           localRot0.GetImaginary()[1],
           localRot0.GetImaginary()[2]);
-        q2 = ignition::math::Quaterniond(
+        q2 = math::Quaterniond(
           localRot1.GetReal(),
           localRot1.GetImaginary()[0],
           localRot1.GetImaginary()[1],
@@ -214,7 +214,7 @@ namespace gz
         if (!errorsAxis.empty())
         {
           errors.emplace_back(UsdError(
-            gz::usd::UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
+            gz::usd::UsdErrorCode::USD_TO_GZ_USD_PARSING_ERROR,
               "Errors encountered when setting xyz of prismatic "
               "joint axis: [" + std::string(_prim.GetName()) + "]"));
           for (const auto & error : errorsAxis)
@@ -223,9 +223,9 @@ namespace gz
         }
 
         _joint.SetRawPose(
-          ignition::math::Pose3d(
-            ignition::math::Vector3d(trans[0], trans[1], trans[2]),
-            ignition::math::Quaterniond(q1 * q2)));
+          math::Pose3d(
+            math::Vector3d(trans[0], trans[1], trans[2]),
+            math::Quaterniond(q1 * q2)));
 
         jointAxis.SetLower(lowerLimit * metersPerUnit);
         jointAxis.SetUpper(upperLimit * metersPerUnit);
@@ -244,7 +244,7 @@ namespace gz
         if (!errorsAxis.empty())
         {
           errors.emplace_back(UsdError(
-            gz::usd::UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
+            gz::usd::UsdErrorCode::USD_TO_GZ_USD_PARSING_ERROR,
               "Errors encountered when setting xyz of revolute "
               "joint axis: [" + std::string(_prim.GetName()) + "]"));
           for (const auto & error : errorsAxis)
@@ -252,12 +252,12 @@ namespace gz
           return errors;
         }
 
-        _joint.SetRawPose(ignition::math::Pose3d(
-            ignition::math::Vector3d(trans[0], trans[1], trans[2]),
+        _joint.SetRawPose(math::Pose3d(
+            math::Vector3d(trans[0], trans[1], trans[2]),
             q1));
 
-        jointAxis.SetLower(IGN_DTOR(lowerLimit));
-        jointAxis.SetUpper(IGN_DTOR(upperLimit));
+        jointAxis.SetLower(GZ_DTOR(lowerLimit));
+        jointAxis.SetUpper(GZ_DTOR(upperLimit));
         _joint.SetAxis(0, jointAxis);
 
         return errors;
@@ -270,7 +270,7 @@ namespace gz
       else
       {
         errors.emplace_back(UsdError(
-              gz::usd::UsdErrorCode::USD_TO_IGNITION_USD_PARSING_ERROR,
+              gz::usd::UsdErrorCode::USD_TO_GZ_USD_PARSING_ERROR,
               "Unable to create a SDF joint from USD prim [" +
               std::string(_prim.GetName()) +
               "] because the prim is not a USD joint."));

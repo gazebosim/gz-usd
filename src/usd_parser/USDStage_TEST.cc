@@ -21,8 +21,8 @@
 
 #include <ignition/utils/ExtraTestMacros.hh>
 
-#include <ignition/usd/usd_parser/USDStage.hh>
-#include <ignition/usd/UsdError.hh>
+#include <gz/usd/usd_parser/USDStage.hh>
+#include <gz/usd/UsdError.hh>
 
 #include "test_config.h"
 #include "test_utils.hh"

@@ -23,7 +23,7 @@
 
 namespace gz
 {
-  inline namespace IGNITION_USD_VERSION_NAMESPACE {
+  inline namespace GZ_USD_VERSION_NAMESPACE {
   //
   namespace usd
   {

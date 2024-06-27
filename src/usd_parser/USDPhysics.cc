@@ -27,7 +27,7 @@
 
 namespace gz
 {
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 namespace usd
 {
   void ParseUSDPhysicsScene(
@@ -35,16 +35,16 @@ namespace usd
     sdf::World &_world,
     double _metersPerUnit)
   {
-    ignition::math::Vector3d worldGravity{0, 0, -1};
+    math::Vector3d worldGravity{0, 0, -1};
     float magnitude {9.8f};
     const auto gravityAttr = _scene.GetGravityDirectionAttr();
     if (gravityAttr)
     {
       pxr::GfVec3f gravity;
       gravityAttr.Get(&gravity);
-      if (!ignition::math::equal(0.0f, gravity[0]) &&
-          !ignition::math::equal(0.0f, gravity[1]) &&
-          !ignition::math::equal(0.0f, gravity[2]))
+      if (!math::equal(0.0f, gravity[0]) &&
+          !math::equal(0.0f, gravity[1]) &&
+          !math::equal(0.0f, gravity[2]))
       {
         worldGravity[0] = gravity[0];
         worldGravity[1] = gravity[1];

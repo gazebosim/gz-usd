@@ -53,7 +53,7 @@
 namespace gz
 {
 // Inline bracke to help doxygen filtering.
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
@@ -71,17 +71,17 @@ namespace usd
   {
     gz::usd::UsdErrors errors;
 
-    ignition::math::Pose3d parentToJoint;
-    if (_joint.ParentLinkName() == "world")
+    math::Pose3d parentToJoint;
+    if (_joint.ParentName() == "world")
     {
-      ignition::math::Pose3d modelToJoint;
+      math::Pose3d modelToJoint;
       auto poseErrors = usd::PoseWrtParent(_joint, modelToJoint);
       if (!poseErrors.empty())
         return poseErrors;
 
       // it is assumed the _parentModel's parent is the world because nested
       // models are not yet supported (see issue #845)
-      ignition::math::Pose3d worldToModel;
+      math::Pose3d worldToModel;
       poseErrors = usd::PoseWrtParent(_parentModel, worldToModel);
       if (!poseErrors.empty())
         return poseErrors;
@@ -91,28 +91,28 @@ namespace usd
     else
     {
       auto poseResolutionErrors =
-        _joint.SemanticPose().Resolve(parentToJoint, _joint.ParentLinkName());
+        _joint.SemanticPose().Resolve(parentToJoint, _joint.ParentName());
       if (!poseResolutionErrors.empty())
       {
         errors.push_back(UsdError(
               sdf::Error(sdf::ErrorCode::POSE_RELATIVE_TO_INVALID,
               "Unable to get the pose of joint [" + _joint.Name() +
-              "] w.r.t. its parent link [" + _joint.ParentLinkName() + "].")));
+              "] w.r.t. its parent link [" + _joint.ParentName() + "].")));
         for (const auto &e : poseResolutionErrors)
           errors.push_back(UsdError(e));
         return errors;
       }
     }
 
-    ignition::math::Pose3d childToJoint;
+    math::Pose3d childToJoint;
     auto poseResolutionErrors = _joint.SemanticPose().Resolve(childToJoint,
-        _joint.ChildLinkName());
+        _joint.ChildName());
     if (!poseResolutionErrors.empty())
     {
       errors.push_back(UsdError(
           sdf::Error(sdf::ErrorCode::POSE_RELATIVE_TO_INVALID,
             "Unable to get the pose of joint [" + _joint.Name() +
-            "] w.r.t. its child [" + _joint.ChildLinkName() + "].")));
+            "] w.r.t. its child [" + _joint.ChildName() + "].")));
       for (const auto &e : poseResolutionErrors)
         errors.push_back(UsdError(e));
       return errors;
@@ -132,22 +132,22 @@ namespace usd
 
     const auto axis = _joint.Axis();
     // TODO(anyone) Review this logic which converts a Y axis into a X axis.
-    if (axis && (axis->Xyz() == ignition::math::Vector3d::UnitY))
+    if (axis && (axis->Xyz() == math::Vector3d::UnitY))
     {
       if (auto jointRevolute = pxr::UsdPhysicsRevoluteJoint(_jointPrim))
       {
-        const ignition::math::Quaterniond fixRotation(0, 0, IGN_DTOR(90));
-        ignition::math::Quaterniond parentRotationTmp = parentToJoint.Rot();
-        ignition::math::Quaterniond childRotationTmp = childToJoint.Rot();
+        const math::Quaterniond fixRotation(0, 0, GZ_DTOR(90));
+        math::Quaterniond parentRotationTmp = parentToJoint.Rot();
+        math::Quaterniond childRotationTmp = childToJoint.Rot();
 
-        if (parentRotationTmp == ignition::math::Quaterniond::Identity)
+        if (parentRotationTmp == math::Quaterniond::Identity)
         {
           parentRotationTmp = fixRotation * parentRotationTmp;
         }
         else
         {
-          parentRotationTmp = ignition::math::Quaterniond(IGN_DTOR(-90),
-              IGN_PI, IGN_PI) * parentRotationTmp;
+          parentRotationTmp = math::Quaterniond(GZ_DTOR(-90),
+              GZ_PI, GZ_PI) * parentRotationTmp;
         }
 
         childRotationTmp = fixRotation * childRotationTmp;
@@ -202,18 +202,18 @@ namespace usd
 
     const auto axis = _joint.Axis();
 
-    if (axis->Xyz() == ignition::math::Vector3d::UnitX ||
-        axis->Xyz() == -ignition::math::Vector3d::UnitX)
+    if (axis->Xyz() == math::Vector3d::UnitX ||
+        axis->Xyz() == -math::Vector3d::UnitX)
     {
       usdJoint.CreateAxisAttr().Set(pxr::TfToken("X"));
     }
-    else if (axis->Xyz() == ignition::math::Vector3d::UnitY ||
-        axis->Xyz() == -ignition::math::Vector3d::UnitY)
+    else if (axis->Xyz() == math::Vector3d::UnitY ||
+        axis->Xyz() == -math::Vector3d::UnitY)
     {
       usdJoint.CreateAxisAttr().Set(pxr::TfToken("Y"));
     }
-    else if (axis->Xyz() == ignition::math::Vector3d::UnitZ ||
-        axis->Xyz() == -ignition::math::Vector3d::UnitZ)
+    else if (axis->Xyz() == math::Vector3d::UnitZ ||
+        axis->Xyz() == -math::Vector3d::UnitZ)
     {
       usdJoint.CreateAxisAttr().Set(pxr::TfToken("Z"));
     }
@@ -230,9 +230,9 @@ namespace usd
 
     // Revolute joint limits in SDF are in radians, but USD expects degrees
     // of C++ type float
-    auto sdfLimitDegrees = static_cast<float>(IGN_RTOD(axis->Lower()));
+    auto sdfLimitDegrees = static_cast<float>(GZ_RTOD(axis->Lower()));
     usdJoint.CreateLowerLimitAttr().Set(sdfLimitDegrees);
-    sdfLimitDegrees = static_cast<float>(IGN_RTOD(axis->Upper()));
+    sdfLimitDegrees = static_cast<float>(GZ_RTOD(axis->Upper()));
     usdJoint.CreateUpperLimitAttr().Set(sdfLimitDegrees);
 
     pxr::UsdPrim usdJointPrim = _stage->GetPrimAtPath(pxr::SdfPath(_path));
@@ -277,18 +277,18 @@ namespace usd
 
     const auto axis = _joint.Axis();
 
-    if (axis->Xyz() == ignition::math::Vector3d::UnitX ||
-        axis->Xyz() == -ignition::math::Vector3d::UnitX)
+    if (axis->Xyz() == math::Vector3d::UnitX ||
+        axis->Xyz() == -math::Vector3d::UnitX)
     {
       usdJoint.CreateAxisAttr().Set(pxr::TfToken("X"));
     }
-    else if (axis->Xyz() == ignition::math::Vector3d::UnitY ||
-        axis->Xyz() == -ignition::math::Vector3d::UnitY)
+    else if (axis->Xyz() == math::Vector3d::UnitY ||
+        axis->Xyz() == -math::Vector3d::UnitY)
     {
       usdJoint.CreateAxisAttr().Set(pxr::TfToken("Y"));
     }
-    else if (axis->Xyz() == ignition::math::Vector3d::UnitZ ||
-        axis->Xyz() == -ignition::math::Vector3d::UnitZ)
+    else if (axis->Xyz() == math::Vector3d::UnitZ ||
+        axis->Xyz() == -math::Vector3d::UnitZ)
     {
       usdJoint.CreateAxisAttr().Set(pxr::TfToken("Z"));
     }
@@ -322,25 +322,25 @@ namespace usd
     // the joint's parent may be "world". If this is the case, the joint's
     // parent should be set to the world prim, not a link
     auto parentLinkPath = _worldPath;
-    if (_joint.ParentLinkName() != "world")
+    if (_joint.ParentName() != "world")
     {
-      const auto it = _linkToUsdPath.find(_joint.ParentLinkName());
+      const auto it = _linkToUsdPath.find(_joint.ParentName());
       if (it == _linkToUsdPath.end())
       {
         errors.push_back(UsdError(
           gz::usd::UsdErrorCode::INVALID_PRIM_PATH,
-          "Unable to find a USD path for link [" + _joint.ParentLinkName() +
+          "Unable to find a USD path for link [" + _joint.ParentName() +
           "], which is the parent link of joint [" + _joint.Name() + "]."));
         return errors;
       }
       parentLinkPath = it->second;
     }
 
-    const auto it = _linkToUsdPath.find(_joint.ChildLinkName());
+    const auto it = _linkToUsdPath.find(_joint.ChildName());
     if (it == _linkToUsdPath.end())
     {
       errors.push_back(UsdError(gz::usd::UsdErrorCode::INVALID_PRIM_PATH,
-            "Unable to find a USD path for link [" + _joint.ParentLinkName() +
+            "Unable to find a USD path for link [" + _joint.ParentName() +
             "], which is the child link of joint [" + _joint.Name() + "]."));
       return errors;
     }

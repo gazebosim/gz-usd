@@ -59,28 +59,28 @@
 
 #include "polygon_helper.hh"
 
-#include "ignition/usd/usd_parser/USDTransforms.hh"
-#include "ignition/usd/UsdError.hh"
+#include "gz/usd/usd_parser/USDTransforms.hh"
+#include "gz/usd/UsdError.hh"
 #include "../Conversions.hh"
 
 namespace gz
 {
 // Inline bracket to help doxygen filtering.
-inline namespace IGNITION_USD_VERSION_NAMESPACE {
+inline namespace GZ_USD_VERSION_NAMESPACE {
 //
 namespace usd
 {
 //////////////////////////////////////////////////
 void GetInertial(
   const pxr::UsdPrim &_prim,
-  ignition::math::Inertiald &_inertial)
+  math::Inertiald &_inertial)
 {
   float mass;
   pxr::GfVec3f centerOfMass;
   pxr::GfVec3f diagonalInertia;
   pxr::GfQuatf principalAxes;
 
-  ignition::math::MassMatrix3d massMatrix;
+  math::MassMatrix3d massMatrix;
 
   if (_prim.HasAPI<pxr::UsdPhysicsRigidBodyAPI>())
   {
@@ -125,15 +125,15 @@ void GetInertial(
       // PrincipalAxesOffset: see
       // https://github.com/ignitionrobotics/sdformat/pull/902#discussion_r840905534
       massMatrix.SetDiagonalMoments(
-        ignition::math::Vector3d(
+        math::Vector3d(
           diagonalInertia[0],
           diagonalInertia[1],
           diagonalInertia[2]));
 
-      _inertial.SetPose(ignition::math::Pose3d(
-          ignition::math::Vector3d(
+      _inertial.SetPose(math::Pose3d(
+          math::Vector3d(
             centerOfMass[0], centerOfMass[1], centerOfMass[2]),
-          ignition::math::Quaterniond(1.0, 0, 0, 0)));
+          math::Quaterniond(1.0, 0, 0, 0)));
 
       _inertial.SetMassMatrix(massMatrix);
     }
@@ -210,7 +210,7 @@ int ParseMeshSubGeom(const pxr::UsdPrim &_prim,
   sdf::Link *_link,
   ignition::common::SubMesh &_subMesh,
   sdf::Mesh &_meshGeom,
-  ignition::math::Vector3d &_scale,
+  math::Vector3d &_scale,
   const USDData &_usdData)
 {
   int numSubMeshes = 0;
@@ -291,8 +291,8 @@ int ParseMeshSubGeom(const pxr::UsdPrim &_prim,
       visSubset.SetName("mesh_subset_" + std::to_string(numSubMeshes));
       visSubset.SetGeom(geomSubset);
 
-      ignition::math::Pose3d pose;
-      ignition::math::Vector3d scale(1, 1, 1);
+      math::Pose3d pose;
+      math::Vector3d scale(1, 1, 1);
       std::string linkName = pxr::TfStringify(_prim.GetPath());
       auto found = linkName.find(_link->Name());
       if (found != std::string::npos)
@@ -324,9 +324,9 @@ gz::usd::UsdErrors ParseMesh(
   sdf::Link *_link,
   sdf::Visual &_vis,
   sdf::Geometry &_geom,
-  ignition::math::Vector3d &_scale,
+  math::Vector3d &_scale,
   const USDData &_usdData,
-  ignition::math::Pose3d &_pose)
+  math::Pose3d &_pose)
 {
   gz::usd::UsdErrors errors;
 
@@ -359,7 +359,7 @@ gz::usd::UsdErrors ParseMesh(
     faceVertexIndices, faceVertexCounts, indexes);
   if (!errors.empty())
   {
-    errors.emplace_back(UsdErrorCode::USD_TO_IGNITION_USD_POLYGON_PARSING_ERROR,
+    errors.emplace_back(UsdErrorCode::USD_TO_GZ_USD_POLYGON_PARSING_ERROR,
       "Unable to parse polygon in path [" + pxr::TfStringify(_prim.GetPath())
       + "]");
     return errors;
@@ -377,8 +377,8 @@ gz::usd::UsdErrors ParseMesh(
 
   for (const auto & point : points)
   {
-    ignition::math::Vector3d v =
-      ignition::math::Vector3d(point[0], point[1], point[2]) * metersPerUnit;
+    math::Vector3d v =
+      math::Vector3d(point[0], point[1], point[2]) * metersPerUnit;
     subMesh.AddVertex(v);
   }
 
@@ -390,8 +390,8 @@ gz::usd::UsdErrors ParseMesh(
   sdf::Mesh meshGeom;
   _geom.SetType(sdf::GeometryType::MESH);
 
-  ignition::math::Pose3d pose;
-  ignition::math::Vector3d scale(1, 1, 1);
+  math::Pose3d pose;
+  math::Vector3d scale(1, 1, 1);
   std::string linkName = pxr::TfStringify(_prim.GetPath());
   auto found = linkName.find(_link->Name());
   if (found != std::string::npos)
@@ -472,7 +472,7 @@ gz::usd::UsdErrors ParseMesh(
 /// \param[in] _metersPerUnit meter per unit of the stage
 void ParseCube(const pxr::UsdPrim &_prim,
   sdf::Geometry &_geom,
-  const ignition::math::Vector3d &_scale,
+  const math::Vector3d &_scale,
   double _metersPerUnit)
 {
   double size;
@@ -483,7 +483,7 @@ void ParseCube(const pxr::UsdPrim &_prim,
 
   sdf::Box box;
   _geom.SetType(sdf::GeometryType::BOX);
-  box.SetSize(ignition::math::Vector3d(
+  box.SetSize(math::Vector3d(
     size * _scale.X(),
     size * _scale.Y(),
     size * _scale.Z()));
@@ -499,7 +499,7 @@ void ParseCube(const pxr::UsdPrim &_prim,
 /// \param[in] _metersPerUnit meter per unit of the stage
 void ParseSphere(const pxr::UsdPrim &_prim,
   sdf::Geometry &_geom,
-  const ignition::math::Vector3d &_scale,
+  const math::Vector3d &_scale,
   double _metersPerUnit)
 {
   double radius;
@@ -521,7 +521,7 @@ void ParseSphere(const pxr::UsdPrim &_prim,
 void ParseCylinder(
   const pxr::UsdPrim &_prim,
   sdf::Geometry &_geom,
-  const ignition::math::Vector3d &_scale,
+  const math::Vector3d &_scale,
   double _metersPerUnit)
 {
   auto variant_cylinder = pxr::UsdGeomCylinder(_prim);
@@ -545,7 +545,7 @@ gz::usd::UsdErrors ParseUSDLinks(
   const std::string &_nameLink,
   std::optional<sdf::Link> &_link,
   const USDData &_usdData,
-  ignition::math::Vector3d &_scale)
+  math::Vector3d &_scale)
 {
   gz::usd::UsdErrors errors;
   const std::string primNameStr = _prim.GetPath().GetName();
@@ -589,8 +589,8 @@ gz::usd::UsdErrors ParseUSDLinks(
       }
     }
 
-    ignition::math::Pose3d pose;
-    ignition::math::Vector3d scale(1, 1, 1);
+    math::Pose3d pose;
+    math::Vector3d scale(1, 1, 1);
     GetTransform(tmpPrim, _usdData, pose, scale, "");
     // This is a special case when a geometry is defined in the higher level
     // of the path. we should only set the position if the path at least has
@@ -608,13 +608,13 @@ gz::usd::UsdErrors ParseUSDLinks(
     _link->SetName(ignition::common::basename(primPathStr));
   }
 
-  ignition::math::Inertiald noneInertial = {{1.0,
-            ignition::math::Vector3d::One, ignition::math::Vector3d::Zero},
-            ignition::math::Pose3d::Zero};
+  math::Inertiald noneInertial = {{1.0,
+            math::Vector3d::One, math::Vector3d::Zero},
+            math::Pose3d::Zero};
   const auto inertial = _link->Inertial();
   if (inertial == noneInertial)
   {
-    ignition::math::Inertiald newInertial;
+    math::Inertiald newInertial;
     GetInertial(_prim, newInertial);
     _link->SetInertial(newInertial);
   }
@@ -673,13 +673,13 @@ gz::usd::UsdErrors ParseUSDLinks(
       }
       else if (_prim.IsA<pxr::UsdGeomMesh>())
       {
-        ignition::math::Pose3d poseTmp;
+        math::Pose3d poseTmp;
         errors = ParseMesh(
           _prim, &_link.value(), vis, geom, _scale, _usdData, poseTmp);
         if (!errors.empty())
         {
           errors.emplace_back(UsdError(
-          gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+          gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
             "Error parsing mesh"));
           return errors;
         }
@@ -706,8 +706,8 @@ gz::usd::UsdErrors ParseUSDLinks(
       col.SetName(collisionName);
       sdf::Geometry colGeom;
 
-      ignition::math::Pose3d poseCol;
-      ignition::math::Vector3d scaleCol(1, 1, 1);
+      math::Pose3d poseCol;
+      math::Vector3d scaleCol(1, 1, 1);
       std::string linkName = pxr::TfStringify(_prim.GetPath());
       auto found = linkName.find(_link->Name());
       if (found != std::string::npos)
@@ -741,13 +741,13 @@ gz::usd::UsdErrors ParseUSDLinks(
       else if (_prim.IsA<pxr::UsdGeomMesh>())
       {
         sdf::Visual visTmp;
-        ignition::math::Pose3d poseTmp;
+        math::Pose3d poseTmp;
         errors = ParseMesh(
           _prim, &_link.value(), visTmp, colGeom, scaleCol, _usdData, poseTmp);
         if (!errors.empty())
         {
           errors.emplace_back(UsdError(
-          gz::usd::UsdErrorCode::IGNITION_USD_TO_USD_PARSING_ERROR,
+          gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
             "Error parsing mesh"));
           return errors;
         }
@@ -758,11 +758,11 @@ gz::usd::UsdErrors ParseUSDLinks(
       {
         sdf::Plane plane;
         colGeom.SetType(sdf::GeometryType::PLANE);
-        plane.SetSize(ignition::math::Vector2d(100, 100));
+        plane.SetSize(math::Vector2d(100, 100));
         colGeom.SetPlaneShape(plane);
 
-        ignition::math::Pose3d pose;
-        ignition::math::Vector3d scale(1, 1, 1);
+        math::Pose3d pose;
+        math::Vector3d scale(1, 1, 1);
         GetTransform(
           _prim, _usdData, pose, scale, pxr::TfStringify(_prim.GetPath()));
         col.SetRawPose(pose);

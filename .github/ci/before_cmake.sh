@@ -9,7 +9,11 @@ cd /tmp
 # check that we can compile USD from sources (only Focal)
 # see https://github.com/ignitionrobotics/sdformat/issues/869
 return_code=0
-if [ "$(lsb_release -r -s)" != "20.04" ]; then
+if [ "$(lsb_release -r -s)" == "20.04" ]; then
+  USD_VERSION="21.11"
+elif [ "$(lsb_release -r -s)" == "22.04" ]; then
+  USD_VERSION="22.11"
+else
   return_code=$(($return_code + 1))
 fi
 
@@ -26,11 +30,23 @@ then
   mkdir usd_binaries
   cd usd_binaries
 
-  apt-get install libboost-all-dev libtbb-dev p7zip-full -y
+  apt-get install libboost-all-dev p7zip-full -y
 
-  wget https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v21.11.zip
-  unzip v21.11.zip
-  cd USD-21.11
+  wget https://github.com/oneapi-src/oneTBB/archive/refs/tags/2019_U6.tar.gz
+  tar -xvf 2019_U6.tar.gz
+  cd oneTBB-2019_U6/
+  make -j 2
+  mkdir -p /tmp/install_tbb/lib
+  mkdir -p /tmp/install_tbb/include
+  cp build/*_release/libtbb* /tmp/install_tbb/lib
+  cp -r include/serial /tmp/install_tbb/include/
+  cp -r include/tbb /tmp/install_tbb/include/
+
+  cd ..
+
+  wget https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v$USD_VERSION.zip
+  unzip v$USD_VERSION.zip
+  cd OpenUSD-$USD_VERSION
   mkdir build
   cd build
 
@@ -40,6 +56,7 @@ then
     -DPXR_ENABLE_PYTHON_SUPPORT=OFF \
     -DBUILD_SHARED_LIBS=ON  \
     -DTBB_USE_DEBUG_BUILD=OFF  \
+    -DTBB_ROOT=/tmp/install_tbb \
     -DPXR_BUILD_DOCUMENTATION=OFF  \
     -DPXR_BUILD_TESTS=OFF  \
     -DPXR_BUILD_EXAMPLES=OFF  \

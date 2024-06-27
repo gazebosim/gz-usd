@@ -15,19 +15,19 @@
  *
 */
 
-#ifndef IGNITION_USD_USD_USD_PARSER_PARSER_HH
-#define IGNITION_USD_USD_USD_PARSER_PARSER_HH
+#ifndef GZ_USD_USD_USD_PARSER_PARSER_HH
+#define GZ_USD_USD_USD_PARSER_PARSER_HH
 
 #include <string>
 
-#include <ignition/usd/config.hh>
-#include "ignition/usd/Export.hh"
-#include "ignition/usd/UsdError.hh"
+#include <gz/usd/config.hh>
+#include "gz/usd/Export.hh"
+#include "gz/usd/UsdError.hh"
 
 namespace gz
 {
   // Inline bracket to help doxygen filtering.
-  inline namespace IGNITION_USD_VERSION_NAMESPACE {
+  inline namespace GZ_USD_VERSION_NAMESPACE {
   //
   namespace usd
   {
@@ -40,7 +40,7 @@ namespace gz
     /// Each UsdError includes an error code and message. An empty vector
     /// indicates no error occurred when parsing the USD file to its SDF
     /// representation.
-    UsdErrors IGNITION_USD_VISIBLE parseUSDFile(
+    UsdErrors GZ_USD_VISIBLE parseUSDFile(
       const std::string &_inputFilenameUsd,
       const std::string &_outputFilenameSdf,
       bool _useGazeboPlugins = true);

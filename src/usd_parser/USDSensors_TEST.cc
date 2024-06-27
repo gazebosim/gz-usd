@@ -38,7 +38,9 @@
 #include "sdf/Sensor.hh"
 #include "sdf/Camera.hh"
 #include "sdf/Lidar.hh"
-#include "ignition/usd/usd_parser/USDData.hh"
+#include "gz/usd/usd_parser/USDData.hh"
+
+using namespace gz;
 
 /////////////////////////////////////////////////
 TEST(USDJointTest, JointTest)
@@ -59,7 +61,7 @@ TEST(USDJointTest, JointTest)
     cameraPrim, usdData);
 
   EXPECT_EQ(sdf::SensorType::CAMERA, sensorCamera.Type());
-  EXPECT_EQ(ignition::math::Pose3d(-1.83617, 0, 0.773532, 0, 0.267035, -0),
+  EXPECT_EQ(math::Pose3d(-1.83617, 0, 0.773532, 0, 0.267035, -0),
             sensorCamera.RawPose());
   auto cameraSDF = sensorCamera.CameraSensor();
   ASSERT_TRUE(cameraSDF);
