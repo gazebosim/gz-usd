@@ -107,6 +107,7 @@ namespace usd
     auto lightAPI = pxr::UsdLuxLightAPI(lightPrim);
     lightAPI.CreateIntensityAttr().Set(usdLightIntensity);
 
+    lightAPI.CreateNormalizeAttr().Set(true);
     // TODO(adlarkin) Other things to look at (there may be more):
     // * exposure - I don't think SDF has this, but USD does. See the
     //    UsdLightAPI::GetExposureAttr method

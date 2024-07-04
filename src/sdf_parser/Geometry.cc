@@ -205,6 +205,7 @@ namespace usd
   {
     gz::usd::UsdErrors errors;
 
+    pxr::UsdGeomXform::Define(_stage, pxr::SdfPath(_path));
     ignition::common::URI uri(_geometry.MeshShape()->Uri());
     std::string fullName;
 
@@ -245,6 +246,8 @@ namespace usd
     }
     else
     {
+      auto parent = common::parentPath(_geometry.MeshShape()->FilePath());
+      common::systemPaths()->AddFilePaths(parent);
       fullName =
         ignition::common::findFile(_geometry.MeshShape()->Uri());
     }
@@ -429,7 +432,7 @@ namespace usd
       // TODO(adlarkin) update this call in sdf13 to avoid casting the index to
       // an int:
       // https://github.com/ignitionrobotics/ign-common/pull/319
-      int materialIndex = subMesh->GetMaterialIndex().value();
+      int materialIndex = subMesh->GetMaterialIndex().value_or(-1);
       if (materialIndex != -1)
       {
         const auto material = ignMesh->MaterialByIndex(materialIndex).get();
@@ -458,22 +461,22 @@ namespace usd
           return errors;
         }
 
-        auto materialUSD = pxr::UsdShadeMaterial(materialPrim);
-        if (materialUSD &&
-            (materialSdf.Emissive() != math::Color(0, 0, 0, 1)
-             || materialSdf.Specular() != math::Color(0, 0, 0, 1)
-             || materialSdf.PbrMaterial()))
-        {
-          pxr::UsdShadeMaterialBindingAPI(usdMesh).Bind(materialUSD);
-        }
-        else if (!materialUSD)
-        {
-          errors.push_back(UsdError(
-              gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR,
-              "The prim at path [" + materialPath.GetString()
-              + "] is not a pxr::UsdShadeMaterial object."));
-          return errors;
-        }
+        /* auto materialUSD = pxr::UsdShadeMaterial(materialPrim); */
+        /* if (materialUSD && */
+        /*     (materialSdf.Emissive() != math::Color(0, 0, 0, 1) */
+        /*      || materialSdf.Specular() != math::Color(0, 0, 0, 1) */
+        /*      || materialSdf.PbrMaterial())) */
+        /* { */
+        /*   pxr::UsdShadeMaterialBindingAPI(usdMesh).Bind(materialUSD); */
+        /* } */
+        /* else if (!materialUSD) */
+        /* { */
+        /*   errors.push_back(UsdError( */
+        /*       gz::usd::UsdErrorCode::GZ_USD_TO_USD_PARSING_ERROR, */
+        /*       "The prim at path [" + materialPath.GetString() */
+        /*       + "] is not a pxr::UsdShadeMaterial object.")); */
+        /*   return errors; */
+        /* } */
       }
 
       pxr::UsdGeomXformCommonAPI xform(usdMesh);

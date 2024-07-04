@@ -17,6 +17,7 @@
 
 #include "Visual.hh"
 
+#include <gz/math/Pose3.hh>
 #include <string>
 
 #include <ignition/math/Pose3.hh>
