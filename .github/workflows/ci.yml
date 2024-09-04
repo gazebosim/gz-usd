@@ -19,6 +19,6 @@ jobs:
         id: ci
         uses: gazebo-tooling/action-gz-ci@noble
         with:
-          codecov-enabled: true
+          codecov-enabled: false
           cppcheck-enabled: true
           cpplint-enabled: true
