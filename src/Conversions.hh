@@ -44,7 +44,8 @@ namespace gz
     /// material.
     /// \param[in] _in SDF material.
     /// \param[out] _out The Ignition Common Material.
-    void GZ_USD_VISIBLE convert(const sdf::Material &_in, gz::common::Material &_out);
+    void GZ_USD_VISIBLE
+    convert(const sdf::Material &_in, gz::common::Material &_out);
   }
   }
 }
