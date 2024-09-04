@@ -24,7 +24,7 @@
 #pragma pop_macro ("__DEPRECATED")
 
 #include <gz/usd/config.hh>
-#include "gz/usd/Export.hh"
+#include "gz/gz_usd/Export.hh"
 
 #include "sdf/World.hh"
 
@@ -39,7 +39,7 @@ namespace gz
     /// \param[in] _scene USD physics scene to extract attributes from
     /// \param[out] _world World interface where the data is placed
     /// \param[in] _metersPerUnit meters per unit in the USD
-    void ParseUSDPhysicsScene(
+    void GZ_USD_VISIBLE ParseUSDPhysicsScene(
       const pxr::UsdPhysicsScene &_scene,
       sdf::World &_world,
       double _metersPerUnit);

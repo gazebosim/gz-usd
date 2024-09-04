@@ -52,7 +52,7 @@ namespace gz
     /// Each UsdError includes an error code and message. An empty vector
     /// indicates no errors occurred when parsing _link to its USD
     /// representation.
-    gz::usd::UsdErrors ParseSdfLink(const sdf::Link &_link,
+    gz::usd::UsdErrors GZ_USD_VISIBLE ParseSdfLink(const sdf::Link &_link,
         pxr::UsdStageRefPtr &_stage, const std::string &_path,
         bool _rigidBody);
   }

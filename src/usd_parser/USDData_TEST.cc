@@ -17,10 +17,10 @@
 
 #include <gtest/gtest.h>
 
-#include <ignition/common/Filesystem.hh>
-#include <ignition/common/Util.hh>
+#include <gz/common/Filesystem.hh>
+#include <gz/common/Util.hh>
 
-#include <ignition/utils/ExtraTestMacros.hh>
+#include <gz/utils/ExtraTestMacros.hh>
 
 #include <gz/usd/usd_parser/USDData.hh>
 #include <gz/usd/UsdError.hh>
@@ -42,15 +42,15 @@ TEST(USDData, Constructor)
   EXPECT_EQ(1u, errors.size());
 
   // Add test/usd directory to find some resources
-  auto systemPaths = ignition::common::systemPaths();
+  auto systemPaths = gz::common::systemPaths();
   systemPaths->AddFilePaths(gz::testing::TestFile("usd"));
 
   {
     gz::testing::ScopeExit removeCopiedMaterials(
         []
         {
-          ignition::common::removeAll(
-            ignition::common::joinPaths(ignition::common::cwd(), "materials"));
+          gz::common::removeAll(
+            gz::common::joinPaths(gz::common::cwd(), "materials"));
         });
 
     // Open a valid USD file

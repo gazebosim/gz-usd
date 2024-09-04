@@ -47,7 +47,7 @@ namespace gz
     /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
     /// Each UsdErrorincludes an error code and message. An empty vector
     /// indicates no error.
-    gz::usd::UsdErrors ParseMaterial(const pxr::UsdPrim &_prim,
+    gz::usd::UsdErrors GZ_USD_VISIBLE ParseMaterial(const pxr::UsdPrim &_prim,
         sdf::Material &_material);
 }
 }

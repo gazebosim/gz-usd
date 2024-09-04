@@ -28,7 +28,7 @@
 #include <pxr/usd/usd/stage.h>
 #pragma pop_macro ("__DEPRECATED")
 
-#include <ignition/math/Pose3.hh>
+#include <gz/math/Pose3.hh>
 
 #include "test_config.h"
 #include "test_utils.hh"
@@ -63,8 +63,8 @@ TEST(USDJointTest, JointTest)
   EXPECT_EQ(0u, errors.size());
   EXPECT_EQ(sdf::JointType::REVOLUTE, joint1.Type());
   EXPECT_EQ("upper_joint", joint1.Name());
-  EXPECT_EQ("upper_link", joint1.ChildLinkName());
-  EXPECT_EQ("base", joint1.ParentLinkName());
+  EXPECT_EQ("upper_link", joint1.ChildName());
+  EXPECT_EQ("base", joint1.ParentName());
   EXPECT_EQ(math::Pose3d(0, 0, 0.021, -1.5708, 0, 0),
             joint1.RawPose());
 
@@ -83,8 +83,8 @@ TEST(USDJointTest, JointTest)
   EXPECT_EQ(0u, errors.size());
   EXPECT_EQ(sdf::JointType::REVOLUTE, joint2.Type());
   EXPECT_EQ("lower_joint", joint2.Name());
-  EXPECT_EQ("lower_link", joint2.ChildLinkName());
-  EXPECT_EQ("upper_link", joint2.ParentLinkName());
+  EXPECT_EQ("lower_link", joint2.ChildName());
+  EXPECT_EQ("upper_link", joint2.ParentName());
   EXPECT_EQ(math::Pose3d(0.0025, -0, 0.01, -0.4292, 0, 0),
             joint2.RawPose());
   axis = joint2.Axis(0);

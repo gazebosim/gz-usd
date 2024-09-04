@@ -30,7 +30,7 @@
 #include <pxr/usd/usdPhysics/revoluteJoint.h>
 #pragma pop_macro ("__DEPRECATED")
 
-#include <ignition/common/Util.hh>
+#include <gz/common/Util.hh>
 
 #include "gz/usd/UsdError.hh"
 #include "gz/usd/usd_parser/USDData.hh"
@@ -66,19 +66,19 @@ namespace gz
 
       if (body1.size() > 0)
       {
-        _joint.SetChildName(ignition::common::basename(
+        _joint.SetChildName(gz::common::basename(
           body1[0].GetString()));
       }
       else if (body0.size() > 0)
       {
         _joint.SetParentName("world");
-        _joint.SetChildName(ignition::common::basename(
+        _joint.SetChildName(gz::common::basename(
           body0[0].GetString()));
       }
 
       if (body0.size() > 0 && _joint.ParentName().empty())
       {
-        _joint.SetParentName(ignition::common::basename(
+        _joint.SetParentName(gz::common::basename(
           body0[0].GetString()));
       }
       else

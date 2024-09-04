@@ -20,10 +20,10 @@
 
 #include <string>
 
-#include <ignition/math/Angle.hh>
-#include <ignition/math/Pose3.hh>
-#include <ignition/math/Vector3.hh>
-#include <ignition/math/Quaternion.hh>
+#include <gz/math/Angle.hh>
+#include <gz/math/Pose3.hh>
+#include <gz/math/Vector3.hh>
+#include <gz/math/Quaternion.hh>
 
 // TODO(adlarkin) this is to remove deprecated "warnings" in usd, these warnings
 // are reported using #pragma message so normal diagnostic flags cannot remove
@@ -36,7 +36,7 @@
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
 #pragma pop_macro ("__DEPRECATED")
 
-#include <ignition/common/Util.hh>
+#include <gz/common/Util.hh>
 
 #include <sdf/Collision.hh>
 #include <sdf/Error.hh>
@@ -71,9 +71,9 @@ namespace gz
       {
         return result;
       }
-      result = ignition::common::replaceAll(_path, " ", "");
-      result = ignition::common::replaceAll(result, ".", "_");
-      result = ignition::common::replaceAll(result, "-", "_");
+      result = gz::common::replaceAll(_path, " ", "");
+      result = gz::common::replaceAll(result, ".", "_");
+      result = gz::common::replaceAll(result, "-", "_");
       if (std::isdigit(result[0]))
       {
         result = "_" + result;

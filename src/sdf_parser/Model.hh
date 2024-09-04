@@ -53,7 +53,7 @@ namespace gz
     /// Each UsdError includes an error code and message. An empty vector
     /// indicates no error occurred when parsing _model to its USD
     /// representation.
-    gz::usd::UsdErrors ParseSdfModel(
+    gz::usd::UsdErrors GZ_USD_VISIBLE ParseSdfModel(
         const sdf::Model &_model, pxr::UsdStageRefPtr &_stage,
         const std::string &_path, const pxr::SdfPath &_worldPath);
   }

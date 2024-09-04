@@ -77,7 +77,7 @@ namespace usd
 
       // DistantLight in USD does not define height. Added some height to the
       // light. The default sun light in ign-gazebo sdf world is 10.
-      pose += math::Pose3d(0, 0, 10, 0, 0, 0);
+      pose *= math::Pose3d(0, 0, 10, 0, 0, 0);
       // Light emitted from a distant source along the -Z axis
       // The pose should set the direction
       light->SetDirection(math::Vector3d(0, 0, -1));

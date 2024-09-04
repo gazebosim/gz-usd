@@ -45,13 +45,13 @@ namespace usd
 {
 /////////////////////////////////////////////////
 UsdError::UsdError()
-  : dataPtr(ignition::utils::MakeImpl<Implementation>())
+  : dataPtr(gz::utils::MakeImpl<Implementation>())
 {
 }
 
 /////////////////////////////////////////////////
 UsdError::UsdError(const UsdErrorCode _code, const std::string &_message)
-    : dataPtr(ignition::utils::MakeImpl<Implementation>())
+    : dataPtr(gz::utils::MakeImpl<Implementation>())
 {
   this->dataPtr->code = _code;
   this->dataPtr->message = _message;
@@ -60,7 +60,7 @@ UsdError::UsdError(const UsdErrorCode _code, const std::string &_message)
 /////////////////////////////////////////////////
 UsdError::UsdError(const UsdErrorCode _code, const std::string &_message,
                    const std::string &_filePath)
-    : dataPtr(ignition::utils::MakeImpl<Implementation>())
+    : dataPtr(gz::utils::MakeImpl<Implementation>())
 {
   this->dataPtr->code = _code;
   this->dataPtr->message = _message;
@@ -70,7 +70,7 @@ UsdError::UsdError(const UsdErrorCode _code, const std::string &_message,
 /////////////////////////////////////////////////
 UsdError::UsdError(const UsdErrorCode _code, const std::string &_message,
                    const std::string &_filePath, int _lineNumber)
-    : dataPtr(ignition::utils::MakeImpl<Implementation>())
+    : dataPtr(gz::utils::MakeImpl<Implementation>())
 {
   this->dataPtr->code = _code;
   this->dataPtr->message = _message;
@@ -80,7 +80,7 @@ UsdError::UsdError(const UsdErrorCode _code, const std::string &_message,
 
 /////////////////////////////////////////////////
 UsdError::UsdError(const sdf::Error &_sdfError)
-    : dataPtr(ignition::utils::MakeImpl<Implementation>())
+    : dataPtr(gz::utils::MakeImpl<Implementation>())
 {
   this->dataPtr->code = UsdErrorCode::GZ_USD_ERROR;
   this->dataPtr->sdfError = _sdfError;

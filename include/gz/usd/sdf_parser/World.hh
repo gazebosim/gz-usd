@@ -30,7 +30,7 @@
 #pragma pop_macro ("__DEPRECATED")
 
 #include <gz/usd/config.hh>
-#include "gz/usd/Export.hh"
+#include "gz/gz_usd/Export.hh"
 #include "gz/usd/UsdError.hh"
 #include "sdf/World.hh"
 

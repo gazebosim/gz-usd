@@ -59,7 +59,7 @@ namespace gz
     /// Each UsdError includes an error code and message. An empty vector
     /// indicates no errors occurred when parsing _joint to its USD
     /// representation.
-    gz::usd::UsdErrors ParseSdfJoint(
+    gz::usd::UsdErrors GZ_USD_VISIBLE ParseSdfJoint(
         const sdf::Joint &_joint,
         pxr::UsdStageRefPtr &_stage, const std::string &_path,
         const sdf::Model &_parentModel,

@@ -41,7 +41,7 @@ namespace gz
     /// Each UsdErrorincludes an error code and message. An empty vector
     /// indicates no error occurred when parsing the world information of
     /// _inputFileNameUsd
-    gz::usd::UsdErrors parseUSDWorld(
+    gz::usd::UsdErrors GZ_USD_VISIBLE parseUSDWorld(
       const std::string &_inputFileNameUsd,
       bool _useGazeboPlugins,
       sdf::World &_world);

@@ -23,8 +23,8 @@
 #include <utility>
 #include <vector>
 
-#include <ignition/common/Filesystem.hh>
-#include <ignition/common/Util.hh>
+#include <gz/common/Filesystem.hh>
+#include <gz/common/Util.hh>
 
 #pragma push_macro ("__DEPRECATED")
 #undef __DEPRECATED
@@ -113,7 +113,7 @@ namespace usd
       std::string primType = prim.GetPrimTypeInfo().GetTypeName().GetText();
 
       std::vector<std::string> primPathTokens =
-        ignition::common::split(primPath, "/");
+        gz::common::split(primPath, "/");
 
       // This assumption on the scene graph wouldn't hold if the usd does
       // not come from Isaac Sim
@@ -270,7 +270,7 @@ namespace usd
           if (!noModelAncestor && modelPtr)
           {
             if (auto link =
-                modelPtr->LinkByName(ignition::common::basename(linkName)))
+                modelPtr->LinkByName(gz::common::basename(linkName)))
             {
               link->AddLight(light.value());
               worldLight = false;
@@ -357,7 +357,7 @@ namespace usd
 
       std::optional<sdf::Link> optionalLink;
       if (auto linkInserted =
-          modelPtr->LinkByName(ignition::common::basename(linkName)))
+          modelPtr->LinkByName(gz::common::basename(linkName)))
       {
         optionalLink = *linkInserted;
         auto scale = linkScaleMap.find(linkName);
@@ -390,7 +390,7 @@ namespace usd
     for (unsigned int i = 0; i < _world.LightCount(); ++i)
     {
       auto light = _world.LightByIndex(i);
-      light->SetName(ignition::common::basename(light->Name()));
+      light->SetName(gz::common::basename(light->Name()));
     }
 
     for (unsigned int i = 0; i < _world.ModelCount(); ++i)

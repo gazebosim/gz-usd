@@ -19,13 +19,13 @@
 
 #include <string>
 
-#include <ignition/common/Console.hh>
-#include <ignition/common/Mesh.hh>
-#include <ignition/common/MeshManager.hh>
-#include <ignition/common/Util.hh>
-#include <ignition/common/SubMesh.hh>
+#include <gz/common/Console.hh>
+#include <gz/common/Mesh.hh>
+#include <gz/common/MeshManager.hh>
+#include <gz/common/Util.hh>
+#include <gz/common/SubMesh.hh>
 
-#include <ignition/math/Vector3.hh>
+#include <gz/math/Vector3.hh>
 
 // TODO(adlarkin) this is to remove deprecated "warnings" in usd, these warnings
 // are reported using #pragma message so normal diagnostic flags cannot remove
@@ -205,21 +205,21 @@ namespace usd
   {
     gz::usd::UsdErrors errors;
 
-    ignition::common::URI uri(_geometry.MeshShape()->Uri());
+    gz::common::URI uri(_geometry.MeshShape()->Uri());
     std::string fullName;
 
     if (uri.Scheme() == "https" || uri.Scheme() == "http")
     {
       fullName =
-        ignition::common::findFile(uri.Str());
+        gz::common::findFile(uri.Str());
     }
     else
     {
       fullName =
-        ignition::common::findFile(_geometry.MeshShape()->Uri());
+        gz::common::findFile(_geometry.MeshShape()->Uri());
     }
 
-    auto ignMesh = ignition::common::MeshManager::Instance()->Load(
+    auto ignMesh = gz::common::MeshManager::Instance()->Load(
         fullName);
     if (!ignMesh)
     {
@@ -252,9 +252,9 @@ namespace usd
           return errors;
         }
 
-        std::string pathLowerCase = ignition::common::lowercase(_path);
+        std::string pathLowerCase = gz::common::lowercase(_path);
         std::string subMeshLowerCase =
-          ignition::common::lowercase(subMesh->Name());
+          gz::common::lowercase(subMesh->Name());
 
         if (pathLowerCase.find(subMeshLowerCase) != std::string::npos)
         {
@@ -326,21 +326,21 @@ namespace usd
       unsigned int numFaces = 0;
       switch (subMesh->SubMeshPrimitiveType())
       {
-        case ignition::common::SubMesh::PrimitiveType::POINTS:
+        case gz::common::SubMesh::PrimitiveType::POINTS:
           verticesPerFace = 1;
           numFaces = subMesh->IndexCount();
           break;
-        case ignition::common::SubMesh::PrimitiveType::LINES:
+        case gz::common::SubMesh::PrimitiveType::LINES:
           verticesPerFace = 2;
           numFaces = subMesh->IndexCount() / 2;
           break;
-        case ignition::common::SubMesh::PrimitiveType::TRIANGLES:
+        case gz::common::SubMesh::PrimitiveType::TRIANGLES:
           verticesPerFace = 3;
           numFaces = subMesh->IndexCount() / 3;
           break;
-        case ignition::common::SubMesh::PrimitiveType::LINESTRIPS:
-        case ignition::common::SubMesh::PrimitiveType::TRIFANS:
-        case ignition::common::SubMesh::PrimitiveType::TRISTRIPS:
+        case gz::common::SubMesh::PrimitiveType::LINESTRIPS:
+        case gz::common::SubMesh::PrimitiveType::TRIFANS:
+        case gz::common::SubMesh::PrimitiveType::TRISTRIPS:
         default:
           errors.push_back(UsdError(
                 gz::usd::UsdErrorCode::INVALID_SUBMESH_PRIMITIVE_TYPE,

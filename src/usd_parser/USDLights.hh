@@ -30,7 +30,7 @@
 #include "sdf/Light.hh"
 
 #include <gz/usd/config.hh>
-#include "gz/usd/Export.hh"
+#include "gz/gz_usd/Export.hh"
 
 #include "gz/usd/usd_parser/USDData.hh"
 
