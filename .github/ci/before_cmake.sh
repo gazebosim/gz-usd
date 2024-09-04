@@ -9,7 +9,7 @@ cd /tmp
 # check that we can compile USD from sources (only Focal)
 # see https://github.com/ignitionrobotics/sdformat/issues/869
 return_code=0
-USD_VERSION="22.11"
+USD_VERSION="24.08"
 
 mkdir cmake_test
 cd cmake_test
