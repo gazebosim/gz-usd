@@ -25,7 +25,7 @@ then
   wget https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v$USD_VERSION.zip
   unzip v$USD_VERSION.zip
   cd OpenUSD-$USD_VERSION
-  python3 build_scripts/build_usd.py --build-variant release --no-tests --no-examples --no-tutorials --no-docs --no-python /tmp/USD
+  python3 build_scripts/build_usd.py --build-variant release --no-tests --no-imaging --no-examples --no-tutorials --no-docs --onetbb --no-python /tmp/USD
 fi
 
 cd $BUILD_DIR
