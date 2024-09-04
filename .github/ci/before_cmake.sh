@@ -22,7 +22,7 @@ then
   # compile USD from sources
   cd /tmp
 
-  apt install libpyside2-dev python3-opengl cmake libglu1-mesa-dev freeglut3-dev mesa-common-dev libx11-dev
+  apt install libpyside2-dev python3-opengl cmake libglu1-mesa-dev freeglut3-dev mesa-common-dev libx11-dev -y
 
   wget https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v$USD_VERSION.zip
   unzip v$USD_VERSION.zip
