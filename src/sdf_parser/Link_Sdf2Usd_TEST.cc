@@ -35,7 +35,7 @@
 #include <pxr/usd/usdPhysics/scene.h>
 #pragma pop_macro ("__DEPRECATED")
 
-#include <ignition/common/Util.hh>
+#include <gz/common/Util.hh>
 
 #include "gz/usd/sdf_parser/World.hh"
 #include "sdf/Root.hh"
@@ -64,7 +64,7 @@ class UsdStageFixture : public::testing::Test
 TEST_F(UsdStageFixture, Link)
 {
   sdf::setFindCallback(gz::usd::testing::findFileCb);
-  ignition::common::addFindFileURICallback(
+  gz::common::addFindFileURICallback(
     std::bind(&gz::usd::testing::FindResourceUri, std::placeholders::_1));
 
   const auto path = gz::testing::TestFile("sdf", "basic_shapes.sdf");

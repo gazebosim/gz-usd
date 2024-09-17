@@ -1,7 +1,8 @@
 Gazebo version | Branch
 -- | --
 Fortress | [fortress](https://github.com/gazebosim/gz-usd/tree/fortress) |
-Garden and higher versions | [main](https://github.com/gazebosim/gz-usd) |
+Garden and higher versions | [garden](https://github.com/gazebosim/gz-usd/tree/garden) |
+Harmonic and higher versions | [main](https://github.com/gazebosim/gz-usd) |
 
 USD is a high-performance extensible software platform for collaboratively constructing animated 3D
 scenes, designed to meet the needs of large-scale film and visual effects production.
@@ -17,14 +18,14 @@ If you have already installed `gz-usd` you might want to visit [the tutorial sec
 # Requirements
 
 You will need all of the dependencies for sdformat, along with the following additional dependencies:
-* [USD](https://github.com/PixarAnimationStudios/USD/tree/v21.11#getting-and-building-the-code):
+* [USD](https://github.com/PixarAnimationStudios/USD/tree/v24.08#getting-and-building-the-code):
     Note: USD support is only available when building sdformat from source. USD requires CMAKE 3.12 this package is available from Ubuntu 20.0.
 
     Clone the USD repository
     ```bash
-    git clone --depth 1 -b v21.11 https://github.com/PixarAnimationStudios/USD.git
+    git clone --depth 1 -b v24.08 https://github.com/PixarAnimationStudios/USD.git
     ```
-    Note: Only v21.11 supported currently
+    Note: Only v24.08 supported currently
 
     Install dependencies not managed by the build script
 
@@ -34,7 +35,7 @@ You will need all of the dependencies for sdformat, along with the following add
     Use the build script to compile USD. In order to speed up compilation, it is recommended to disable unneeded components.
     ```bash
     cd USD
-    python3 build_scripts/build_usd.py --build-variant release --no-tests --no-examples --no-tutorials --no-docs --no-python <install_dir>
+    python3 build_scripts/build_usd.py --build-variant release --no-tests --no-examples --no-imaging --onetbb --no-tutorials --no-docs --no-python <install_dir>
     ```
     For more information regarding the build options, see the USD docs at https://github.com/PixarAnimationStudios/USD/tree/v21.11#getting-and-building-the-code.
 
@@ -60,6 +61,7 @@ git clone https://github.com/gazebosim/gz-usd
 cd gz-usd
 mkdir build
 cd build
+export GZ_VERSION=<harmonic or ionic>
 cmake ..
 make
 ```
@@ -70,7 +72,6 @@ To see how the executable works, run the following command from the `./build/bin
 ```bash
 ./sdf2usd -h
 ```
-
 
 ### Note about building with colcon
 

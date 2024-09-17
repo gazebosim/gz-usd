@@ -18,7 +18,7 @@
 #include <iostream>
 #include <string>
 
-#include <ignition/utils/cli/CLI.hpp>
+#include <gz/utils/cli/CLI.hpp>
 
 #include <gz/usd/config.hh>
 #include <gz/usd/usd_parser/Parser.hh>

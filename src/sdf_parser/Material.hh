@@ -48,7 +48,7 @@ namespace gz
     /// \return gz::usd::UsdErrors, which is a list of UsdError objects.
     /// This list is empty if no errors occurred when parsing _materialSdf its
     /// USD representation
-    gz::usd::UsdErrors ParseSdfMaterial(
+    gz::usd::UsdErrors GZ_USD_VISIBLE ParseSdfMaterial(
         const sdf::Material *_materialSdf,
         pxr::UsdStageRefPtr &_stage,
         pxr::SdfPath &_materialPath);

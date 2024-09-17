@@ -19,11 +19,11 @@
 
 #include <gtest/gtest.h>
 
-#include <ignition/common/Filesystem.hh>
-#include <ignition/common/TempDirectory.hh>
-#include <ignition/common/Util.hh>
+#include <gz/common/Filesystem.hh>
+#include <gz/common/TempDirectory.hh>
+#include <gz/common/Util.hh>
 
-#include <ignition/utils/ExtraTestMacros.hh>
+#include <gz/utils/ExtraTestMacros.hh>
 
 #include "gz/usd/config.hh"
 
@@ -42,7 +42,7 @@
 
 static std::string usd2sdfCommand()
 {
-  return ignition::common::joinPaths(std::string(PROJECT_BINARY_DIR), "bin",
+  return gz::common::joinPaths(std::string(PROJECT_BINARY_DIR), "bin",
       "usd2sdf");
 }
 
@@ -79,23 +79,23 @@ TEST(version_cmd, GZ_UTILS_TEST_DISABLED_ON_WIN32(SDF))
 /////////////////////////////////////////////////
 TEST(check_cmd, GZ_UTILS_TEST_DISABLED_ON_WIN32(SDF))
 {
-  const auto tmp = ignition::common::createTempDirectory("usd",
-      ignition::common::tempDirectoryPath());
+  const auto tmp = gz::common::createTempDirectory("usd",
+      gz::common::tempDirectoryPath());
 
-  auto systemPaths = ignition::common::systemPaths();
-  systemPaths->AddFilePaths(ignition::common::joinPaths(
+  auto systemPaths = gz::common::systemPaths();
+  systemPaths->AddFilePaths(gz::common::joinPaths(
     gz::testing::TestFile("usd"), "materials", "textures"));
   // Check a good SDF file
   {
     const std::string path = gz::testing::TestFile("usd", "upAxisZ.usda");
     const auto outputSdfFilePath =
-      ignition::common::joinPaths(tmp, "upAxisZ.sdf");
-    EXPECT_FALSE(ignition::common::isFile(outputSdfFilePath));
+      gz::common::joinPaths(tmp, "upAxisZ.sdf");
+    EXPECT_FALSE(gz::common::isFile(outputSdfFilePath));
     const std::string output =
       custom_exec_str(usd2sdfCommand() + " " + path + " " + outputSdfFilePath);
 
     // make sure that a sdf file was generated
-    ASSERT_TRUE(ignition::common::isFile(outputSdfFilePath)) << output;
+    ASSERT_TRUE(gz::common::isFile(outputSdfFilePath)) << output;
 
     // check the contents of the generated SDF file
     sdf::Root root;

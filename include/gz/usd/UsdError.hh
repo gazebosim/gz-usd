@@ -21,10 +21,10 @@
 #include <string>
 #include <vector>
 
-#include <ignition/utils/ImplPtr.hh>
+#include <gz/utils/ImplPtr.hh>
 
 #include <sdf/Error.hh>
-#include <gz/usd/Export.hh>
+#include <gz/gz_usd/Export.hh>
 #include <gz/usd/config.hh>
 
 namespace gz

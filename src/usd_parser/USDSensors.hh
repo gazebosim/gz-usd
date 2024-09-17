@@ -41,7 +41,7 @@ namespace gz
     /// \param[in] _prim The USD sensor prim
     /// \param[in] _usdData Object that holds data about the USD stage
     /// \return The sdf::Sensor representation of the USD sensor (_prim)
-    sdf::Sensor ParseSensors(
+    sdf::Sensor GZ_USD_VISIBLE ParseSensors(
       const pxr::UsdPrim &_prim,
       const USDData &_usdData);
   }

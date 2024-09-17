@@ -49,7 +49,7 @@ namespace gz
     /// attribute we need to keeep the scale in a extenal variable
     /// \return gz::usd::UsdErrors, which is a list of UsdError objects.
     /// An empty list means there were no errors parsing the USD link
-    gz::usd::UsdErrors ParseUSDLinks(
+    gz::usd::UsdErrors GZ_USD_VISIBLE ParseUSDLinks(
       const pxr::UsdPrim &_prim,
       const std::string &_nameLink,
       std::optional<sdf::Link> &_link,

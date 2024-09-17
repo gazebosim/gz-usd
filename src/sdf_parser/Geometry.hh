@@ -49,7 +49,7 @@ namespace gz
     /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
     /// Each UsdError includes an error code and message. An empty vector
     /// indicates no error.
-    gz::usd::UsdErrors ParseSdfGeometry(
+    gz::usd::UsdErrors GZ_USD_VISIBLE ParseSdfGeometry(
         const sdf::Geometry &_geometry, pxr::UsdStageRefPtr &_stage,
         const std::string &_path);
   }

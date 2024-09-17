@@ -21,12 +21,12 @@
 #include <set>
 #include <string>
 
-#include <ignition/utils/ImplPtr.hh>
+#include <gz/utils/ImplPtr.hh>
 
 #include "sdf/Types.hh"
 #include <gz/usd/config.hh>
 #include "sdf/system_util.hh"
-#include "gz/usd/Export.hh"
+#include "gz/gz_usd/Export.hh"
 #include "gz/usd/UsdError.hh"
 
 namespace gz

@@ -3,21 +3,22 @@ name: Ubuntu
 on: [push, pull_request]
 
 jobs:
-  jammy-ci:
+  noble-ci:
     runs-on: ubuntu-latest
-    name: Ubuntu Jammy CI
+    name: Ubuntu Noble CI
     steps:
       - name: Set env
         run: |
           echo "PATH=$PATH:/tmp/USD/bin" >> $GITHUB_ENV
           echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tmp/USD/lib" >> $GITHUB_ENV
           echo "CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/tmp/USD" >> $GITHUB_ENV
+          echo "GZ_VERSION=harmonic" >> $GITHUB_ENV
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Compile and test
         id: ci
-        uses: gazebo-tooling/action-gz-ci@jammy
+        uses: gazebo-tooling/action-gz-ci@noble
         with:
-          codecov-enabled: true
+          codecov-enabled: false
           cppcheck-enabled: true
           cpplint-enabled: true
