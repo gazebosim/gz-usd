@@ -398,7 +398,7 @@ namespace usd
 
       // TODO(adlarkin) update this call in sdf13 to avoid casting the index to
       // an int:
-      // https://github.com/ignitionrobotics/ign-common/pull/319
+      // https://github.com/gazebosim/gz-common/pull/319
       int materialIndex = subMesh->GetMaterialIndex().value();
       if (materialIndex != -1)
       {

@@ -8,13 +8,13 @@ project(gz_usd0 VERSION 0.0.1)
 if("$ENV{GZ_VERSION}" STREQUAL "harmonic")
     find_package(gz-cmake3 REQUIRED)
     #--------------------------------------
-    # Find ignition-common
+    # Find gz-common
     gz_find_package(gz-common5 REQUIRED COMPONENTS graphics)
     set(GZ_COMMON_VER ${gz-common5_VERSION_MAJOR})
     set(GZ_COMMON_LIB gz-common${GZ_COMMON_VER}::gz-common${GZ_COMMON_VER})
     set(GZ_COMMON_GRAPHICS_LIB gz-common${GZ_COMMON_VER}::graphics)
     #--------------------------------------
-    # Find ignition-utils
+    # Find gz-utils
     gz_find_package(gz-utils2 REQUIRED COMPONENTS cli)
     set(GZ_UTILS_VER ${gz-utils2_VERSION_MAJOR})
     set(GZ_UTILS_LIB gz-utils${GZ_UTILS_VER}::gz-utils${GZ_UTILS_VER})
@@ -24,13 +24,13 @@ if("$ENV{GZ_VERSION}" STREQUAL "harmonic")
 else()
     find_package(gz-cmake4 REQUIRED)
     #--------------------------------------
-    # Find ignition-common
+    # Find gz-common
     gz_find_package(gz-common6 REQUIRED COMPONENTS graphics)
     set(GZ_COMMON_VER ${gz-common6_VERSION_MAJOR})
     set(GZ_COMMON_LIB gz-common${GZ_COMMON_VER}::gz-common${GZ_COMMON_VER})
     set(GZ_COMMON_GRAPHICS_LIB gz-common${GZ_COMMON_VER}::graphics)
     #--------------------------------------
-    # Find ignition-utils
+    # Find gz-utils
     gz_find_package(gz-utils3 REQUIRED COMPONENTS cli)
     set(GZ_UTILS_VER ${gz-utils3_VERSION_MAJOR})
     set(GZ_UTILS_LIB gz-utils${GZ_UTILS_VER}::gz-utils${GZ_UTILS_VER})
