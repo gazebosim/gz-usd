@@ -30,7 +30,7 @@ then
 
   wget https://github.com/PixarAnimationStudios/USD/archive/refs/tags/v21.11.zip
   unzip v21.11.zip
-  cd USD-21.11
+  cd OpenUSD-21.11
   mkdir build
   cd build
 
