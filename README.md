@@ -12,12 +12,20 @@ If you have already installed `gz-usd` you might want to visit [the tutorial sec
 # Requirements
 
 You will need all of the dependencies for sdformat, along with the following additional dependencies:
+<<<<<<< HEAD
 * [USD](https://github.com/PixarAnimationStudios/USD/tree/v21.11#getting-and-building-the-code):
+=======
+* [USD](https://github.com/PixarAnimationStudios/OpenUSD/tree/v24.08#getting-and-building-the-code):
+>>>>>>> 6548a11 (README: minor improvements (#25))
     Note: USD support is only available when building sdformat from source. USD requires CMAKE 3.12 this package is available from Ubuntu 20.0.
 
     Clone the USD repository
     ```bash
+<<<<<<< HEAD
     git clone --depth 1 -b v21.11 https://github.com/PixarAnimationStudios/USD.git
+=======
+    git clone --depth 1 -b v24.08 https://github.com/PixarAnimationStudios/OpenUSD.git
+>>>>>>> 6548a11 (README: minor improvements (#25))
     ```
     Note: Only v21.11 supported currently
 
@@ -26,19 +34,27 @@ You will need all of the dependencies for sdformat, along with the following add
     ```bash
     sudo apt install libpyside2-dev python3-opengl cmake libglu1-mesa-dev freeglut3-dev mesa-common-dev
     ```
+    Define an environment variable `USD_PATH` to encode the install directory.
+    ```bash
+    export USD_PATH=<install_dir>
+    ```
     Use the build script to compile USD. In order to speed up compilation, it is recommended to disable unneeded components.
     ```bash
     cd USD
+<<<<<<< HEAD
     python3 build_scripts/build_usd.py --build-variant release --no-tests --no-examples --no-tutorials --no-docs --no-python <install_dir>
+=======
+    python3 build_scripts/build_usd.py --build-variant release --no-tests --no-examples --no-imaging --onetbb --no-tutorials --no-docs --no-python $USD_PATH
+>>>>>>> 6548a11 (README: minor improvements (#25))
     ```
-    For more information regarding the build options, see the USD docs at https://github.com/PixarAnimationStudios/USD/tree/v21.11#getting-and-building-the-code.
+    For more information regarding the build options, see the USD docs at https://github.com/PixarAnimationStudios/OpenUSD/tree/v21.11#getting-and-building-the-code.
 
-    Add USD to system paths (replace <install_dir> with the path to your USD install directory)
+    Add USD to system paths
 
     ```bash
-    export PATH=<install_dir>/bin:$PATH
-    export LD_LIBRARY_PATH=<install_dir>/lib:$LD_LIBRARY_PATH
-    export CMAKE_PREFIX_PATH=<install_dir>:$CMAKE_PREFIX_PATH
+    export PATH=$USD_PATH/bin:$PATH
+    export LD_LIBRARY_PATH=$USD_PATH/lib:$LD_LIBRARY_PATH
+    export CMAKE_PREFIX_PATH=$USD_PATH:$CMAKE_PREFIX_PATH
     ```
 * [gz-usd](https://github.com/gazebosim/gz-usd)
 * [sdformat](https://github.com/gazebosim/sdformat)
