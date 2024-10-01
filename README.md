@@ -18,12 +18,12 @@ If you have already installed `gz-usd` you might want to visit [the tutorial sec
 # Requirements
 
 You will need all of the dependencies for sdformat, along with the following additional dependencies:
-* [USD](https://github.com/PixarAnimationStudios/USD/tree/v24.08#getting-and-building-the-code):
+* [USD](https://github.com/PixarAnimationStudios/OpenUSD/tree/v24.08#getting-and-building-the-code):
     Note: USD support is only available when building sdformat from source. USD requires CMAKE 3.12 this package is available from Ubuntu 20.0.
 
     Clone the USD repository
     ```bash
-    git clone --depth 1 -b v24.08 https://github.com/PixarAnimationStudios/USD.git
+    git clone --depth 1 -b v24.08 https://github.com/PixarAnimationStudios/OpenUSD.git
     ```
     Note: Only v24.08 supported currently
 
@@ -37,7 +37,7 @@ You will need all of the dependencies for sdformat, along with the following add
     cd USD
     python3 build_scripts/build_usd.py --build-variant release --no-tests --no-examples --no-imaging --onetbb --no-tutorials --no-docs --no-python <install_dir>
     ```
-    For more information regarding the build options, see the USD docs at https://github.com/PixarAnimationStudios/USD/tree/v21.11#getting-and-building-the-code.
+    For more information regarding the build options, see the USD docs at https://github.com/PixarAnimationStudios/OpenUSD/tree/v21.11#getting-and-building-the-code.
 
     Add USD to system paths (replace <install_dir> with the path to your USD install directory)
 
