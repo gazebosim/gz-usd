@@ -32,19 +32,23 @@ You will need all of the dependencies for sdformat, along with the following add
     ```bash
     sudo apt install libpyside2-dev python3-opengl cmake libglu1-mesa-dev freeglut3-dev mesa-common-dev
     ```
+    Define an environment variable `USD_PATH` to encode the install directory.
+    ```bash
+    export USD_PATH=<install_dir>
+    ```
     Use the build script to compile USD. In order to speed up compilation, it is recommended to disable unneeded components.
     ```bash
     cd USD
-    python3 build_scripts/build_usd.py --build-variant release --no-tests --no-examples --no-imaging --onetbb --no-tutorials --no-docs --no-python <install_dir>
+    python3 build_scripts/build_usd.py --build-variant release --no-tests --no-examples --no-imaging --onetbb --no-tutorials --no-docs --no-python $USD_PATH
     ```
     For more information regarding the build options, see the USD docs at https://github.com/PixarAnimationStudios/OpenUSD/tree/v21.11#getting-and-building-the-code.
 
-    Add USD to system paths (replace <install_dir> with the path to your USD install directory)
+    Add USD to system paths
 
     ```bash
-    export PATH=<install_dir>/bin:$PATH
-    export LD_LIBRARY_PATH=<install_dir>/lib:$LD_LIBRARY_PATH
-    export CMAKE_PREFIX_PATH=<install_dir>:$CMAKE_PREFIX_PATH
+    export PATH=$USD_PATH/bin:$PATH
+    export LD_LIBRARY_PATH=$USD_PATH/lib:$LD_LIBRARY_PATH
+    export CMAKE_PREFIX_PATH=$USD_PATH:$CMAKE_PREFIX_PATH
     ```
 * [gz-usd](https://github.com/gazebosim/gz-usd)
 * [sdformat](https://github.com/gazebosim/sdformat)
