@@ -39,6 +39,7 @@
 #include <pxr/usd/sdf/path.h>
 #include <pxr/usd/usd/stage.h>
 #include <pxr/usd/usdGeom/capsule.h>
+#include <pxr/usd/usdGeom/cone.h>
 #include <pxr/usd/usdGeom/cube.h>
 #include <pxr/usd/usdGeom/cylinder.h>
 #include <pxr/usd/usdGeom/primvarsAPI.h>
@@ -53,6 +54,7 @@
 
 #include "sdf/Box.hh"
 #include "sdf/Capsule.hh"
+#include "sdf/Cone.hh"
 #include "sdf/Cylinder.hh"
 #include "sdf/Ellipsoid.hh"
 #include "sdf/Geometry.hh"
@@ -111,6 +113,46 @@ namespace usd
           sdfBox->Size().X(),
           sdfBox->Size().Y(),
           sdfBox->Size().Z()));
+
+    return errors;
+  }
+
+  /// \brief Parse a SDF cone geometry into a USD cone geometry
+  /// \param[in] _geometry The SDF cone geometry
+  /// \param[in] _stage The stage that will contain the parsed USD equivalent
+  /// of _geometry
+  /// \param[in] _path Where the parsed USD equivalent of _geometry should exist
+  /// in _stage
+  /// \return gz::usd::UsdErrors, which is a vector of UsdError objects.
+  /// Each UsdError includes an error code and message. An empty vector
+  /// indicates no error occurred when creating the USD equivalent of _geometry
+  gz::usd::UsdErrors ParseSdfConeGeometry(
+    const sdf::Geometry &_geometry,
+    pxr::UsdStageRefPtr &_stage,
+    const std::string &_path)
+  {
+    gz::usd::UsdErrors errors;
+
+    const auto &sdfCone = _geometry.ConeShape();
+
+    auto usdCone =
+      pxr::UsdGeomCone::Define(_stage, pxr::SdfPath(_path));
+    if (!usdCone)
+    {
+      errors.push_back(UsdError(
+        gz::usd::UsdErrorCode::FAILED_USD_DEFINITION,
+        "Unable to define a USD cone geometry at path [" + _path + "]"));
+      return errors;
+    }
+
+    usdCone.CreateRadiusAttr().Set(sdfCone->Radius());
+    usdCone.CreateHeightAttr().Set(sdfCone->Length());
+    pxr::GfVec3f endPoint(sdfCone->Radius());
+    endPoint[2] = sdfCone->Length() * 0.5;
+    pxr::VtArray<pxr::GfVec3f> extentBounds;
+    extentBounds.push_back(-1.0 * endPoint);
+    extentBounds.push_back(endPoint);
+    usdCone.CreateExtentAttr().Set(extentBounds);
 
     return errors;
   }
@@ -591,6 +633,9 @@ namespace usd
     {
       case sdf::GeometryType::BOX:
         errors = ParseSdfBoxGeometry(_geometry, _stage, _path);
+        break;
+      case sdf::GeometryType::CONE:
+        errors = ParseSdfConeGeometry(_geometry, _stage, _path);
         break;
       case sdf::GeometryType::CYLINDER:
         errors = ParseSdfCylinderGeometry(_geometry, _stage, _path);

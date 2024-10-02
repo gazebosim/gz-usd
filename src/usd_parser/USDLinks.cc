@@ -27,6 +27,7 @@
 #undef __DEPRECATED
 #include <pxr/usd/kind/registry.h>
 #include <pxr/usd/usd/modelAPI.h>
+#include <pxr/usd/usdGeom/cone.h>
 #include <pxr/usd/usdGeom/cube.h>
 #include <pxr/usd/usdGeom/cylinder.h>
 #include <pxr/usd/usdGeom/gprim.h>
@@ -50,6 +51,7 @@
 
 #include "sdf/Box.hh"
 #include "sdf/Collision.hh"
+#include "sdf/Cone.hh"
 #include "sdf/Cylinder.hh"
 #include "sdf/Geometry.hh"
 #include "sdf/Link.hh"
@@ -513,6 +515,33 @@ void ParseSphere(const pxr::UsdPrim &_prim,
 }
 
 //////////////////////////////////////////////////
+/// \brief Parse USD cone
+/// \param[in] _prim Reference to the USD prim
+/// \param[in] _geom sdf geom
+/// \param[in] _scale scale mesh
+/// \param[in] _metersPerUnit meter per unit of the stage
+void ParseCone(
+  const pxr::UsdPrim &_prim,
+  sdf::Geometry &_geom,
+  const math::Vector3d &_scale,
+  double _metersPerUnit)
+{
+  auto variant_cone = pxr::UsdGeomCone(_prim);
+  double radius;
+  double height;
+  variant_cone.GetRadiusAttr().Get(&radius);
+  variant_cone.GetHeightAttr().Get(&height);
+
+  sdf::Cone c;
+  _geom.SetType(sdf::GeometryType::CONE);
+
+  c.SetRadius(radius * _metersPerUnit * _scale.X());
+  c.SetLength(height * _metersPerUnit * _scale.Z());
+
+  _geom.SetConeShape(c);
+}
+
+//////////////////////////////////////////////////
 /// \brief Parse USD cylinder
 /// \param[in] _prim Reference to the USD prim
 /// \param[in] _geom sdf geom
@@ -621,6 +650,7 @@ gz::usd::UsdErrors ParseUSDLinks(
 
   sdf::Geometry geom;
   if (_prim.IsA<pxr::UsdGeomSphere>() ||
+      _prim.IsA<pxr::UsdGeomCone>() ||
       _prim.IsA<pxr::UsdGeomCylinder>() ||
       _prim.IsA<pxr::UsdGeomCube>() ||
       _prim.IsA<pxr::UsdGeomMesh>() ||
@@ -654,6 +684,13 @@ gz::usd::UsdErrors ParseUSDLinks(
       {
         ParseSphere(_prim, geom, _scale, metersPerUnit);
         vis.SetName("visual_sphere");
+        vis.SetGeom(geom);
+        _link->AddVisual(vis);
+      }
+      else if (_prim.IsA<pxr::UsdGeomCone>())
+      {
+        ParseCone(_prim, geom, _scale, metersPerUnit);
+        vis.SetName("visual_cone");
         vis.SetGeom(geom);
         _link->AddVisual(vis);
       }
@@ -723,6 +760,12 @@ gz::usd::UsdErrors ParseUSDLinks(
       if (_prim.IsA<pxr::UsdGeomSphere>())
       {
         ParseSphere(_prim, colGeom, scaleCol, metersPerUnit);
+        col.SetGeom(colGeom);
+        col.SetRawPose(poseCol);
+      }
+      else if (_prim.IsA<pxr::UsdGeomCone>())
+      {
+        ParseCone(_prim, colGeom, scaleCol, metersPerUnit);
         col.SetGeom(colGeom);
         col.SetRawPose(poseCol);
       }
