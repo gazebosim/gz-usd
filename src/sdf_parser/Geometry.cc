@@ -45,6 +45,7 @@
 #include <pxr/usd/usdGeom/primvarsAPI.h>
 #include <pxr/usd/usdGeom/primvar.h>
 #include <pxr/usd/usdGeom/mesh.h>
+#include <pxr/usd/usdGeom/scope.h>
 #include <pxr/usd/usdGeom/sphere.h>
 #include <pxr/usd/usdGeom/xform.h>
 #include <pxr/usd/usdGeom/xformCommonAPI.h>
@@ -396,6 +397,19 @@ namespace usd
       // this case is "verticesPerFace"
       for (unsigned int n = 0; n < numFaces; ++n)
         faceVertexCounts.push_back(verticesPerFace);
+
+      // The other geometry types in this file create a prim at _path,
+      // but in order to store the mesh name in USD, an additional level
+      // is added to the USD hierarchy with the mesh name.
+      // To ensure that the prim at _path has a type, define it as a Scope.
+      auto usdScope = pxr::UsdGeomScope::Define(_stage, pxr::SdfPath(_path));
+      if (!usdScope)
+      {
+        errors.push_back(UsdError(
+          gz::usd::UsdErrorCode::FAILED_USD_DEFINITION,
+          "Unable to define a USD geometry scope at path [" + _path + "]"));
+        return errors;
+      }
 
       std::string primName;
       if (!subMesh->Name().empty())
