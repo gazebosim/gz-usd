@@ -153,6 +153,19 @@ namespace usd
     extentBounds.push_back(endPoint);
     usdCylinder.CreateExtentAttr().Set(extentBounds);
 
+    // Set refinement level for cylinders so that the visual shapes will look
+    // rounder. It should be ignored for collision shapes.
+    auto enableRefinementAttr =
+        usdCylinder.GetPrim().CreateAttribute(
+            pxr::TfToken("refinementEnableOverride"),
+            pxr::SdfValueTypeNames->Bool, false);
+    enableRefinementAttr.Set(true);
+    auto refinementAttr =
+        usdCylinder.GetPrim().CreateAttribute(
+            pxr::TfToken("refinementLevel"),
+            pxr::SdfValueTypeNames->Int, false);
+    refinementAttr.Set(1);
+
     return errors;
   }
 
