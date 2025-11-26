@@ -14,54 +14,39 @@ This repo provides tools to convert between SDF and USD files.
 
 If you have already installed `gz-usd` you might want to visit [the tutorial section](./tutorials/README.md).
 
-# Requirements
+# Build Instructions
 
-You will need all of the dependencies for sdformat, along with the following additional dependencies:
-* [USD](https://github.com/PixarAnimationStudios/USD/tree/v21.11#getting-and-building-the-code):
-    Note: USD support is only available when building sdformat from source. USD requires CMAKE 3.12 this package is available from Ubuntu 20.0.
+We will build USD and gz-usd in a colcon workspace
+* Create a workspace
 
-    Clone the USD repository
-    ```bash
-    git clone --depth 1 -b v21.11 https://github.com/PixarAnimationStudios/USD.git
-    ```
-    Note: Only v21.11 supported currently
+  ```bash
+  mkdir ~/gz-usd-ws
+  ```
 
-    Install dependencies not managed by the build script
+* Clone USD and gz-usd in the workspace. Note: Only v21.11 supported currently
+
+  ```bash
+  mkdir ~/gz-usd-ws/src
+  cd ~/gz-usd-ws/src
+  git clone --depth 1 -b v21.11 https://github.com/PixarAnimationStudios/USD.git
+  git clone https://github.com/gazebosim/gz-usd
+  ```
+
+
+* Install system dependencies
 
     ```bash
     sudo apt install libpyside2-dev python3-opengl cmake libglu1-mesa-dev freeglut3-dev mesa-common-dev
     ```
     Use the build script to compile USD. In order to speed up compilation, it is recommended to disable unneeded components.
-    ```bash
-    cd USD
-    python3 build_scripts/build_usd.py --build-variant release --no-tests --no-examples --no-tutorials --no-docs --no-python <install_dir>
-    ```
-    For more information regarding the build options, see the USD docs at https://github.com/PixarAnimationStudios/USD/tree/v21.11#getting-and-building-the-code.
 
-    Add USD to system paths (replace <install_dir> with the path to your USD install directory)
+* Build workspace
+  
+  ```bash
+colcon build --merge-install --mixin compile-commands --cmake-args  -DPXR_ENABLE_PYTHON_SUPPORT=FALSE -DPXR_ENABLE_GL_SUPPORT=FALSE -DPXR_BUILD_IMAGING=FALSE -DPXR_BUILD_TUTORIALS=FALSE -DPXR_BUILD_EXAMPLES=FALSE -DPXR_BUILD_TESTS=FALSE -DPXR_BUILD_USD_TOOLS=FALSE
 
-    ```bash
-    export PATH=<install_dir>/bin:$PATH
-    export LD_LIBRARY_PATH=<install_dir>/lib:$LD_LIBRARY_PATH
-    export CMAKE_PREFIX_PATH=<install_dir>:$CMAKE_PREFIX_PATH
-    ```
-* [gz-usd](https://github.com/gazebosim/gz-usd)
-* [sdformat](https://github.com/gazebosim/sdformat)
+  ```
 
-# Setup
-
-Build `gz-usd`. The steps below follow a traditional cmake build, but `gz-usd`
-can also be built with [colcon](https://colcon.readthedocs.io/en/released/index.html):
-
-**Note: Be sure to build gz-usd on a terminal with the above environment variables exported.**
-
-```bash
-git clone https://github.com/gazebosim/gz-usd
-cd gz-usd
-mkdir build
-cd build
-cmake ..
-make
 ```
 
 You should now have an executable named `sdf2usd` in the `./build/bin` directory.
