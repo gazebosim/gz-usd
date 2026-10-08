@@ -40,6 +40,10 @@
 #include <pxr/usd/usdShade/materialBindingAPI.h>
 #pragma pop_macro ("__DEPRECATED")
 
+#include <fstream>
+#include <iterator>
+#include <unordered_map>
+
 #include <gz/common/ColladaExporter.hh>
 #include <gz/common/Filesystem.hh>
 #include <gz/common/Material.hh>
@@ -172,6 +176,56 @@ std::string directoryFromUSDPath(const std::string &_primPath)
 }
 
 //////////////////////////////////////////////////
+/// \brief Read a whole file
+/// \param[in] _path Path of the file
+/// \return The file content
+std::string readFile(const std::string &_path)
+{
+  std::ifstream file(_path, std::ios::binary);
+  return std::string(std::istreambuf_iterator<char>(file),
+    std::istreambuf_iterator<char>());
+}
+
+//////////////////////////////////////////////////
+/// \brief Export a mesh as Collada in _directoryMesh. Scenes such as Isaac Sim
+/// worlds contain many copies of the same mesh (e.g. hundreds of identical
+/// plants), so if an identical Collada file was already exported, the new one
+/// is removed and the path of the existing one is returned.
+/// \param[in] _mesh Mesh to export
+/// \param[in] _directoryMesh Directory where the mesh is exported. The file
+/// is named after the last element of the directory.
+/// \return Path of the Collada file to use. Empty if the directory could not
+/// be created.
+std::string exportMesh(const gz::common::Mesh &_mesh,
+  const std::string &_directoryMesh)
+{
+  // Hash of the file content -> paths of the exported files with that hash
+  static std::unordered_map<std::size_t, std::vector<std::string>> exported;
+
+  if (!gz::common::createDirectories(_directoryMesh))
+    return "";
+
+  const std::string fileNoExtension = gz::common::joinPaths(
+    _directoryMesh, gz::common::basename(_directoryMesh));
+  gz::common::ColladaExporter exporter;
+  exporter.Export(&_mesh, fileNoExtension, false);
+  const std::string file = fileNoExtension + ".dae";
+
+  const std::string content = readFile(file);
+  auto &candidates = exported[std::hash<std::string>{}(content)];
+  for (const auto &candidate : candidates)
+  {
+    if (readFile(candidate) == content)
+    {
+      gz::common::removeAll(_directoryMesh);
+      return candidate;
+    }
+  }
+  candidates.push_back(file);
+  return file;
+}
+
+//////////////////////////////////////////////////
 /// \brief Get the material name of the prim
 /// \param[in] _prim Reference to the USD prim
 /// \return A string with the material name
@@ -277,17 +331,9 @@ int ParseMeshSubGeom(const pxr::UsdPrim &_prim,
       std::string directoryMesh = directoryFromUSDPath(childPathName) +
         childPathName;
 
-      if (gz::common::createDirectories(directoryMesh))
-      {
-        directoryMesh = gz::common::joinPaths(directoryMesh,
-          gz::common::basename(directoryMesh));
-
-        // Export with extension
-        gz::common::ColladaExporter exporter;
-        exporter.Export(&meshSubset, directoryMesh, false);
-      }
-      _meshGeom.SetFilePath(directoryMesh + ".dae");
-      _meshGeom.SetUri(directoryMesh + ".dae");
+      const std::string meshFile = exportMesh(meshSubset, directoryMesh);
+      _meshGeom.SetFilePath(meshFile);
+      _meshGeom.SetUri(meshFile);
 
       geomSubset.SetMeshShape(_meshGeom);
       visSubset.SetName("mesh_subset_" + std::to_string(numSubMeshes));
@@ -444,23 +490,19 @@ gz::usd::UsdErrors ParseMesh(
       subMesh.SetMaterialIndex(mesh.MaterialCount() - 1);
     }
 
+    mesh.AddSubMesh(subMesh);
+
+    const std::string meshFile = exportMesh(mesh, directoryMesh);
+    meshGeom.SetFilePath(meshFile);
+    meshGeom.SetUri(meshFile);
+    _geom.SetMeshShape(meshGeom);
+
     std::string primNameStr = _prim.GetPath().GetName();
     _vis.SetName(primNameStr + "_visual");
     _vis.SetRawPose(pose);
     _vis.SetGeom(_geom);
 
     _link->AddVisual(_vis);
-
-    mesh.AddSubMesh(subMesh);
-
-    if (gz::common::createDirectories(directoryMesh))
-    {
-      directoryMesh = gz::common::joinPaths(
-        directoryMesh, gz::common::basename(directoryMesh));
-      // Export with extension
-      gz::common::ColladaExporter exporter;
-      exporter.Export(&mesh, directoryMesh, false);
-    }
   }
 
   return errors;
