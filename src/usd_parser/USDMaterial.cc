@@ -20,6 +20,7 @@
 
 #include <gz/common/Filesystem.hh>
 #include <gz/common/Util.hh>
+#include <pxr/usd/sdf/types.h>
 #include <pxr/usd/usdShade/input.h>
 #include <pxr/usd/usdShade/material.h>
 #include <pxr/usd/usdShade/shader.h>
@@ -177,6 +178,16 @@ namespace gz
           bool isPBR = false;
           sdf::PbrWorkflow pbrWorkflow;
           math::Color emissiveColorCommon;
+
+          // Skip texture inputs that are not set. OmniPBR materials author
+          // every texture input, most of them with an empty asset (@@).
+          if (input.GetTypeName() == pxr::SdfValueTypeNames->Asset)
+          {
+            pxr::SdfAssetPath inputAsset;
+            input.Get(&inputAsset);
+            if (inputAsset.GetAssetPath().empty())
+              continue;
+          }
 
           for (const auto &input : variantShader.GetInputs())
           {
