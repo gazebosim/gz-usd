@@ -179,18 +179,18 @@ namespace gz
           sdf::PbrWorkflow pbrWorkflow;
           math::Color emissiveColorCommon;
 
-          // Skip texture inputs that are not set. OmniPBR materials author
-          // every texture input, most of them with an empty asset (@@).
-          if (input.GetTypeName() == pxr::SdfValueTypeNames->Asset)
-          {
-            pxr::SdfAssetPath inputAsset;
-            input.Get(&inputAsset);
-            if (inputAsset.GetAssetPath().empty())
-              continue;
-          }
-
           for (const auto &input : variantShader.GetInputs())
           {
+            // Skip texture inputs that are not set. OmniPBR materials author
+            // every texture input, most of them with an empty asset (@@).
+            if (input.GetTypeName() == pxr::SdfValueTypeNames->Asset)
+            {
+              pxr::SdfAssetPath inputAsset;
+              input.Get(&inputAsset);
+              if (inputAsset.GetAssetPath().empty())
+                continue;
+            }
+
             if (input.GetBaseName() == "diffuse_texture")
             {
               pxr::SdfAssetPath materialPath =
