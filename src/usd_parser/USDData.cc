@@ -62,6 +62,10 @@ namespace usd {
       /// Materials availables in the stage and substages
       std::unordered_map<std::string, sdf::Material> materials;
 
+      /// Exported meshes. The key uniquely identifies the mesh data and the
+      /// value is the path of the exported file
+      std::unordered_map<std::string, std::string> exportedMeshes;
+
       /// Add all subdirectories that are inside the stage folder
       /// This will help us to find other stages and/or textures.
       /// \param[in] _path Path of the subdirectory to add
@@ -107,6 +111,22 @@ namespace usd {
     USDData::AllReferences() const
   {
     return this->dataPtr->references;
+  }
+
+  /////////////////////////////////////////////////
+  std::string USDData::ExportedMesh(const std::string &_meshKey) const
+  {
+    auto it = this->dataPtr->exportedMeshes.find(_meshKey);
+    if (it == this->dataPtr->exportedMeshes.end())
+      return "";
+    return it->second;
+  }
+
+  /////////////////////////////////////////////////
+  void USDData::AddExportedMesh(const std::string &_meshKey,
+                                const std::string &_filePath)
+  {
+    this->dataPtr->exportedMeshes[_meshKey] = _filePath;
   }
 
   /////////////////////////////////////////////////

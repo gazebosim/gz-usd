@@ -40,10 +40,6 @@
 #include <pxr/usd/usdShade/materialBindingAPI.h>
 #pragma pop_macro ("__DEPRECATED")
 
-#include <fstream>
-#include <iterator>
-#include <unordered_map>
-
 #include <gz/common/ColladaExporter.hh>
 #include <gz/common/Filesystem.hh>
 #include <gz/common/Material.hh>
@@ -176,53 +172,154 @@ std::string directoryFromUSDPath(const std::string &_primPath)
 }
 
 //////////////////////////////////////////////////
-/// \brief Read a whole file
-/// \param[in] _path Path of the file
-/// \return The file content
-std::string readFile(const std::string &_path)
+/// \brief Append the raw bytes of a value to a key
+/// \param[in,out] _key Key to append to
+/// \param[in] _value Value to append
+template<typename T>
+void appendToKey(std::string &_key, const T &_value)
 {
-  std::ifstream file(_path, std::ios::binary);
-  return std::string(std::istreambuf_iterator<char>(file),
-    std::istreambuf_iterator<char>());
+  _key.append(reinterpret_cast<const char *>(&_value), sizeof(T));
+}
+
+//////////////////////////////////////////////////
+/// \brief Append a string to a key, prefixed by its size
+/// \param[in,out] _key Key to append to
+/// \param[in] _value String to append
+void appendToKey(std::string &_key, const std::string &_value)
+{
+  appendToKey(_key, _value.size());
+  _key.append(_value);
+}
+
+//////////////////////////////////////////////////
+/// \brief Build a key that uniquely identifies all the mesh data written by
+/// the Collada exporter (geometry and materials). Two meshes with the same
+/// key produce the same Collada file.
+/// \param[in] _mesh Mesh to build the key of
+/// \return The key
+std::string meshKey(const gz::common::Mesh &_mesh)
+{
+  std::string key;
+
+  appendToKey(key, _mesh.MaterialCount());
+  for (unsigned int i = 0; i < _mesh.MaterialCount(); ++i)
+  {
+    const auto material = _mesh.MaterialByIndex(i);
+    if (!material)
+    {
+      appendToKey(key, false);
+      continue;
+    }
+    appendToKey(key, true);
+    appendToKey(key, material->Ambient().AsRGBA());
+    appendToKey(key, material->Diffuse().AsRGBA());
+    appendToKey(key, material->Specular().AsRGBA());
+    appendToKey(key, material->Emissive().AsRGBA());
+    appendToKey(key, material->Transparency());
+    appendToKey(key, material->Shininess());
+    appendToKey(key, material->TextureImage());
+  }
+
+  appendToKey(key, _mesh.SubMeshCount());
+  for (unsigned int i = 0; i < _mesh.SubMeshCount(); ++i)
+  {
+    const auto subMesh = _mesh.SubMeshByIndex(i).lock();
+    if (!subMesh)
+    {
+      appendToKey(key, false);
+      continue;
+    }
+    appendToKey(key, true);
+    appendToKey(key, subMesh->SubMeshPrimitiveType());
+
+    const auto materialIndex = subMesh->GetMaterialIndex();
+    appendToKey(key, materialIndex.has_value());
+    if (materialIndex)
+      appendToKey(key, materialIndex.value());
+
+    appendToKey(key, subMesh->VertexCount());
+    for (unsigned int j = 0; j < subMesh->VertexCount(); ++j)
+    {
+      const auto &v = subMesh->Vertex(j);
+      appendToKey(key, v.X());
+      appendToKey(key, v.Y());
+      appendToKey(key, v.Z());
+    }
+
+    appendToKey(key, subMesh->NormalCount());
+    for (unsigned int j = 0; j < subMesh->NormalCount(); ++j)
+    {
+      const auto &n = subMesh->Normal(j);
+      appendToKey(key, n.X());
+      appendToKey(key, n.Y());
+      appendToKey(key, n.Z());
+    }
+
+    const unsigned int texCoordCount = subMesh->TexCoordCountBySet(0);
+    appendToKey(key, texCoordCount);
+    for (unsigned int j = 0; j < texCoordCount; ++j)
+    {
+      const auto &t = subMesh->TexCoordBySet(j, 0);
+      appendToKey(key, t.X());
+      appendToKey(key, t.Y());
+    }
+
+    appendToKey(key, subMesh->IndexCount());
+    for (unsigned int j = 0; j < subMesh->IndexCount(); ++j)
+    {
+      appendToKey(key, subMesh->Index(j));
+    }
+  }
+
+  return key;
 }
 
 //////////////////////////////////////////////////
 /// \brief Export a mesh as Collada in _directoryMesh. Scenes such as Isaac Sim
 /// worlds contain many copies of the same mesh (e.g. hundreds of identical
-/// plants), so if an identical Collada file was already exported, the new one
-/// is removed and the path of the existing one is returned.
+/// plants), so if a mesh with the same data was already exported, it is not
+/// exported again and the path of the existing file is used instead.
 /// \param[in] _mesh Mesh to export
 /// \param[in] _directoryMesh Directory where the mesh is exported. The file
 /// is named after the last element of the directory.
-/// \return Path of the Collada file to use. Empty if the directory could not
-/// be created.
-std::string exportMesh(const gz::common::Mesh &_mesh,
-  const std::string &_directoryMesh)
+/// \param[in,out] _usdData USD data where the exported meshes are registered
+/// \param[out] _file Path of the Collada file to use
+/// \return gz::usd::UsdErrors, which is a list of UsdError objects.
+/// An empty list means the mesh was exported successfully
+gz::usd::UsdErrors exportMesh(const gz::common::Mesh &_mesh,
+  const std::string &_directoryMesh,
+  USDData &_usdData,
+  std::string &_file)
 {
-  // Hash of the file content -> paths of the exported files with that hash
-  static std::unordered_map<std::size_t, std::vector<std::string>> exported;
+  gz::usd::UsdErrors errors;
+
+  const std::string key = meshKey(_mesh);
+  _file = _usdData.ExportedMesh(key);
+  if (!_file.empty())
+    return errors;
 
   if (!gz::common::createDirectories(_directoryMesh))
-    return "";
+  {
+    errors.emplace_back(UsdErrorCode::USD_TO_GZ_USD_PARSING_ERROR,
+      "Unable to create directory [" + _directoryMesh + "]");
+    return errors;
+  }
 
   const std::string fileNoExtension = gz::common::joinPaths(
     _directoryMesh, gz::common::basename(_directoryMesh));
   gz::common::ColladaExporter exporter;
   exporter.Export(&_mesh, fileNoExtension, false);
-  const std::string file = fileNoExtension + ".dae";
+  _file = fileNoExtension + ".dae";
 
-  const std::string content = readFile(file);
-  auto &candidates = exported[std::hash<std::string>{}(content)];
-  for (const auto &candidate : candidates)
+  if (!gz::common::isFile(_file))
   {
-    if (readFile(candidate) == content)
-    {
-      gz::common::removeAll(_directoryMesh);
-      return candidate;
-    }
+    errors.emplace_back(UsdErrorCode::USD_TO_GZ_USD_PARSING_ERROR,
+      "Unable to export mesh [" + _file + "]");
+    return errors;
   }
-  candidates.push_back(file);
-  return file;
+
+  _usdData.AddExportedMesh(key, _file);
+  return errors;
 }
 
 //////////////////////////////////////////////////
@@ -260,14 +357,16 @@ std::string ParseMaterialName(const pxr::UsdPrim &_prim)
 /// \param[in] _subMesh submesh to add the subsets
 /// \param[in] _meshGeom Mesh geom
 /// \param[inout] _scale scale mesh
-/// \param[in] _usdData metadata of the USD file
+/// \param[in,out] _usdData metadata of the USD file
+/// \param[out] _errors Errors found while parsing the mesh subsets
 /// \return Number of mesh subsets
 int ParseMeshSubGeom(const pxr::UsdPrim &_prim,
   sdf::Link *_link,
   gz::common::SubMesh &_subMesh,
   sdf::Mesh &_meshGeom,
   math::Vector3d &_scale,
-  const USDData &_usdData)
+  USDData &_usdData,
+  gz::usd::UsdErrors &_errors)
 {
   int numSubMeshes = 0;
 
@@ -331,7 +430,14 @@ int ParseMeshSubGeom(const pxr::UsdPrim &_prim,
       std::string directoryMesh = directoryFromUSDPath(childPathName) +
         childPathName;
 
-      const std::string meshFile = exportMesh(meshSubset, directoryMesh);
+      std::string meshFile;
+      auto errorsExport = exportMesh(
+        meshSubset, directoryMesh, _usdData, meshFile);
+      if (!errorsExport.empty())
+      {
+        _errors.insert(_errors.end(), errorsExport.begin(), errorsExport.end());
+        continue;
+      }
       _meshGeom.SetFilePath(meshFile);
       _meshGeom.SetUri(meshFile);
 
@@ -363,7 +469,7 @@ int ParseMeshSubGeom(const pxr::UsdPrim &_prim,
 /// \param[in] _vis sdf visual
 /// \param[in] _geom sdf geom
 /// \param[in] _scale scale mesh
-/// \param[in] _usdData metadata of the USD file
+/// \param[in,out] _usdData metadata of the USD file
 /// \param[out] _pose The pose of the parsed mesh
 /// \return gz::usd::UsdErrors, which is a list of UsdError objects.
 ///  An empty list means that no errors occurred when parsing the USD mesh
@@ -373,7 +479,7 @@ gz::usd::UsdErrors ParseMesh(
   sdf::Visual &_vis,
   sdf::Geometry &_geom,
   math::Vector3d &_scale,
-  const USDData &_usdData,
+  USDData &_usdData,
   math::Pose3d &_pose)
 {
   gz::usd::UsdErrors errors;
@@ -472,7 +578,11 @@ gz::usd::UsdErrors ParseMesh(
   meshGeom.SetUri(meshGeom.FilePath());
 
   int numSubMeshes = ParseMeshSubGeom(
-    _prim, _link, subMesh, meshGeom, _scale, _usdData);
+    _prim, _link, subMesh, meshGeom, _scale, _usdData, errors);
+  if (!errors.empty())
+  {
+    return errors;
+  }
 
   _geom.SetMeshShape(meshGeom);
 
@@ -492,7 +602,12 @@ gz::usd::UsdErrors ParseMesh(
 
     mesh.AddSubMesh(subMesh);
 
-    const std::string meshFile = exportMesh(mesh, directoryMesh);
+    std::string meshFile;
+    errors = exportMesh(mesh, directoryMesh, _usdData, meshFile);
+    if (!errors.empty())
+    {
+      return errors;
+    }
     meshGeom.SetFilePath(meshFile);
     meshGeom.SetUri(meshFile);
     _geom.SetMeshShape(meshGeom);
@@ -615,7 +730,7 @@ gz::usd::UsdErrors ParseUSDLinks(
   const pxr::UsdPrim &_prim,
   const std::string &_nameLink,
   std::optional<sdf::Link> &_link,
-  const USDData &_usdData,
+  USDData &_usdData,
   math::Vector3d &_scale)
 {
   gz::usd::UsdErrors errors;

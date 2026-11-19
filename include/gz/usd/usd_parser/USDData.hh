@@ -85,6 +85,20 @@ namespace gz
                               std::shared_ptr<gz::usd::USDStage>>
           FindStage(const std::string &_name) const;
 
+      /// \brief Find a mesh file that was already exported with the given
+      /// mesh data. This is used to avoid exporting the same mesh many times
+      /// when a stage contains many copies of it.
+      /// \param[in] _meshKey Key that uniquely identifies the mesh data
+      /// \return Path of the exported mesh file, or an empty string if no
+      /// mesh with this key was exported.
+      public: std::string ExportedMesh(const std::string &_meshKey) const;
+
+      /// \brief Register an exported mesh file
+      /// \param[in] _meshKey Key that uniquely identifies the mesh data
+      /// \param[in] _filePath Path of the exported mesh file
+      public: void AddExportedMesh(const std::string &_meshKey,
+                                   const std::string &_filePath);
+
       public: friend std::ostream& operator<<(
         std::ostream& os, const USDData& data)
       {

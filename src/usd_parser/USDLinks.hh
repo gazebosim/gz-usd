@@ -44,7 +44,8 @@ namespace gz
     /// \param[out] _link The SDF link to populate. If no value is held, a new
     /// link will be created. If the optional does hold a value, the existing
     /// link will have additional information added to it
-    /// \param[in] _usdData USDData object that holds data about the USD stage
+    /// \param[in,out] _usdData USDData object that holds data about the USD
+    /// stage. Exported meshes are registered in it.
     /// \param[in] _scale scale of current Link, sdf::Link does not have a scale
     /// attribute we need to keeep the scale in a extenal variable
     /// \return gz::usd::UsdErrors, which is a list of UsdError objects.
@@ -53,7 +54,7 @@ namespace gz
       const pxr::UsdPrim &_prim,
       const std::string &_nameLink,
       std::optional<sdf::Link> &_link,
-      const USDData &_usdData,
+      USDData &_usdData,
       math::Vector3d &_scale);
   }
   }
