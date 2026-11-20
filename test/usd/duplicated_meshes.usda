@@ -1,0 +1,56 @@
+#usda 1.0
+(
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "plant_1" (
+    kind = "model"
+)
+{
+    def Mesh "leaves" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        bool physics:collisionEnabled = 1
+        int[] faceVertexCounts = [3, 3]
+        int[] faceVertexIndices = [0, 1, 2, 0, 2, 3]
+        normal3f[] normals = [(0, 0, 1), (0, 0, 1), (0, 0, 1), (0, 0, 1)]
+        point3f[] points = [(0, 0, 0), (1, 0, 0), (1, 1, 0), (0, 1, 0)]
+    }
+}
+
+def Xform "plant_2" (
+    kind = "model"
+)
+{
+    float3 xformOp:translate = (2, 0, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate"]
+
+    def Mesh "leaves" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        bool physics:collisionEnabled = 1
+        int[] faceVertexCounts = [3, 3]
+        int[] faceVertexIndices = [0, 1, 2, 0, 2, 3]
+        normal3f[] normals = [(0, 0, 1), (0, 0, 1), (0, 0, 1), (0, 0, 1)]
+        point3f[] points = [(0, 0, 0), (1, 0, 0), (1, 1, 0), (0, 1, 0)]
+    }
+}
+
+def Xform "rock" (
+    kind = "model"
+)
+{
+    def Mesh "stone" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMassAPI"]
+    )
+    {
+        bool physics:collisionEnabled = 1
+        int[] faceVertexCounts = [3, 3]
+        int[] faceVertexIndices = [0, 1, 2, 0, 2, 3]
+        normal3f[] normals = [(0, 0, 1), (0, 0, 1), (0, 0, 1), (0, 0, 1)]
+        point3f[] points = [(0, 0, 0), (2, 0, 0), (2, 2, 0), (0, 2, 0)]
+    }
+}
