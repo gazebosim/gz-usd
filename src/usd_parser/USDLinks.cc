@@ -192,11 +192,11 @@ void appendToKey(std::string &_key, const std::string &_value)
 }
 
 //////////////////////////////////////////////////
-/// \brief Build a key that uniquely identifies all the mesh data written by
-/// the Collada exporter (geometry and materials). Two meshes with the same
-/// key produce the same Collada file.
+/// \brief Build a key that identifies all the mesh data written by the
+/// Collada exporter (geometry and materials). Two meshes with the same key
+/// produce the same Collada file.
 /// \param[in] _mesh Mesh to build the key of
-/// \return The key
+/// \return SHA-1 hash of the mesh data
 std::string meshKey(const gz::common::Mesh &_mesh)
 {
   std::string key;
@@ -271,7 +271,7 @@ std::string meshKey(const gz::common::Mesh &_mesh)
     }
   }
 
-  return key;
+  return gz::common::sha1(key);
 }
 
 //////////////////////////////////////////////////
