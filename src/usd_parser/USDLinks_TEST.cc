@@ -17,7 +17,6 @@
 
 #include <gtest/gtest.h>
 
-#include <functional>
 #include <optional>
 #include <string>
 #include <utility>
@@ -215,6 +214,28 @@ TEST(USDLinksTest, LinksNameMassAndDiagonalMoments)
 }
 
 /////////////////////////////////////////////////
+/// \brief Count the Collada files inside a directory, recursively
+/// \param[in] _dir Directory to search
+/// \return Number of Collada files found
+unsigned int countDae(const std::string &_dir)
+{
+  unsigned int count = 0;
+  for (gz::common::DirIter file(_dir); file != gz::common::DirIter(); ++file)
+  {
+    const std::string path = *file;
+    if (gz::common::isDirectory(path))
+    {
+      count += countDae(path);
+    }
+    else if (gz::common::EndsWith(path, ".dae"))
+    {
+      ++count;
+    }
+  }
+  return count;
+}
+
+/////////////////////////////////////////////////
 TEST(USDLinksTest, DuplicatedMeshesAreExportedOnce)
 {
   const std::string filename =
@@ -287,25 +308,6 @@ TEST(USDLinksTest, DuplicatedMeshesAreExportedOnce)
   EXPECT_TRUE(gz::common::isFile(rock.first));
 
   // Only two Collada files were written to disk
-  std::function<unsigned int(const std::string &)> countDae =
-    [&countDae](const std::string &_dir)
-    {
-      unsigned int count = 0;
-      for (gz::common::DirIter file(_dir);
-           file != gz::common::DirIter(); ++file)
-      {
-        const std::string path = *file;
-        if (gz::common::isDirectory(path))
-        {
-          count += countDae(path);
-        }
-        else if (gz::common::EndsWith(path, ".dae"))
-        {
-          ++count;
-        }
-      }
-      return count;
-    };
   EXPECT_EQ(2u, countDae(tmp));
 
   EXPECT_TRUE(gz::common::chdir(originalCwd));
